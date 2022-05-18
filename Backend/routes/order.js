@@ -62,32 +62,35 @@ router.get("/" , verifyTokenAndAdmin , async (req , res) => {
     }
 })
 
-// GET STATS
-// router.get("/income" , verifyTokenAndAdmin , async (req , res) => {
-//     const date = new Date();
-//     const lastYear = new Date(date.setFullYear(date.getFullYear() - 1))
-//     try{
-//         const data = await User.aggregate([
-//             {
-//                 $match:{createdAt:{$gte: lastYear}} // match all users and get all users that greater that last year
-//             },
-//             {
-//                 $project:{
-//                     month:{$month:"$createdAt"} // get month for all users and set each of them in month variable
-//                 }
-//             },
-//             {
-//                 $group:{ // make all data that will apper in group like the following: 
-//                     _id:"$month",
-//                     total:{ $sum: 1 }
-//                 }
-//             }
-//         ]);
+// GET MONTHLY INCOME
+router.get("/income" , verifyTokenAndAdmin , async (req , res) => {
+    const date = new Date();
+    const lastMonth = new Date(date.setMonth(date.getMonth() - 1)) // get month now
+    const previousMonth = new Date(new Date().setMonth(lastMonth.getMonth() - 1)) // get month now - 1 (5 - 1 = 4)
+
+    try{
+        const income = await Order.aggregate([
+            {
+                $match:{createdAt:{$gte: previousMonth}} // match all users and get all users that greater that last year
+            },
+            {
+                $project:{
+                    month:{$month:"$createdAt"}, // get month for all users and set each of them in month variable
+                    sales:"$amount"
+                }
+            },
+            {
+                $group:{ // make all data that will apper in group like the following: 
+                    _id:"$month",
+                    total:{ $sum: "$sales" }
+                }
+            }
+        ]);
         
-//         res.status(200).json(data)
-//     }catch(err){
-//         res.status(500).json(err)
-//     }
-// })
+        res.status(200).json(income)
+    }catch(err){
+        res.status(500).json(err)
+    }
+})
 
 module.exports = router;
