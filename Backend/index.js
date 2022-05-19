@@ -14,8 +14,6 @@ const app = express()
 
 const PORT = process.env.PORT || 9000
 
-
-
 app.use(cors({ origin: true }));
 app.use(express.json())
 app.use("/api/users" , userRoute)

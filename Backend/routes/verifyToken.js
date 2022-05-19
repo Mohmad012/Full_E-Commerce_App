@@ -1,4 +1,3 @@
-const { status } = require("express/lib/response");
 const jwt = require("jsonwebtoken");
 
 const verifyToken = (req , res , next) => {
