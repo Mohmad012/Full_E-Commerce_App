@@ -1,5 +1,4 @@
 const express = require("express");
-const mongoose = require("mongoose")
 const dotenv = require("dotenv")
 const userRoute = require("./routes/users")
 const authRoute = require("./routes/auth")
@@ -9,15 +8,13 @@ const orderRoute = require("./routes/order")
 const stripeRoute = require("./routes/stripe")
 const cors = require("cors")
 dotenv.config()
+require('./database/mongoose')
 
 const app = express()
 
-const ConnectDB = process.env.MONGO_CONNECTION
 const PORT = process.env.PORT || 9000
 
-mongoose.connect(ConnectDB)
-    .then(() => console.log("ConnectDB Successfull!"))
-    .catch(err => console.log(err))
+
 
 app.use(cors({ origin: true }));
 app.use(express.json())
