@@ -1,0 +1,85 @@
+[
+
+  {
+    "sliderItems":[
+      {
+        "id": 1,
+        "img": "https://images.pexels.com/photos/2522681/pexels-photo-2522681.jpeg",
+        "title": "SUMMER SALE",
+        "desc": "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
+        "bg": "f5fafd"
+      },
+      {
+        "id": 2,
+        "img": "https://images.pexels.com/photos/1306246/pexels-photo-1306246.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "title": "AUTUMN COLLECTION",
+        "desc": "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
+        "bg": "fcf1ed"
+      },
+      {
+        "id": 3,
+        "img": "https://images.pexels.com/photos/4937352/pexels-photo-4937352.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "title": "LOUNGEWEAR LOVE",
+        "desc": "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
+        "bg": "fbf0f4"
+      }
+    ],
+
+    "categories":[
+      {
+        "id": 1,
+        "img": "https://images.pexels.com/photos/157675/fashion-men-s-individuality-black-and-white-157675.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "title": "SHIRT STYLE!",
+        "cat":"women"
+      },
+      {
+        "id": 2,
+        "img": "https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "title": "LOUNGEWEAR LOVE",
+        "cat":"coat"
+      },
+      {
+        "id": 3,
+        "img": "https://images.pexels.com/photos/1852382/pexels-photo-1852382.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "title": "LIGHT JACKETS",
+        "cat":"jeans"
+      }
+    ],
+
+    "popularProducts":[
+      {
+        "id":1,
+        "img":"https://d3o2e4jr3mxnm3.cloudfront.net/Mens-Jake-Guitar-Vintage-Crusher-Tee_68382_1_lg.png"
+      },
+      {
+        "id":2,
+        "img":"https://pngimg.com/uploads/dress_shirt/dress_shirt_PNG8061.png"
+      },
+      {
+        "id":3,
+        "img":"https://4.bp.blogspot.com/-DmWf6J7Kr-A/VPZfwq0ISwI/AAAAAAAAJjQ/MJ4Jf31dz5Q/s1600/www.fonxat.com-Design%2Band%2BGraphics%2Btshirt_PNG5431.png"
+      },
+      {
+        "id":4,
+        "img":"https://www.burdastyle.com/pub/media/catalog/product/cache/7bd3727382ce0a860b68816435d76e26/107/BUS-PAT-BURTE-1320516/1170x1470_BS_2016_05_132_front.png"
+      },
+      {
+        "id":5,
+        "img":"https://images.ctfassets.net/5gvckmvm9289/3BlDoZxSSjqAvv1jBJP7TH/65f9a95484117730ace42abf64e89572/Noissue-x-Creatsy-Tote-Bag-Mockup-Bundle-_4_-2.png"
+      },
+      {
+        "id":6,
+        "img":"https://i.pinimg.com/originals/1c/25/0f/1c250fab2cf879b4ebed9f0c1e585eaa.png"
+      },
+      {
+        "id":7,
+        "img":"https://d3o2e4jr3mxnm3.cloudfront.net/Rocket-Vintage-Chill-Cap_66374_1_lg.png"
+      },
+      {
+        "id":8,
+        "img":"https://www.pngarts.com/files/3/Women-Jacket-PNG-High-Quality-Image.png"
+      }
+    ]
+  }
+
+]
