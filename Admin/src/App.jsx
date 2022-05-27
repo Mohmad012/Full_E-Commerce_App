@@ -4,8 +4,8 @@ import { Switch, Route } from "react-router-dom";
 import Aos from 'aos'
 
 import Home from './pages/Home'
-// import ProductList from './pages/ProductList'
-// import Product from './pages/Product'
+import List from './pages/List'
+import Single from './pages/Single'
 // import Register from './pages/Register'
 // import Login from './pages/Login'
 // import Cart from './pages/Cart'
@@ -31,7 +31,8 @@ const App = () => {
             </Helmet>
             <Switch>
               <Route path="/" exact component={Home} />
-              {/* <Route path="/" exact component={ProductList} /> */}
+              <Route path="/users" exact component={List} />
+              <Route path="/users/:userId" exact component={Single} />
               {/* <Route path="/" exact component={Product} /> */}
               {/* <Route path="/" exact component={Register} /> */}
               {/* <Route path="/" exact component={Login} /> */}

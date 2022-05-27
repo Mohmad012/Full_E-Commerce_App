@@ -8,6 +8,7 @@
     "@google-pay/button-react": "^2.1.5",
     "@mui/icons-material": "^5.8.0",
     "@mui/material": "^5.8.1",
+    "@mui/x-data-grid": "^5.11.1",
     "@popperjs/core": "^2.9.3",
     "@stripe/react-stripe-js": "^1.1.2",
     "@stripe/stripe-js": "^1.11.0",
