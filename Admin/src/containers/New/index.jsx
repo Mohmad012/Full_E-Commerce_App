@@ -1,128 +1,65 @@
-import Layout from "../../layouts";
-import Announcement from "../../components/Announcement";
+import "./style.scss";
+import Sidebar from "../../components/Sidebar";
+import Header from "../../layouts/Header";
+import DriveFolderuploadoutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
+import { useState } from "react";
 
-import {
-  Container,
-  Wrapper,
-  Title,
-  Top,
-  TopTexts,
-  TopText,
-  TopButton,
-  Bottom,
-  Info,
-  Summary,
-  Product,
-  ProductDetail,
-  Image,
-  Details,
-  ProductName,
-  ProductId,
-  ProductColor,
-  ProductSize,
-  PriceDetail,
-  ProductAmountContainer,
-  ProductAmount,
-  ProductPrice,
-  Hr,
-  SummaryTitle,
-  SummaryItem,
-  SummaryItemText,
-  SummaryItemPrice,
-  SummaryButton
-} from "./style";
+const NewContainer = ({ props: { InputsData, title } }) => {
+  const [file, setFile] = useState("");
 
-import { Add, Remove } from "@material-ui/icons";
-
-
-const NewContainer = () => {
+  console.log("file", file);
 
   return (
-    <Container>
-      <Layout>
-        <Announcement />
-        <Wrapper>
-          <Title>YOUR BAG</Title>
-          <Top>
-            <TopButton>CONTINUE SHOPPING</TopButton>
-            <TopTexts>
-              <TopText> Shopping Bag (2) </TopText>
-              <TopText> Your Wishlist (0) </TopText>
-            </TopTexts>
-            <TopButton type="filled">CHECKOUT NOW</TopButton>
-          </Top>
-          <Bottom>
-            <Info>
-              <Product>
-                <ProductDetail>
-                    <Image src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1614188818-TD1MTHU_SHOE_ANGLE_GLOBAL_MENS_TREE_DASHERS_THUNDER_b01b1013-cd8d-48e7-bed9-52db26515dc4.png?crop=1xw:1.00xh;center,top&resize=480%3A%2A" />
-                    <Details>
-                      <ProductName> <b> Product: </b> JESSIE THUNDER SHOES </ProductName>
-                      <ProductId> <b> ID:</b> 93813718293 </ProductId>
-                      <ProductColor color="black" />
-                      <ProductSize> <b> Size: </b> 37.5 </ProductSize>
-                    </Details>
-                </ProductDetail>
-                <PriceDetail>
-                  <ProductAmountContainer>
-                    <Add />
-                    <ProductAmount>2</ProductAmount>
-                    <Remove />
-                  </ProductAmountContainer>
-                  <ProductPrice>$ 30</ProductPrice>
-                </PriceDetail>
-              </Product>
-              <Hr />
-              <Product>
-                <ProductDetail>
-                    <Image src="https://i.pinimg.com/originals/2d/af/f8/2daff8e0823e51dd752704a47d5b795c.png" />
-                    <Details>
-                      <ProductName> <b> Product: </b> HAKURAT-SHIRT </ProductName>
-                      <ProductId> <b> ID: </b> 93813718293 </ProductId>
-                      <ProductColor color="gray" />
-                      <ProductSize> <b> Size: </b> M </ProductSize>
-                    </Details>
-                </ProductDetail>
-                <PriceDetail>
-                  <ProductAmountContainer>
-                    <Add />
-                    <ProductAmount>1</ProductAmount>
-                    <Remove />
-                  </ProductAmountContainer>
-                  <ProductPrice>$ 20</ProductPrice>
-                </PriceDetail>
-              </Product>
-              
-            </Info>
-            <Summary>
-              <SummaryTitle> ORDER SUMMARY </SummaryTitle>
-              <SummaryItem>
-                <SummaryItemText> Subtotal </SummaryItemText>
-                <SummaryItemPrice> $ 80 </SummaryItemPrice>
-              </SummaryItem>
+    <div className="new">
+      <Sidebar />
+      <div className="newContainer">
+        <Header />
+        <div className="top">
+          <h1>{title}</h1>
+        </div>
+        <div className="bottom">
+          <div className="left">
+            <img
+              src={
+                file
+                  ? URL.createObjectURL(file)
+                  : "https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg"
+              }
+              width={100}
+              height={100}
+              alt=""
+            />
+          </div>
+          <div className="right">
+            <form>
+              <div className="formInput">
+                <label htmlFor="file">
+                  Image: <DriveFolderuploadoutlinedIcon className="icon" />
+                </label>
+                <input
+                  type="file"
+                  id="file"
+                  onChange={(e) => setFile(e.target.files[0])}
+                  className="inputCuFile"
+                />
+              </div>
+              {InputsData?.map((InputData, key) => (
+                <div className="formInput" key={InputData.id}>
+                  <label>{InputData.label}</label>
+                  <input
+                    type={InputData.type}
+                    placeholder={InputData.placeholder}
+                  />
+                </div>
+              ))}
 
-              <SummaryItem>
-                <SummaryItemText> Estimated Shipping </SummaryItemText>
-                <SummaryItemPrice> $ 5.90 </SummaryItemPrice>
-              </SummaryItem>
-
-              <SummaryItem>
-                <SummaryItemText> Shipping Discount </SummaryItemText>
-                <SummaryItemPrice> $ -5.90 </SummaryItemPrice>
-              </SummaryItem>
-
-              <SummaryItem type="total" >
-                <SummaryItemText> Total </SummaryItemText>
-                <SummaryItemPrice> $ 80 </SummaryItemPrice>
-              </SummaryItem>
-
-              <SummaryButton> CHECKOUT NOW </SummaryButton>
-            </Summary>
-          </Bottom>
-        </Wrapper>
-      </Layout>
-    </Container>
+              <button>Send</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   );
-}
+};
 
-export default NewContainer
+export default NewContainer;

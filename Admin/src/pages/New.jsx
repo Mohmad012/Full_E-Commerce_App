@@ -1,6 +1,5 @@
-import NewContainer from '../containers/New'
+import NewContainer from "../containers/New";
 
-const New = () => <NewContainer />
+const New = (props) => <NewContainer props={props} />;
 
 export default New;
-
