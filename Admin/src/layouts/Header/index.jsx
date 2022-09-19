@@ -1,13 +1,20 @@
 import SearchoutlinedIcon from "@mui/icons-material/SearchOutlined";
 import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
+
 import DarkModeoutlinedIcon from "@mui/icons-material/DarkModeOutlined";
+import LightModeIcon from "@mui/icons-material/LightMode";
+
 import FullscreenExitoutlinedIcon from "@mui/icons-material/FullscreenExitOutlined";
 import NotificationsNoneQutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import ChatBubbleoutlineoutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
-import ListoutlinedIcon from "@mui/icons-material/ListOutlined"
-import "./style.scss"
+import ListoutlinedIcon from "@mui/icons-material/ListOutlined";
+import "./style.scss";
+import { DarkModeContext } from "../../context/darkMode";
+import { useContext } from "react";
 
 const Header = () => {
+  const { darkMode, dispatch } = useContext(DarkModeContext);
+
   return (
     <nav className="navbar">
       <div className="wrapper">
@@ -22,8 +29,15 @@ const Header = () => {
             English
           </div>
 
-          <div className="item">
-            <DarkModeoutlinedIcon className="icon" />
+          <div
+            className="item"
+            style={{ cursor: "pointer" }}
+            onClick={() => dispatch({ type: "TOGGLE" })}>
+            {darkMode ? (
+              <LightModeIcon className="icon" />
+            ) : (
+              <DarkModeoutlinedIcon className="icon" />
+            )}
           </div>
 
           <div className="item">
@@ -54,7 +68,7 @@ const Header = () => {
         </div>
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

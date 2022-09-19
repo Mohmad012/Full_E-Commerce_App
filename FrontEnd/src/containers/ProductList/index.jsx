@@ -1,4 +1,4 @@
-
+import { useLocation } from "react-router-dom";
 import Announcement from "../../components/Announcement";
 import Layout from "../../layouts";
 import Newsletter from "../../components/Newsletter";
@@ -11,12 +11,26 @@ import {
   Filter,
   FilterText,
   Select,
-  Option
+  Option,
 } from "./style";
-
+import { useState } from "react";
 
 const ProductListContainer = () => {
+  const location = useLocation();
 
+  const categ = location.pathname.split("/")[2];
+  const [filtersProds, setFiltersProds] = useState({});
+  const [sortProds, setSortProds] = useState({});
+
+  const handleFilters = (e) => {
+    const { name, value } = e.target;
+    setFiltersProds({
+      ...filtersProds,
+      [name]: value,
+    });
+  };
+
+  console.log("filtersProds", filtersProds);
   return (
     <Container>
       <Layout>
@@ -25,10 +39,8 @@ const ProductListContainer = () => {
         <FilterContainer>
           <Filter>
             <FilterText>Filter Products:</FilterText>
-            <Select>
-              <Option disabled selected>
-                Color
-              </Option>
+            <Select name="color" onChange={handleFilters}>
+              <Option disabled>Color</Option>
               <Option>White</Option>
               <Option>Black</Option>
               <Option>Red</Option>
@@ -37,10 +49,8 @@ const ProductListContainer = () => {
               <Option>Green</Option>
             </Select>
 
-            <Select>
-              <Option disabled selected>
-                Size
-              </Option>
+            <Select name="size" onChange={handleFilters}>
+              <Option disabled>Size</Option>
               <Option>XS</Option>
               <Option>S</Option>
               <Option>M</Option>
@@ -50,18 +60,22 @@ const ProductListContainer = () => {
           </Filter>
           <Filter>
             <FilterText>Sort Products:</FilterText>
-            <Select>
-              <Option selected>Newest</Option>
-              <Option>Price (asc)</Option>
-              <Option>Price (desc)</Option>
+            <Select onChange={(e) => setSortProds(e.target.value)}>
+              <Option value="newest">Newest</Option>
+              <Option value="asc">Price (asc)</Option>
+              <Option value="desc">Price (desc)</Option>
             </Select>
           </Filter>
         </FilterContainer>
-        <Products />
+        <Products
+          categ={categ}
+          filtersProds={filtersProds}
+          sortProds={sortProds}
+        />
         <Newsletter />
       </Layout>
     </Container>
   );
-}
+};
 
-export default ProductListContainer
+export default ProductListContainer;

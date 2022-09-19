@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { Switch, Route } from "react-router-dom";
 import Aos from "aos";
@@ -8,13 +8,15 @@ import List from "./pages/List";
 import Single from "./pages/Single";
 import New from "./pages/New";
 // import Register from './pages/Register'
-// import Login from './pages/Login'
+import Login from "./pages/Login";
 // import Cart from './pages/Cart'
 
 import data from "./data/static.json";
+import { DarkModeContext } from "./context/darkMode";
 
 import "aos/dist/aos.css";
-import "./assets/style.css";
+import "./assets/dark.scss";
+import "./assets/style.scss";
 
 const App = () => {
   useEffect(() => {
@@ -23,8 +25,10 @@ const App = () => {
     });
   }, []);
 
+  const { darkMode } = useContext(DarkModeContext);
+
   return (
-    <>
+    <div className={darkMode ? "app dark" : "app"}>
       <Helmet>
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
@@ -34,27 +38,32 @@ const App = () => {
       </Helmet>
       <Switch>
         <Route path="/" exact component={Home} />
-        <Route path="/users" exact component={List} />
-        {/* <Route path="/users/new" exact component={New} /> */}
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/users" component={List} />
+
         <Route
+          exact
           path="/users/new"
           render={() => (
             <New InputsData={data[0].userInputs} title="Add New User" />
           )}
         />
-        {/* <Route
-          path="/users/new"
+
+        <Route exact path="/users/:userId" component={Single} />
+
+        <Route exact path="/products" component={List} />
+
+        <Route
+          exact
+          path="/products/new"
           render={() => (
-            <New InputsData={data[0].userInputs} title="Add New User" />
+            <New InputsData={data[0].productInputs} title="Add New Product" />
           )}
-        /> */}
-        <Route path="/users/:userId" exact component={Single} />
-        {/* <Route path="/" exact component={Product} /> */}
-        {/* <Route path="/" exact component={Register} /> */}
-        {/* <Route path="/" exact component={Login} /> */}
-        {/* <Route path="/" exact component={Cart} /> */}
+        />
+
+        <Route exact path="/products/:productId" component={Single} />
       </Switch>
-    </>
+    </div>
   );
 };
 
