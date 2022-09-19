@@ -78,6 +78,10 @@
         "id": 8,
         "img": "https://www.pngarts.com/files/3/Women-Jacket-PNG-High-Quality-Image.png"
       }
-    ]
+    ],
+
+    "colors": ["Color", "White", "Black", "Red", "Blue", "Yellow", "Green"],
+
+    "Sizes": ["Size", "XS", "S", "M", "L", "XL"]
   }
 ]

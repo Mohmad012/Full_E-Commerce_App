@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { useLocation } from "react-router-dom";
 import Announcement from "../../components/Announcement";
 import Layout from "../../layouts";
@@ -13,7 +15,24 @@ import {
   Select,
   Option,
 } from "./style";
-import { useState } from "react";
+
+import data from "../../data/static.json";
+
+const SelectItem = ({ name, handleFilters, data }) => (
+  <Select name={name} onChange={handleFilters}>
+    {data.map((item, key) => (
+      <>
+        {key === 0 ? (
+          <Option key={key} disabled>
+            {item}
+          </Option>
+        ) : (
+          <Option key={key}>{item}</Option>
+        )}
+      </>
+    ))}
+  </Select>
+);
 
 const ProductListContainer = () => {
   const location = useLocation();
@@ -30,33 +49,25 @@ const ProductListContainer = () => {
     });
   };
 
-  console.log("filtersProds", filtersProds);
   return (
     <Container>
       <Layout>
         <Announcement />
-        <Title>Dresses</Title>
+        <Title>{categ}</Title>
         <FilterContainer>
           <Filter>
             <FilterText>Filter Products:</FilterText>
-            <Select name="color" onChange={handleFilters}>
-              <Option disabled>Color</Option>
-              <Option>White</Option>
-              <Option>Black</Option>
-              <Option>Red</Option>
-              <Option>Blue</Option>
-              <Option>Yellow</Option>
-              <Option>Green</Option>
-            </Select>
+            <SelectItem
+              name="color"
+              handleFilters={handleFilters}
+              data={data[0].colors}
+            />
 
-            <Select name="size" onChange={handleFilters}>
-              <Option disabled>Size</Option>
-              <Option>XS</Option>
-              <Option>S</Option>
-              <Option>M</Option>
-              <Option>L</Option>
-              <Option>XL</Option>
-            </Select>
+            <SelectItem
+              name="size"
+              handleFilters={handleFilters}
+              data={data[0].Sizes}
+            />
           </Filter>
           <Filter>
             <FilterText>Sort Products:</FilterText>
