@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Layout from "../../layouts";
 import Announcement from "../../components/Announcement";
 
@@ -29,13 +30,87 @@ import {
   SummaryItem,
   SummaryItemText,
   SummaryItemPrice,
-  SummaryButton
+  SummaryButton,
 } from "./style";
 
 import { Add, Remove } from "@material-ui/icons";
+import { useDispatch, useSelector } from "react-redux";
+import { updateProduct } from "../../store/cartReducer";
+import { useEffect } from "react";
+import StripeCheckout from "react-stripe-checkout";
+import { userRequest } from "../../requestApi";
+import { useHistory } from "react-router-dom";
 
+const StripeKEY = process.env.REACT_APP_STRIPE_PUBLIC_KEY;
 
 const CartContainer = () => {
+  const cart = useSelector((state) => state.cart);
+
+  const [updateQuantity, setUpdateQuantity] = useState(1);
+  const [idProd, setIdProd] = useState(0);
+  const [priceProd, setPriceProd] = useState(0);
+
+  const dispatch = useDispatch();
+
+  const handleQuantity = (type, product) => {
+    // setIdProd(id);
+    // setPriceProd(price);
+    // let newQuantity = 1;
+    // let currProduct = { ...product };
+    // type === "dec"
+    //   ? currProduct.quantity > 1 && setUpdateQuantity((prev) => prev - 1)
+    //   : setUpdateQuantity((prev) => prev + 1);
+    // console.log("newQuantity before", newQuantity);
+    // if (newQuantity > 1) {
+    //   if (type === "dec") {
+    //     newQuantity -= 1;
+    //   } else {
+    //     newQuantity += 1;
+    //   }
+    // }
+    // // type === "dec"
+    // //   ? currProduct.quantity > 1 && currProduct.quantity--
+    // //   : currProduct.quantity++;
+    // console.log("newQuantity after", newQuantity);
+  };
+
+  // useEffect(() => {
+  //   updateQuantity &&
+  //     idProd &&
+  //     priceProd &&
+  //     dispatch(
+  //       updateProduct({
+  //         id: idProd,
+  //         updateQuantity,
+  //         price: priceProd,
+  //       })
+  //     );
+  // }, [updateQuantity, idProd, priceProd]);
+
+  const [StripeToken, setStripeToken] = useState(null);
+
+  const history = useHistory();
+
+  const onToken = (token) => {
+    setStripeToken(token);
+  };
+
+  useEffect(() => {
+    const makeCheckout = async () => {
+      try {
+        const res = await userRequest.post("/checkout/payment", {
+          tokenId: StripeToken.id,
+          amount: cart.total * 100,
+        });
+
+        history.push("/success", { data: res.data });
+      } catch (e) {
+        console.log("Error: ", e);
+      }
+    };
+
+    StripeToken && cart.total >= 1 && makeCheckout();
+  }, [StripeToken, cart.total, history]);
 
   return (
     <Container>
@@ -53,52 +128,57 @@ const CartContainer = () => {
           </Top>
           <Bottom>
             <Info>
-              <Product>
-                <ProductDetail>
-                    <Image src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1614188818-TD1MTHU_SHOE_ANGLE_GLOBAL_MENS_TREE_DASHERS_THUNDER_b01b1013-cd8d-48e7-bed9-52db26515dc4.png?crop=1xw:1.00xh;center,top&resize=480%3A%2A" />
-                    <Details>
-                      <ProductName> <b> Product: </b> JESSIE THUNDER SHOES </ProductName>
-                      <ProductId> <b> ID:</b> 93813718293 </ProductId>
-                      <ProductColor color="black" />
-                      <ProductSize> <b> Size: </b> 37.5 </ProductSize>
-                    </Details>
-                </ProductDetail>
-                <PriceDetail>
-                  <ProductAmountContainer>
-                    <Add />
-                    <ProductAmount>2</ProductAmount>
-                    <Remove />
-                  </ProductAmountContainer>
-                  <ProductPrice>$ 30</ProductPrice>
-                </PriceDetail>
-              </Product>
-              <Hr />
-              <Product>
-                <ProductDetail>
-                    <Image src="https://i.pinimg.com/originals/2d/af/f8/2daff8e0823e51dd752704a47d5b795c.png" />
-                    <Details>
-                      <ProductName> <b> Product: </b> HAKURAT-SHIRT </ProductName>
-                      <ProductId> <b> ID: </b> 93813718293 </ProductId>
-                      <ProductColor color="gray" />
-                      <ProductSize> <b> Size: </b> M </ProductSize>
-                    </Details>
-                </ProductDetail>
-                <PriceDetail>
-                  <ProductAmountContainer>
-                    <Add />
-                    <ProductAmount>1</ProductAmount>
-                    <Remove />
-                  </ProductAmountContainer>
-                  <ProductPrice>$ 20</ProductPrice>
-                </PriceDetail>
-              </Product>
-              
+              {cart?.products.length ? (
+                cart?.products?.map((product) => (
+                  <>
+                    <Product>
+                      <ProductDetail>
+                        <Image src={product.img} />
+                        <Details>
+                          <ProductName>
+                            {" "}
+                            <b> Product: </b> {product.title}
+                          </ProductName>
+                          <ProductId>
+                            {" "}
+                            <b> ID:</b> {product._id}
+                          </ProductId>
+                          <ProductColor color={product.color} />
+                          <ProductSize>
+                            {" "}
+                            <b> Size: </b> {product.size}
+                          </ProductSize>
+                        </Details>
+                      </ProductDetail>
+                      <PriceDetail>
+                        <ProductAmountContainer>
+                          <Add
+                            style={{ cursor: "pointer" }}
+                            onClick={() => handleQuantity("inc", product)}
+                          />
+                          <ProductAmount>{product.quantity}</ProductAmount>
+                          <Remove
+                            style={{ cursor: "pointer" }}
+                            onClick={() => handleQuantity("dec", product)}
+                          />
+                        </ProductAmountContainer>
+                        <ProductPrice>
+                          $ {product.price * product.quantity}
+                        </ProductPrice>
+                      </PriceDetail>
+                    </Product>
+                    <Hr />
+                  </>
+                ))
+              ) : (
+                <p>No Item Fuond!!</p>
+              )}
             </Info>
             <Summary>
               <SummaryTitle> ORDER SUMMARY </SummaryTitle>
               <SummaryItem>
                 <SummaryItemText> Subtotal </SummaryItemText>
-                <SummaryItemPrice> $ 80 </SummaryItemPrice>
+                <SummaryItemPrice> $ {cart.total} </SummaryItemPrice>
               </SummaryItem>
 
               <SummaryItem>
@@ -111,18 +191,42 @@ const CartContainer = () => {
                 <SummaryItemPrice> $ -5.90 </SummaryItemPrice>
               </SummaryItem>
 
-              <SummaryItem type="total" >
+              <SummaryItem type="total">
                 <SummaryItemText> Total </SummaryItemText>
-                <SummaryItemPrice> $ 80 </SummaryItemPrice>
+                <SummaryItemPrice> $ {cart.total} </SummaryItemPrice>
               </SummaryItem>
 
-              <SummaryButton> CHECKOUT NOW </SummaryButton>
+              {/* <SummaryButton> CHECKOUT NOW </SummaryButton> */}
+
+              {/* <StripeCheckout
+                name="Lama Shop"
+                image="https://avatars.githubusercontent.com/u/1486366?v=4"
+                billingAddress
+                shippingAddress
+                description={`Your total is ${cart.total}`}
+                amount={cart.total * 100}
+                token={onToken}
+                stripekey={StripeKEY}>
+                <SummaryButton> CHECKOUT NOW </SummaryButton>
+              </StripeCheckout> */}
+
+              <StripeCheckout
+                name="Lama Shop"
+                image="https://avatars.githubusercontent.com/u/1486366?v=4"
+                billingAddress
+                shippingAddress
+                description={`Your total is $${cart.total}`}
+                amount={cart.total * 100}
+                token={onToken}
+                stripeKey={StripeKEY}>
+                <SummaryButton>CHECKOUT NOW</SummaryButton>
+              </StripeCheckout>
             </Summary>
           </Bottom>
         </Wrapper>
       </Layout>
     </Container>
   );
-}
+};
 
-export default CartContainer
+export default CartContainer;

@@ -12,6 +12,8 @@ import Cart from "./pages/Cart";
 
 import "aos/dist/aos.css";
 import "./assets/style.css";
+import Success from "./pages/Success";
+import { useSelector } from "react-redux";
 
 const App = () => {
   useEffect(() => {
@@ -20,7 +22,7 @@ const App = () => {
     });
   }, []);
 
-  const user = true;
+  const user = useSelector((state) => state.user.currentUser);
 
   return (
     <>
@@ -33,22 +35,19 @@ const App = () => {
       </Helmet>
       <Switch>
         <Route exact path="/">
-          <Home />
+          {user ? <Home /> : <Login />}
         </Route>
-        <Route path="/products">
-          <ProductList />
-        </Route>
+
+        <Route path="/success">{user ? <Success /> : <Login />}</Route>
+
+        <Route path="/products">{user ? <ProductList /> : <Login />}</Route>
         <Route path="/products/:category">
-          <ProductList />
+          {user ? <ProductList /> : <Login />}
         </Route>
 
-        <Route path="/product/:id">
-          <Product />
-        </Route>
+        <Route path="/product/:id">{user ? <Product /> : <Login />}</Route>
 
-        <Route path="/cart">
-          <Cart />
-        </Route>
+        <Route path="/cart">{user ? <Cart /> : <Login />}</Route>
 
         <Route path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>
 
