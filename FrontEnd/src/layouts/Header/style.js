@@ -13,6 +13,8 @@ export const Wrapper = styled.div`
   justify-content: space-between;
   ${mobile({ padding: "10px 0px" })};
 `;
+
+// ${tablet({ padding: "10px 0px" })};
 export const Left = styled.div`
   flex: 1;
   display: flex;
@@ -60,7 +62,7 @@ export const Right = styled.div`
   ${mobile({ flex: 2, justifyContent: "center" })};
 `;
 
-export const MenuItem = styled.div`
+export const MenuItemLink = styled.div`
   font-size: 14px;
   cursor: pointer;
   margin-left: 25px;

@@ -46,8 +46,27 @@ const ProductContainer = () => {
     const getProduct = async () => {
       try {
         const res = await publicRequest.get(`/products/find/${id}`);
-        setProduct(res.data);
+        if (res.status === 200) {
+          setProduct(res.data);
+        } else {
+          setProduct({
+            img: "/mo.jpg",
+            title: "title",
+            desc: "desc",
+            price: 50,
+            color: ["red"],
+            size: ["M"],
+          });
+        }
       } catch (err) {
+        setProduct({
+          img: "/mo.jpg",
+          title: "title",
+          desc: "desc",
+          price: 50,
+          color: ["red"],
+          size: ["M"],
+        });
         console.log(err);
       }
     };

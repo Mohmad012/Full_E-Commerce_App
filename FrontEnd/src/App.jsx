@@ -23,6 +23,7 @@ const App = () => {
   }, []);
 
   const user = useSelector((state) => state.user.currentUser);
+  // const user = true;
 
   return (
     <>

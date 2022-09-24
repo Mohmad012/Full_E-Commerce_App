@@ -15,6 +15,7 @@ export const Top = styled.div`
   justify-content: space-between;
   padding: 20px;
   ${mobile({ flexDirection: "column", gap: "0.5rem" })};
+  ${tablet({ flexDirection: "column", gap: "1.5rem" })};
 `;
 export const TopTexts = styled.div`
   ${mobile({ display: "none" })};
@@ -36,8 +37,8 @@ export const TopButton = styled.button`
 export const Bottom = styled.div`
   display: flex;
   justify-content: space-between;
-  ${mobile({ flexDirection: "column" })};
-  ${tablet({ flexDirection: "column" })};
+  ${mobile({ flexDirection: "column", gap: "3rem" })};
+  ${tablet({ flexDirection: "column", gap: "3rem" })};
 `;
 export const Info = styled.div`
   flex: 3;
@@ -108,6 +109,7 @@ export const Hr = styled.hr`
   background-color: #eee;
   border: none;
   height: 1px;
+  ${tablet({ display: "none" })};
 `;
 
 export const SummaryTitle = styled.h1`

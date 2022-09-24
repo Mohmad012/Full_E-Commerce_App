@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Product from "./Product";
 import { Container } from "./style";
 import { publicRequest } from "../../requestApi";
+import data from "../../data/static.json";
 
 const Products = ({ categ, filtersProds, sortProds }) => {
   const [products, setProducts] = useState([]);
@@ -13,9 +14,13 @@ const Products = ({ categ, filtersProds, sortProds }) => {
         const res = await publicRequest.get(
           categ ? `/products?category=${categ}` : "/products"
         );
-        console.log(products);
-        setProducts(res.data);
+        if (res.status === 200) {
+          setProducts(res.data);
+        } else {
+          setProducts(data[0].popularProducts);
+        }
       } catch (err) {
+        setProducts(data[0].popularProducts);
         console.log(err);
       }
     };
@@ -34,18 +39,25 @@ const Products = ({ categ, filtersProds, sortProds }) => {
   }, [products?.length, categ, filtersProds]);
 
   useEffect(() => {
-    if (sortProds === "newest ") {
-      setFilteredProducts((prev) =>
-        [...prev].sort((a, b) => a.createdAt - b.createdAt)
-      );
-    } else if (sortProds === "asc") {
-      setFilteredProducts((prev) =>
-        [...prev].sort((a, b) => a.price - b.price)
-      );
-    } else {
-      setFilteredProducts((prev) =>
-        [...prev].sort((a, b) => b.price - a.price)
-      );
+    if (
+      filteredProducts.some(
+        (item) =>
+          item.hasOwnProperty("createdAt") || item.hasOwnProperty("price")
+      )
+    ) {
+      if (sortProds === "newest ") {
+        setFilteredProducts((prev) =>
+          [...prev].sort((a, b) => a.createdAt - b.createdAt)
+        );
+      } else if (sortProds === "asc") {
+        setFilteredProducts((prev) =>
+          [...prev].sort((a, b) => a.price - b.price)
+        );
+      } else {
+        setFilteredProducts((prev) =>
+          [...prev].sort((a, b) => b.price - a.price)
+        );
+      }
     }
   }, [sortProds]);
 
