@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
 import { login } from "../../store/apiCalls";
 import {
   Container,
@@ -8,7 +9,7 @@ import {
   Form,
   Input,
   Error,
-  Link,
+  LinkItem,
   Button,
 } from "./style";
 
@@ -17,6 +18,7 @@ const LoginContainer = () => {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const { isFetching, error } = useSelector((state) => state.user);
+  const history = useHistory();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -24,6 +26,8 @@ const LoginContainer = () => {
       username,
       password,
     });
+
+    history.goBack();
   };
 
   return (
@@ -45,8 +49,11 @@ const LoginContainer = () => {
             {isFetching ? "Loading..." : "LOGIN"}
           </Button>
           {error ? <Error> a Username Or Password Is Wrong!!</Error> : ""}
-          <Link>DO NOT YOU REMEMBER THE PASSWORD?</Link>
-          <Link>CREATEANEW ACCOUNT</Link>
+          <LinkItem>DO NOT YOU REMEMBER THE PASSWORD?</LinkItem>
+
+          <LinkItem onClick={() => history.push("/register")}>
+            CREATEANEW ACCOUNT
+          </LinkItem>
         </Form>
       </Wrapper>
     </Container>

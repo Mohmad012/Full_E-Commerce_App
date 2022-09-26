@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Helmet } from "react-helmet";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import Aos from "aos";
 
 import Home from "./pages/Home";
@@ -13,7 +13,6 @@ import Cart from "./pages/Cart";
 import "aos/dist/aos.css";
 import "./assets/style.css";
 import Success from "./pages/Success";
-import { useSelector } from "react-redux";
 
 const App = () => {
   useEffect(() => {
@@ -21,9 +20,6 @@ const App = () => {
       duration: 1000,
     });
   }, []);
-
-  const user = useSelector((state) => state.user.currentUser);
-  // const user = true;
 
   return (
     <>
@@ -36,24 +32,35 @@ const App = () => {
       </Helmet>
       <Switch>
         <Route exact path="/">
-          {user ? <Home /> : <Login />}
+          <Home />
         </Route>
 
-        <Route path="/success">{user ? <Success /> : <Login />}</Route>
+        <Route path="/success">
+          <Success />
+        </Route>
 
-        <Route path="/products">{user ? <ProductList /> : <Login />}</Route>
+        <Route path="/products">
+          <ProductList />
+        </Route>
         <Route path="/products/:category">
-          {user ? <ProductList /> : <Login />}
+          <ProductList />
         </Route>
 
-        <Route path="/product/:id">{user ? <Product /> : <Login />}</Route>
+        <Route path="/product/:id">
+          <Product />
+        </Route>
 
-        <Route path="/cart">{user ? <Cart /> : <Login />}</Route>
+        <Route path="/cart">
+          {" "}
+          <Cart />
+        </Route>
 
-        <Route path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>
+        <Route path="/login">
+          <Login />
+        </Route>
 
         <Route path="/register">
-          {user ? <Redirect to="/" /> : <Register />}
+          <Register />
         </Route>
       </Switch>
     </>

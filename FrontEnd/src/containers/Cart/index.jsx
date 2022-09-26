@@ -45,55 +45,23 @@ const StripeKEY = process.env.REACT_APP_STRIPE_PUBLIC_KEY;
 
 const CartContainer = () => {
   const cart = useSelector((state) => state.cart);
+  const user = useSelector((state) => state.user.currentUser);
 
-  const [updateQuantity, setUpdateQuantity] = useState(1);
-  const [idProd, setIdProd] = useState(0);
-  const [priceProd, setPriceProd] = useState(0);
+  // const [updateQuantity, setUpdateQuantity] = useState(1);
+  // const [idProd, setIdProd] = useState(0);
+  // const [priceProd, setPriceProd] = useState(0);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const handleQuantity = (type, product) => {
-    // setIdProd(id);
-    // setPriceProd(price);
-    // let newQuantity = 1;
-    // let currProduct = { ...product };
-    // type === "dec"
-    //   ? currProduct.quantity > 1 && setUpdateQuantity((prev) => prev - 1)
-    //   : setUpdateQuantity((prev) => prev + 1);
-    // console.log("newQuantity before", newQuantity);
-    // if (newQuantity > 1) {
-    //   if (type === "dec") {
-    //     newQuantity -= 1;
-    //   } else {
-    //     newQuantity += 1;
-    //   }
-    // }
-    // // type === "dec"
-    // //   ? currProduct.quantity > 1 && currProduct.quantity--
-    // //   : currProduct.quantity++;
-    // console.log("newQuantity after", newQuantity);
-  };
-
-  // useEffect(() => {
-  //   updateQuantity &&
-  //     idProd &&
-  //     priceProd &&
-  //     dispatch(
-  //       updateProduct({
-  //         id: idProd,
-  //         updateQuantity,
-  //         price: priceProd,
-  //       })
-  //     );
-  // }, [updateQuantity, idProd, priceProd]);
+  const handleQuantity = () => {};
 
   const [StripeToken, setStripeToken] = useState(null);
 
   const history = useHistory();
 
-  const onToken = (token) => {
-    setStripeToken(token);
-  };
+  // const pathname = window.location.pathname;
+
+  const onToken = (token) => setStripeToken(token);
 
   useEffect(() => {
     const makeCheckout = async () => {
@@ -196,31 +164,23 @@ const CartContainer = () => {
                 <SummaryItemPrice> $ {cart.total} </SummaryItemPrice>
               </SummaryItem>
 
-              {/* <SummaryButton> CHECKOUT NOW </SummaryButton> */}
-
-              {/* <StripeCheckout
-                name="Lama Shop"
-                image="https://avatars.githubusercontent.com/u/1486366?v=4"
-                billingAddress
-                shippingAddress
-                description={`Your total is ${cart.total}`}
-                amount={cart.total * 100}
-                token={onToken}
-                stripekey={StripeKEY}>
-                <SummaryButton> CHECKOUT NOW </SummaryButton>
-              </StripeCheckout> */}
-
-              <StripeCheckout
-                name="Lama Shop"
-                image="https://avatars.githubusercontent.com/u/1486366?v=4"
-                billingAddress
-                shippingAddress
-                description={`Your total is $${cart.total}`}
-                amount={cart.total * 100}
-                token={onToken}
-                stripeKey={StripeKEY}>
-                <SummaryButton>CHECKOUT NOW</SummaryButton>
-              </StripeCheckout>
+              {!user ? (
+                <SummaryButton onClick={() => history.push("/login")}>
+                  CHECKOUT NOW
+                </SummaryButton>
+              ) : (
+                <StripeCheckout
+                  name="Lama Shop"
+                  image="https://avatars.githubusercontent.com/u/1486366?v=4"
+                  billingAddress
+                  shippingAddress
+                  description={`Your total is $${cart.total}`}
+                  amount={cart.total * 100}
+                  token={onToken}
+                  stripeKey={StripeKEY}>
+                  <SummaryButton>CHECKOUT NOW</SummaryButton>
+                </StripeCheckout>
+              )}
             </Summary>
           </Bottom>
         </Wrapper>

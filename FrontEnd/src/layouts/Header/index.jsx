@@ -17,7 +17,7 @@ import { Search, ShoppingCartOutlined } from "@material-ui/icons";
 
 import { Badge } from "@material-ui/core";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 
 import Button from "@material-ui/core/Button";
@@ -29,6 +29,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
 import { makeStyles } from "@material-ui/core/styles";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import { removeUser } from "../../store/userReducer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,6 +42,9 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = () => {
   const quantity = useSelector((state) => state.cart.quantity);
+  const user = useSelector((state) => state.user.currentUser);
+
+  const dispatch = useDispatch();
 
   const classes = useStyles();
   const [open, setOpen] = useState(false);
@@ -68,6 +72,12 @@ const Header = () => {
   const handleSignIn = (e) => {
     handleClose(e);
     history.push("/register");
+  };
+
+  const handleLogOut = (e) => {
+    handleClose(e);
+    dispatch(removeUser());
+    localStorage.removeItem("persist:rootUser");
   };
 
   function handleListKeyDown(event) {
@@ -134,20 +144,16 @@ const Header = () => {
                           autoFocusItem={open}
                           id="menu-list-grow"
                           onKeyDown={handleListKeyDown}>
-                          {/* <MenuItem onClick={handleClose}>
-                            <Link to="/register">
-                            <MenuItemLink>REGISTER</MenuItemLink>
-                            </Link>
-                          </MenuItem>
-                          <MenuItem onClick={handleClose}>
-                            {" "}
-                            <Link to="/login">
-                            <MenuItemLink>SIGN IN</MenuItemLink>
-                            </Link>
-                          </MenuItem> */}
-                          <MenuItem onClick={handleSignIn}>REGISTER</MenuItem>
-                          <MenuItem onClick={handleLogin}>SIGN IN</MenuItem>
-                          <MenuItem onClick={handleClose}>Logout</MenuItem>
+                          {user ? (
+                            <MenuItem onClick={handleLogOut}>Logout</MenuItem>
+                          ) : (
+                            <>
+                              <MenuItem onClick={handleSignIn}>
+                                REGISTER
+                              </MenuItem>
+                              <MenuItem onClick={handleLogin}>SIGN IN</MenuItem>
+                            </>
+                          )}
                         </MenuList>
                       </ClickAwayListener>
                     </Paper>

@@ -61,7 +61,7 @@ export const Error = styled.span`
   color: red;
 `;
 
-export const Link = styled.a`
+export const LinkItem = styled.a`
   margin: 5px 0px;
   font-size: 12px;
   text-decoration: underline;

@@ -41,6 +41,7 @@ export const SearchContainer = styled.div`
 export const Input = styled.input`
   border: none;
   outline: none;
+  background-color: transparent;
   ${mobile({ width: "50px" })};
   ${tablet({ width: "100px" })};
 `;
