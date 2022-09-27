@@ -29,10 +29,10 @@ export const TopButton = styled.button`
   padding: 10px;
   font-weight: 600;
   cursor: pointer;
-  border: ${(props) => props.type === "filled" && "none"};
+
   background-color: ${(props) =>
-    props.type === "filled" ? "black" : "transparent"};
-  color: ${(props) => props.type === "filled" && "white"};
+    props.type === "filled" ? "#0000000a" : "transparent"};
+  color: ${(props) => props.type === "filled" && "#000"};
 `;
 export const Bottom = styled.div`
   display: flex;
@@ -129,17 +129,66 @@ export const SummaryItemPrice = styled.span`
   ${lap({ fontSize: "15px", flex: 2, textAlign: "right" })};
 `;
 export const SummaryButton = styled.button`
-  width: 100%;
-  padding: 10px;
-  background-color: #c88b77;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
+  margin: 0 auto;
   border: none;
-  border-radius: 5px;
-  transition: background-color 0.5s;
+  padding: 10px;
+  color: gray;
+  cursor: pointer;
+  font-weight: 600;
+  width: 70%;
+  height: 50px;
+  border: 2px solid #b96f7a;
+  font-family: "Cinzel", serif;
+  font-size: 18px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 0;
+  transition: 0.8s;
+  background-color: #eee;
+
+  &:before,
+  &:after {
+    position: absolute;
+    background: #eee;
+    z-index: -1;
+    transition: 0.3s;
+    content: "";
+  }
+
+  &:before {
+    height: 50px;
+    width: 92%;
+  }
+
+  &:after {
+    width: 100%;
+    height: 30px;
+  }
+
+  .noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  &:hover::before {
+    width: 0px;
+    background: #4a2f26;
+  }
+
+  &:hover::after {
+    height: 0px;
+    background: #4a2f26;
+  }
 
   &:hover {
-    background-color: #7e403b;
+    background: #4a2f26;
   }
 `;
