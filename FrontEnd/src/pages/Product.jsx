@@ -1,6 +1,5 @@
-import ProductContainer from '../containers/Product'
+import ProductContainer from "containers/Product";
 
-const Product = () => <ProductContainer />
+const Product = () => <ProductContainer />;
 
 export default Product;
-

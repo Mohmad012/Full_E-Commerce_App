@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Layout from "../../layouts";
-import Announcement from "../../components/Announcement";
+import Layout from "layouts";
+import Announcement from "components/Announcement";
 
 import {
   Container,
@@ -35,10 +35,10 @@ import {
 
 import { Add, Remove } from "@material-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { updateProduct } from "../../store/cartReducer";
+import { updateProduct } from "store/cartReducer";
 import { useEffect } from "react";
 import StripeCheckout from "react-stripe-checkout";
-import { userRequest } from "../../requestApi";
+import { userRequest } from "requestApi";
 import { useHistory } from "react-router-dom";
 
 const StripeKEY = process.env.REACT_APP_STRIPE_PUBLIC_KEY;
@@ -51,17 +51,22 @@ const CartContainer = () => {
   // const [idProd, setIdProd] = useState(0);
   // const [priceProd, setPriceProd] = useState(0);
 
-  // const dispatch = useDispatch();
-
-  const handleQuantity = () => {};
+  const dispatch = useDispatch();
 
   const [StripeToken, setStripeToken] = useState(null);
+  const [quantity, setQuantity] = useState(1);
 
   const history = useHistory();
 
   // const pathname = window.location.pathname;
 
   const onToken = (token) => setStripeToken(token);
+
+  // useEffect(() => {
+  //   if(quantity){
+
+  //   }
+  // },[quantity])
 
   useEffect(() => {
     const makeCheckout = async () => {
@@ -80,6 +85,10 @@ const CartContainer = () => {
     StripeToken && cart.total >= 1 && makeCheckout();
   }, [StripeToken, cart.total, history]);
 
+  const handleQuantity = (_id, type) => dispatch(updateProduct({ _id, type }));
+
+  console.log("cart?.total", cart?.total);
+
   return (
     <Container>
       <Layout>
@@ -96,8 +105,8 @@ const CartContainer = () => {
           </Top>
           <Bottom>
             <Info>
-              {cart?.products.length ? (
-                cart?.products?.map((product) => (
+              {Object.values(cart?.products).length ? (
+                Object.values(cart?.products)?.map((product) => (
                   <>
                     <Product>
                       <ProductDetail>
@@ -122,16 +131,17 @@ const CartContainer = () => {
                         <ProductAmountContainer>
                           <Add
                             style={{ cursor: "pointer" }}
-                            onClick={() => handleQuantity("inc", product)}
+                            onClick={() => handleQuantity(product._id, "inc")}
                           />
                           <ProductAmount>{product.quantity}</ProductAmount>
                           <Remove
                             style={{ cursor: "pointer" }}
-                            onClick={() => handleQuantity("dec", product)}
+                            onClick={() => handleQuantity(product._id, "dec")}
                           />
                         </ProductAmountContainer>
                         <ProductPrice>
-                          $ {product.price * product.quantity}
+                          {/* $ {product.price * product.quantity} */}${" "}
+                          {Number(product.price * product.quantity).toFixed(2)}
                         </ProductPrice>
                       </PriceDetail>
                     </Product>
@@ -146,7 +156,10 @@ const CartContainer = () => {
               <SummaryTitle> ORDER SUMMARY </SummaryTitle>
               <SummaryItem>
                 <SummaryItemText> Subtotal </SummaryItemText>
-                <SummaryItemPrice> $ {cart.total} </SummaryItemPrice>
+                <SummaryItemPrice>
+                  {" "}
+                  $ {Number(cart.total).toFixed(2)}{" "}
+                </SummaryItemPrice>
               </SummaryItem>
 
               <SummaryItem>
@@ -161,7 +174,10 @@ const CartContainer = () => {
 
               <SummaryItem type="total">
                 <SummaryItemText> Total </SummaryItemText>
-                <SummaryItemPrice> $ {cart.total} </SummaryItemPrice>
+                <SummaryItemPrice>
+                  {" "}
+                  $ {Number(cart.total).toFixed(2)}{" "}
+                </SummaryItemPrice>
               </SummaryItem>
 
               {!user ? (

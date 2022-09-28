@@ -1,6 +1,5 @@
-import CartContainer from '../containers/Cart'
+import CartContainer from "containers/Cart";
 
-const Cart = () => <CartContainer />
+const Cart = () => <CartContainer />;
 
 export default Cart;
-

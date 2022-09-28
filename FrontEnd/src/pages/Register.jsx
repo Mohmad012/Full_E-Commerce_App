@@ -1,6 +1,5 @@
-import RegisterContainer from '../containers/Register'
+import RegisterContainer from "containers/Register";
 
-const Register = () => <RegisterContainer />
+const Register = () => <RegisterContainer />;
 
 export default Register;
-

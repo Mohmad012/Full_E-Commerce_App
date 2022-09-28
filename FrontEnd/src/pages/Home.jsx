@@ -1,6 +1,6 @@
-import Layout from "../layouts";
-import HomeContainer from "../containers/Home";
-import Announcement from "../components/Announcement";
+import Layout from "layouts";
+import HomeContainer from "containers/Home";
+import Announcement from "components/Announcement";
 import { useState } from "react";
 
 const Home = () => {

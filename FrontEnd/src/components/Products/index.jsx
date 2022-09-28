@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import Product from "./Product";
 import { Container } from "./style";
-import { publicRequest } from "../../requestApi";
-import data from "../../data/static.json";
+import { publicRequest } from "requestApi";
+import data from "data/static.json";
 
 const Products = ({ categ, filtersProds, sortProds }) => {
   const [products, setProducts] = useState([]);

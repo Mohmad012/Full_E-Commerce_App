@@ -1,10 +1,10 @@
 import { useState } from "react";
 
 import { useLocation } from "react-router-dom";
-import Announcement from "../../components/Announcement";
-import Layout from "../../layouts";
-import Newsletter from "../../components/Newsletter";
-import Products from "../../components/Products";
+import Announcement from "components/Announcement";
+import Layout from "layouts";
+import Newsletter from "components/Newsletter";
+import Products from "components/Products";
 
 import {
   Container,
@@ -16,7 +16,7 @@ import {
   Option,
 } from "./style";
 
-import data from "../../data/static.json";
+import data from "data/static.json";
 
 const SelectItem = ({ name, handleFilters, data }) => (
   <Select name={name} onChange={handleFilters}>

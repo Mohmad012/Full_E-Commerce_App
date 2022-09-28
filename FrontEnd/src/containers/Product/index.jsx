@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 
-import Announcement from "../../components/Announcement";
-import Newsletter from "../../components/Newsletter";
-import Layout from "../../layouts";
-import { publicRequest } from "../../requestApi";
-import { addProduct } from "../../store/cartReducer";
+import Announcement from "components/Announcement";
+import Newsletter from "components/Newsletter";
+import Layout from "layouts";
+import { publicRequest } from "requestApi";
+import { addProduct } from "store/cartReducer";
 
 import {
   Container,

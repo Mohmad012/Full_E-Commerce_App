@@ -1,6 +1,5 @@
-import ProductListContainer from '../containers/ProductList'
+import ProductListContainer from "containers/ProductList";
 
-const ProductList = () => <ProductListContainer />
+const ProductList = () => <ProductListContainer />;
 
 export default ProductList;
-
