@@ -6,7 +6,6 @@ import { useLocation } from "react-router-dom";
 import Announcement from "components/Announcement";
 import Newsletter from "components/Newsletter";
 import Layout from "layouts";
-import { publicRequest } from "requestApi";
 import { addProduct } from "store/cartReducer";
 
 import {
@@ -29,6 +28,7 @@ import {
   Amount,
   Button,
 } from "./style";
+import UseRequestApi from "hooks/UseRequestApi";
 
 const ProductContainer = () => {
   const location = useLocation();
@@ -39,6 +39,8 @@ const ProductContainer = () => {
   const [quantity, setQuantity] = useState(1);
   const [color, setColor] = useState("Red");
   const [size, setSize] = useState("S");
+
+  const { publicRequest } = UseRequestApi();
 
   const dispatch = useDispatch();
 

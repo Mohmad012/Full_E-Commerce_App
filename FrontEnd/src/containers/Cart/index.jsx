@@ -38,35 +38,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateProduct } from "store/cartReducer";
 import { useEffect } from "react";
 import StripeCheckout from "react-stripe-checkout";
-import { userRequest } from "requestApi";
 import { useHistory } from "react-router-dom";
+import UseRequestApi from "hooks/UseRequestApi";
 
 const StripeKEY = process.env.REACT_APP_STRIPE_PUBLIC_KEY;
 
 const CartContainer = () => {
   const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.user.currentUser);
-
-  // const [updateQuantity, setUpdateQuantity] = useState(1);
-  // const [idProd, setIdProd] = useState(0);
-  // const [priceProd, setPriceProd] = useState(0);
+  const { userRequest } = UseRequestApi();
 
   const dispatch = useDispatch();
 
   const [StripeToken, setStripeToken] = useState(null);
-  const [quantity, setQuantity] = useState(1);
 
   const history = useHistory();
 
-  // const pathname = window.location.pathname;
-
   const onToken = (token) => setStripeToken(token);
-
-  // useEffect(() => {
-  //   if(quantity){
-
-  //   }
-  // },[quantity])
 
   useEffect(() => {
     const makeCheckout = async () => {
@@ -86,8 +74,6 @@ const CartContainer = () => {
   }, [StripeToken, cart.total, history]);
 
   const handleQuantity = (_id, type) => dispatch(updateProduct({ _id, type }));
-
-  console.log("cart?.total", cart?.total);
 
   return (
     <Container>

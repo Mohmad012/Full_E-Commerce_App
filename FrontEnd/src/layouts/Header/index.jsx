@@ -97,8 +97,6 @@ const Header = () => {
     prevOpen.current = open;
   }, [open, history]);
 
-  console.log("open", open);
-
   return (
     <Container>
       <Wrapper>

@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import Product from "./Product";
 import { Container } from "./style";
-import { publicRequest } from "requestApi";
 import data from "data/static.json";
+import UseRequestApi from "hooks/UseRequestApi";
 
 const Products = ({ categ, filtersProds, sortProds }) => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+
+  const { publicRequest } = UseRequestApi();
 
   useEffect(() => {
     const getProducts = async () => {
