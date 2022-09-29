@@ -4,7 +4,7 @@ import axios from "axios";
 const UseRequestApi = () => {
   //   const user = useSelector((state) => state.user.currentUser);
 
-  const BASE_URL = "http://localhost:9000/api";
+  const BASE_URL = `${process.env.REACT_APP_BACKEND_URL}/api`;
   //   user?.accessToken;
 
   const TOKEN =
