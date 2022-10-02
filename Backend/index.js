@@ -23,7 +23,7 @@ app.use(
 );
 
 app.get("/", (req, res) => {
-  res.send("Hello world");
+  res.send("Buy & Sale");
 });
 
 app.use(express.json());
