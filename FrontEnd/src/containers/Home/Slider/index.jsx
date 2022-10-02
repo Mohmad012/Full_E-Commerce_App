@@ -18,15 +18,31 @@ import data from "data/static.json";
 
 const Slider = () => {
   const [slideIndex, setslideIndex] = useState(0);
+  const [disabled, setDisabled] = useState(false);
   const handleClick = (direction) => {
-    direction === "left"
-      ? setslideIndex(slideIndex > 0 ? slideIndex - 1 : 2)
-      : setslideIndex(slideIndex < 2 ? slideIndex + 1 : 0);
+    if (direction === "left") {
+      if (slideIndex > 0) {
+        setslideIndex((prev) => prev - 1);
+        setDisabled("");
+      } else {
+        setDisabled("left");
+      }
+    } else {
+      if (slideIndex < 2) {
+        setslideIndex((prev) => prev + 1);
+        setDisabled("");
+      } else {
+        setDisabled("right");
+      }
+    }
   };
 
   return (
     <Container>
-      <Arrow direction="left" onClick={() => handleClick("left")}>
+      <Arrow
+        direction="left"
+        onClick={() => handleClick("left")}
+        disabled={disabled}>
         <ArrowLeftOutlined />
       </Arrow>
       <Wrapper slideIndex={slideIndex}>
@@ -43,7 +59,10 @@ const Slider = () => {
           </Slide>
         ))}
       </Wrapper>
-      <Arrow direction="right" onClick={() => handleClick("right")}>
+      <Arrow
+        direction="right"
+        onClick={() => handleClick("right")}
+        disabled={disabled}>
         <ArrowRightOutlined />
       </Arrow>
     </Container>
