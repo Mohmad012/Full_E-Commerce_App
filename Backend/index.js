@@ -21,6 +21,11 @@ app.use(
     methods: ["GET", "POST"],
   })
 );
+
+app.get("/", (req, res) => {
+  res.send("Hello world");
+});
+
 app.use(express.json());
 app.use("/api/users", userRoute);
 app.use("/api/products", productRoute);
