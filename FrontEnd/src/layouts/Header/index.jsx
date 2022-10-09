@@ -222,7 +222,9 @@ const Header = () => {
         </Center>
         <Right>
           <button onClick={() => dispatch(changeMode())}>
-            <ReorderIcon />
+            <Icon isDark={isDark}>
+              <ReorderIcon style={{ width: "1rem", height: "1rem" }} />
+            </Icon>
           </button>
           <div className={classesSignBx.root}>
             <div>
