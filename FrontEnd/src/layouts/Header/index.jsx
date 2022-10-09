@@ -36,6 +36,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import PublicIcon from "@material-ui/icons/Public";
 import ReorderIcon from "@material-ui/icons/Reorder";
+import ToggleOnIcon from "@material-ui/icons/ToggleOn";
+// import ToggleOnIcon from '@mui/icons-material/ToggleOn';
 import { removeUser } from "../../store/userReducer";
 import { changeMode } from "store/modeReducer";
 // import ReorderIcon from "@mui/icons-material/Reorder";
@@ -224,6 +226,15 @@ const Header = () => {
           <button onClick={() => dispatch(changeMode())}>
             <Icon isDark={isDark}>
               <ReorderIcon style={{ width: "1rem", height: "1rem" }} />
+            </Icon>
+          </button>
+
+          <button
+            onClick={() => dispatch(changeMode())}
+            style={{ backgroundColor: "transparent", border: "none" }}
+          >
+            <Icon isDark={isDark}>
+              <ToggleOnIcon style={{ width: "1.5rem", height: "1.5rem" }} />
             </Icon>
           </button>
           <div className={classesSignBx.root}>
