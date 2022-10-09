@@ -33,6 +33,7 @@ import { useHistory } from "react-router-dom";
 import { clearFavs, removeFav, updateFav } from "store/favReducer";
 import { addProduct } from "store/cartReducer";
 import { useState } from "react";
+import { decrypt } from "utils/encryptions";
 
 const FavoriteContainer = () => {
   const cart = useSelector((state) => state.cart);
@@ -41,7 +42,7 @@ const FavoriteContainer = () => {
 
   console.log("favs", favs);
   let user = useSelector((state) => state.user.currentUser);
-  // user = JSON.parse(decrypt(user));
+  user = JSON.parse(decrypt(user));
   const isDark = useSelector((state) => state.mode.isDark);
 
   const dispatch = useDispatch();
@@ -73,7 +74,8 @@ const FavoriteContainer = () => {
             <TopButton
               onClick={() => history.push("/")}
               type="TopButton"
-              isDark={isDark}>
+              isDark={isDark}
+            >
               CONTINUE SHOPPING
             </TopButton>
           </Top>
@@ -101,7 +103,8 @@ const FavoriteContainer = () => {
                           </ProductSize>
                           <RemoveBtn
                             isDark={isDark}
-                            onClick={() => handleRemoveItems(product._id)}>
+                            onClick={() => handleRemoveItems(product._id)}
+                          >
                             remove
                           </RemoveBtn>
                         </Details>
@@ -130,7 +133,8 @@ const FavoriteContainer = () => {
                           pos="ltf"
                           addWidth
                           isDark={isDark}
-                          onClick={handleAddToCard}>
+                          onClick={handleAddToCard}
+                        >
                           ADD TO CART
                         </Button>
                       </PriceDetail>

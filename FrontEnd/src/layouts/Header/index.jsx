@@ -40,6 +40,7 @@ import ToggleOnIcon from "@material-ui/icons/ToggleOn";
 // import ToggleOnIcon from '@mui/icons-material/ToggleOn';
 import { removeUser } from "../../store/userReducer";
 import { changeMode } from "store/modeReducer";
+import { decrypt } from "utils/encryptions";
 // import ReorderIcon from "@mui/icons-material/Reorder";
 
 const useStyles = makeStyles((theme) => ({
@@ -53,7 +54,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = () => {
   const quantity = useSelector((state) => state.cart.quantity);
-  const user = useSelector((state) => state.user.currentUser);
+  let user = useSelector((state) => state.user.currentUser);
+  user = JSON.parse(decrypt(user));
   const isDark = useSelector((state) => state.mode.isDark);
 
   const dispatch = useDispatch();
