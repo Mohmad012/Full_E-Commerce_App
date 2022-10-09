@@ -110,7 +110,8 @@ const Summary = styled.div`
   border-radius: 10px;
   padding: 20px 20px 50px;
   min-height: 50vh;
-  background: #22303c;
+  background: ${(props) =>
+    props.isDark === true ? "#22303c" : "rgb(213 213 213)"};
 `;
 const Product = styled.div`
   ${commonDisplay()}
@@ -124,7 +125,8 @@ const ProductDetail = styled.div`
 `;
 
 const RemoveBtn = styled.button`
-  background-color: #1b7ab1;
+  background-color: ${(props) =>
+    props.isDark === true ? "#1b7ab1" : "#7e403b"};
   border: none;
   padding: 16px 2rem;
   cursor: pointer;
@@ -132,7 +134,8 @@ const RemoveBtn = styled.button`
   transition: all 0.3s ease 0s;
   width: fit-content;
   &:hover {
-    background-color: #3ea8e5;
+    background-color: ${(props) =>
+      props.isDark === true ? "#3ea8e5" : "rgb(201 146 141)"};
   }
 `;
 const Clear = styled.div`
