@@ -40,7 +40,7 @@ const FavoriteContainer = () => {
   const fav = useSelector((state) => state.fav);
   const [favs, setFavs] = useState(fav);
 
-  console.log("favs", favs);
+  // console.log("favs", favs);
   let user = useSelector((state) => state.user.currentUser);
   // user = JSON.parse(decrypt(user));
   const isDark = useSelector((state) => state.mode.isDark);

@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
 const Header = () => {
   const quantity = useSelector((state) => state.cart.quantity);
   let user = useSelector((state) => state.user.currentUser);
-  console.log("user", user);
+  // console.log("user", user);
   // user = JSON.parse(decrypt(user));
   const isDark = useSelector((state) => state.mode.isDark);
 
