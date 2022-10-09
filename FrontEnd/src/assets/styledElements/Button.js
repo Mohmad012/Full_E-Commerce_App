@@ -3,7 +3,7 @@ const Button = (pos, isDark, addWidth) => {
     margin: ${pos === "cnt" ? " 0 auto" : 0};
     border: none;
     padding: 10px;
-    color: ${isDark ? "#fff" : "gray"};
+    color: ${isDark ? "#3ea8e5" : "gray"};
     cursor: pointer;
     font-weight: 600;
     width: ${addWidth === "addWidth" ? "150px" : "auto"};
