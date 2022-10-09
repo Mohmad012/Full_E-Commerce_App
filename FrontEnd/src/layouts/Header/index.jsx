@@ -225,7 +225,11 @@ const Header = () => {
         <Right>
           <button
             onClick={() => dispatch(changeMode())}
-            style={{ backgroundColor: "transparent", border: "none" }}
+            style={{
+              backgroundColor: "transparent",
+              border: "none",
+              marginRight: "0.5rem",
+            }}
           >
             <Icon isDark={isDark}>
               <ToggleOnIcon style={{ width: "1.5rem", height: "1.5rem" }} />
