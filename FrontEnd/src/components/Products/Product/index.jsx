@@ -7,9 +7,12 @@ import {
 
 import { Container, Circle, Image, Info, Icon } from "./style";
 
-const Product = ({ item }) => {
+const Product = ({ item, isDark }) => {
   return (
-    <Container data-aos="fade-up" data-aos-delay={`${200 + item.id * 50}`}>
+    <Container
+      data-aos="fade-up"
+      data-aos-delay={`${200 + item.id * 50}`}
+      isDark={isDark}>
       <Circle />
       <Image src={item.img} />
       <Info>

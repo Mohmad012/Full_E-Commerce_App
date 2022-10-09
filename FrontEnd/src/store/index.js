@@ -1,6 +1,9 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import cartReducer from "./cartReducer";
+import favReducer from "./favReducer";
 import userReducer from "./userReducer";
+import modeReducer from "./modeReducer";
+
 import {
   persistStore,
   persistReducer,
@@ -13,24 +16,29 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-const persistConfigUser = {
-  key: "rootUser",
-  version: 1,
-  storage,
+const persistConfig = (key) => {
+  return {
+    key,
+    version: 1,
+    storage,
+  };
 };
 
-const persistConfigCart = {
-  key: "rootCart",
-  version: 1,
-  storage,
-};
+const persistConfigUser = persistConfig("rootUser");
+const persistConfigCart = persistConfig("rootCart");
+const persistConfigFav = persistConfig("rootFav");
+const persistConfigMode = persistConfig("rootMode");
 
 const userPersistedReducer = persistReducer(persistConfigUser, userReducer);
 const cartPersistedReducer = persistReducer(persistConfigCart, cartReducer);
+const favPersistedReducer = persistReducer(persistConfigFav, favReducer);
+const modePersistedReducer = persistReducer(persistConfigMode, modeReducer);
 
 const rootReducer = combineReducers({
   user: userPersistedReducer,
   cart: cartPersistedReducer,
+  fav: favPersistedReducer,
+  mode: modePersistedReducer,
 });
 
 export const store = configureStore({

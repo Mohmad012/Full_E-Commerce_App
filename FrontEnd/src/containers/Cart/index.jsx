@@ -26,26 +26,33 @@ import {
   ProductAmount,
   ProductPrice,
   Hr,
+  NoItemFuond,
   SummaryTitle,
   SummaryItem,
   SummaryItemText,
   SummaryItemPrice,
   SummaryButton,
+  RemoveBtn,
+  Clear,
 } from "./style";
 
 import { Add, Remove } from "@material-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { updateProduct } from "store/cartReducer";
+import { updateProduct, clearProducts, removeProduct } from "store/cartReducer";
 import { useEffect } from "react";
 import StripeCheckout from "react-stripe-checkout";
 import { useHistory } from "react-router-dom";
 import UseRequestApi from "hooks/UseRequestApi";
+// import { decrypt } from "utils/encryptions";
 
 const StripeKEY = process.env.REACT_APP_STRIPE_PUBLIC_KEY;
 
 const CartContainer = () => {
   const cart = useSelector((state) => state.cart);
-  const user = useSelector((state) => state.user.currentUser);
+  let user = useSelector((state) => state.user.currentUser);
+  // user = JSON.parse(decrypt(user));
+  const isDark = useSelector((state) => state.mode.isDark);
+
   const { userRequest } = UseRequestApi();
 
   const dispatch = useDispatch();
@@ -63,8 +70,10 @@ const CartContainer = () => {
           tokenId: StripeToken.id,
           amount: cart.total * 100,
         });
-
-        history.push("/success", { data: res.data });
+        if (res.status === 200) {
+          dispatch(clearProducts());
+          history.push("/success", { data: res.data });
+        }
       } catch (e) {
         console.log("Error: ", e);
       }
@@ -74,116 +83,157 @@ const CartContainer = () => {
   }, [StripeToken, cart.total, history]);
 
   const handleQuantity = (_id, type) => dispatch(updateProduct({ _id, type }));
+  const handleRemoveAllItems = () => dispatch(clearProducts());
+  const handleRemoveItems = (id) => dispatch(removeProduct(id));
 
   return (
-    <Container>
-      <Layout>
+    <Container isDark={isDark}>
+      <Layout isDark={isDark}>
         <Announcement />
-        <Wrapper>
-          <Title>YOUR BAG</Title>
-          <Top>
-            <TopButton>CONTINUE SHOPPING</TopButton>
-            <TopTexts>
-              <TopText> Shopping Bag (2) </TopText>
-              <TopText> Your Wishlist (0) </TopText>
+        <Wrapper isDark={isDark}>
+          <Title isDark={isDark}>your bag</Title>
+          <Top isDark={isDark}>
+            <TopButton
+              onClick={() => history.push("/")}
+              type="TopButton"
+              isDark={isDark}>
+              CONTINUE SHOPPING
+            </TopButton>
+            <TopTexts isDark={isDark}>
+              <TopText isDark={isDark}> Shopping Bag (2) </TopText>
+              <TopText isDark={isDark}> Your Wishlist (0) </TopText>
             </TopTexts>
             {/* <TopButton type="filled">CHECKOUT NOW</TopButton> */}
           </Top>
-          <Bottom>
-            <Info>
+          <Bottom isDark={isDark}>
+            <Info isDark={isDark}>
               {Object.values(cart?.products).length ? (
                 Object.values(cart?.products)?.map((product) => (
                   <>
-                    <Product>
-                      <ProductDetail>
-                        <Image src={product.img} />
-                        <Details>
-                          <ProductName>
+                    <Product isDark={isDark}>
+                      <ProductDetail isDark={isDark}>
+                        <Image isDark={isDark} src={product.img} />
+                        <Details isDark={isDark}>
+                          <ProductName isDark={isDark}>
                             {" "}
                             <b> Product: </b> {product.title}
                           </ProductName>
-                          <ProductId>
+                          <ProductId isDark={isDark}>
                             {" "}
                             <b> ID:</b> {product._id}
                           </ProductId>
-                          <ProductColor color={product.color} />
-                          <ProductSize>
+                          <ProductColor isDark={isDark} color={product.color} />
+                          <ProductSize isDark={isDark}>
                             {" "}
                             <b> Size: </b> {product.size}
                           </ProductSize>
+                          <RemoveBtn
+                            isDark={isDark}
+                            onClick={() => handleRemoveItems(product._id)}>
+                            remove
+                          </RemoveBtn>
                         </Details>
                       </ProductDetail>
-                      <PriceDetail>
-                        <ProductAmountContainer>
+                      <PriceDetail isDark={isDark}>
+                        <ProductAmountContainer isDark={isDark}>
                           <Add
+                            isDark={isDark}
                             style={{ cursor: "pointer" }}
                             onClick={() => handleQuantity(product._id, "inc")}
                           />
-                          <ProductAmount>{product.quantity}</ProductAmount>
+                          <ProductAmount isDark={isDark}>
+                            {product.quantity}
+                          </ProductAmount>
                           <Remove
+                            isDark={isDark}
                             style={{ cursor: "pointer" }}
                             onClick={() => handleQuantity(product._id, "dec")}
                           />
                         </ProductAmountContainer>
-                        <ProductPrice>
-                          {/* $ {product.price * product.quantity} */}${" "}
-                          {Number(product.price * product.quantity).toFixed(2)}
+                        <ProductPrice isDark={isDark}>
+                          {Number(product.price * product.quantity).toFixed(2)}{" "}
+                          $
                         </ProductPrice>
                       </PriceDetail>
                     </Product>
-                    <Hr />
+                    <Hr isDark={isDark} />
                   </>
                 ))
               ) : (
-                <p>No Item Fuond!!</p>
+                <NoItemFuond isDark={isDark}>
+                  there is no item in your bag right now!!
+                </NoItemFuond>
               )}
             </Info>
-            <Summary>
-              <SummaryTitle> ORDER SUMMARY </SummaryTitle>
-              <SummaryItem>
-                <SummaryItemText> Subtotal </SummaryItemText>
-                <SummaryItemPrice>
-                  {" "}
-                  $ {Number(cart.total).toFixed(2)}{" "}
-                </SummaryItemPrice>
-              </SummaryItem>
+            {Object.values(cart?.products).length ? (
+              <Summary isDark={isDark}>
+                <SummaryTitle isDark={isDark}> ORDER SUMMARY </SummaryTitle>
+                <SummaryItem isDark={isDark}>
+                  <SummaryItemText isDark={isDark}> Subtotal </SummaryItemText>
+                  <SummaryItemPrice isDark={isDark}>
+                    {" "}
+                    $ {Number(cart.total).toFixed(2)}{" "}
+                  </SummaryItemPrice>
+                </SummaryItem>
 
-              <SummaryItem>
-                <SummaryItemText> Estimated Shipping </SummaryItemText>
-                <SummaryItemPrice> $ 5.90 </SummaryItemPrice>
-              </SummaryItem>
+                <SummaryItem isDark={isDark}>
+                  <SummaryItemText isDark={isDark}>
+                    {" "}
+                    Estimated Shipping{" "}
+                  </SummaryItemText>
+                  <SummaryItemPrice isDark={isDark}> $ 5.90 </SummaryItemPrice>
+                </SummaryItem>
 
-              <SummaryItem>
-                <SummaryItemText> Shipping Discount </SummaryItemText>
-                <SummaryItemPrice> $ -5.90 </SummaryItemPrice>
-              </SummaryItem>
+                <SummaryItem isDark={isDark}>
+                  <SummaryItemText isDark={isDark}>
+                    {" "}
+                    Shipping Discount{" "}
+                  </SummaryItemText>
+                  <SummaryItemPrice isDark={isDark}> $ -5.90 </SummaryItemPrice>
+                </SummaryItem>
 
-              <SummaryItem type="total">
-                <SummaryItemText> Total </SummaryItemText>
-                <SummaryItemPrice>
-                  {" "}
-                  $ {Number(cart.total).toFixed(2)}{" "}
-                </SummaryItemPrice>
-              </SummaryItem>
+                <SummaryItem type="total" isDark={isDark}>
+                  <SummaryItemText isDark={isDark}> Total </SummaryItemText>
+                  <SummaryItemPrice isDark={isDark}>
+                    {" "}
+                    $ {Number(cart.total).toFixed(2)}{" "}
+                  </SummaryItemPrice>
+                </SummaryItem>
+                <Clear>
+                  <RemoveBtn
+                    type="all"
+                    isDark={isDark}
+                    onClick={handleRemoveAllItems}>
+                    Clear
+                  </RemoveBtn>
+                </Clear>
 
-              {!user ? (
-                <SummaryButton onClick={() => history.push("/login")}>
-                  CHECKOUT NOW
-                </SummaryButton>
-              ) : (
-                <StripeCheckout
-                  name="Lama Shop"
-                  image="https://avatars.githubusercontent.com/u/1486366?v=4"
-                  billingAddress
-                  shippingAddress
-                  description={`Your total is $${cart.total}`}
-                  amount={cart.total * 100}
-                  token={onToken}
-                  stripeKey={StripeKEY}>
-                  <SummaryButton>CHECKOUT NOW</SummaryButton>
-                </StripeCheckout>
-              )}
-            </Summary>
+                {!user ? (
+                  <SummaryButton
+                    pos="cnt"
+                    isDark={isDark}
+                    onClick={() => history.push("/login")}>
+                    CHECKOUT NOW
+                  </SummaryButton>
+                ) : (
+                  <StripeCheckout
+                    name="Buy & Sale"
+                    image="https://avatars.githubusercontent.com/u/1486366?v=4"
+                    billingAddress
+                    shippingAddress
+                    description={`Your total is $${cart.total}`}
+                    amount={cart.total * 100}
+                    token={onToken}
+                    stripeKey={StripeKEY}>
+                    <SummaryButton pos="cnt" isDark={isDark}>
+                      CHECKOUT NOW
+                    </SummaryButton>
+                  </StripeCheckout>
+                )}
+              </Summary>
+            ) : (
+              ""
+            )}
           </Bottom>
         </Wrapper>
       </Layout>

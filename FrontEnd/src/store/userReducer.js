@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { encrypt } from "utils/encryptions";
 
 const userSlice = createSlice({
   name: "user",
@@ -15,7 +16,7 @@ const userSlice = createSlice({
     loginSuccess: (state, action) => {
       state.isFetching = false;
       state.error = false;
-      state.currentUser = action.payload;
+      state.currentUser = encrypt(JSON.stringify(action.payload));
     },
     loginFailure: (state) => {
       state.isFetching = false;

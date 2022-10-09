@@ -27,11 +27,11 @@ export const Arrow = styled.div`
   opacity: 0.5;
   transition: opacity 0.5s;
   &:hover {
-    opacity: 1;
+    opacity: ${(props) => (props.disabled === true ? "0.5" : "1")};
   }
   margin: auto;
   z-index: 2;
-  cursor: ${(props) => props.disabled === props.direction && "not-allowed"};
+  cursor: ${(props) => props.disabled === true && "not-allowed"};
 `;
 
 export const Wrapper = styled.div`
@@ -39,6 +39,8 @@ export const Wrapper = styled.div`
   display: flex;
   transition: all 1.5s ease;
   transform: translateX(${(props) => props.slideIndex * -100}vw);
+  background-color: ${(props) =>
+    props.isDark === true ? "#0000000a" : "transparent"};
 `;
 
 export const Slide = styled.div`
@@ -47,6 +49,10 @@ export const Slide = styled.div`
   display: flex;
   align-items: center;
   background-color: #${(props) => props.bg};
+  color: #${(props) => props.color};
+  button {
+    color: #${(props) => props.color};
+  }
 `;
 
 export const ImgContainer = styled.div`
@@ -85,4 +91,10 @@ export const Button = styled.button`
   font-size: 20px;
   background-color: transparent;
   cursor: pointer;
+  border: none;
+  transition: 0.2s all;
+  &:active {
+    box-shadow: 0px 0px 10px red;
+  }
+  box-shadow: 0px 0px 10px;
 `;

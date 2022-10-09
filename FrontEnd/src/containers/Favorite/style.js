@@ -1,7 +1,6 @@
 import { css, styled } from "utils/ReactLibs";
-import { mobile, smMobile, tablet, lap } from "utils/responsive";
+import { mobile, smMobile, tablet } from "utils/responsive";
 import Btn from "assets/styledElements/Button";
-
 const commonTransition = () => css`
   transition: 0.3s color;
 `;
@@ -74,16 +73,7 @@ const Top = styled.div`
   ${mobile({ flexDirection: "column", gap: "0.5rem" })};
   ${tablet({ flexDirection: "column", gap: "1.5rem" })};
 `;
-const TopTexts = styled.div`
-  ${mobile({ display: "none" })};
-`;
-const TopText = styled.span`
-  text-decoration: none;
-  cursor: pointer;
-  margin: 0px 10px;
-  ${commonTransition()}
-  ${commonColor((props) => props)}
-`;
+
 const TopButton = styled.button`
   padding: 10px;
   font-weight: 600;
@@ -112,23 +102,7 @@ const Bottom = styled.div`
 const Info = styled.div`
   flex: 3;
 `;
-const Summary = styled.div`
-  flex: 1;
-  border: 0.5px solid lightgray;
-  border-radius: 10px;
-  padding: 20px;
-  padding-bottom: 50px;
-  min-height: 50vh;
-  transition: 0.3s all;
-  &:hover {
-    animation: ${(props) =>
-      props.isDark === true && "lighting 5s linear infinite"};
-  }
 
-  box-shadow: ${(props) =>
-    props.isDark === true ? "0px 0px 25px #898989" : "0px 0px 10px #959595"};
-  ${commonLighting((props) => props)}
-`;
 const Product = styled.div`
   ${commonDisplay()}
   justify-content: space-between;
@@ -152,11 +126,7 @@ const RemoveBtn = styled.button`
   }
   width: ${(props) => (props.type === "all" ? "50%" : "auto")};
 `;
-const Clear = styled.div`
-  width: 100%;
-  text-align: center;
-  margin-bottom: 2rem;
-`;
+
 const Image = styled.img`
   box-shadow: ${(props) =>
     props.isDark === true ? "0px 0px 10px #fff" : "0px 1px 5px #000000"};
@@ -221,6 +191,7 @@ const ProductPrice = styled.div`
   ${commonColor((props) => props)}
   font-size: 30px;
   font-weight: 200;
+  margin-bottom: 1rem;
 `;
 const Hr = styled.hr`
   background-color: ${(props) => (props.isDark === true ? "#2c2c2c" : "#eee")};
@@ -235,50 +206,21 @@ const NoItemFuond = styled.p`
   ${commonTransition()}
   ${commonColor((props) => props)}
 `;
-
-const SummaryTitle = styled.h1`
-  font-weight: 100;
-  transition: 0.3s all;
-  color: ${(props) => (props.isDark === true ? " #7e403b" : "#000")};
+const Button = styled.button`
+  ${(props) => Btn(props.pos, props.isDark, props.addWidth)}
 `;
-const SummaryItem = styled.div`
-  margin: 30px 0px;
-  ${commonDisplay()}
-  justify-content: space-between;
-  font-weight: ${(props) => props.type === "total" && "500"};
-  font-size: ${(props) => props.type === "total" && "24px"};
-`;
-const SummaryItemText = styled.span`
-  transition: 0.3s all;
-  color: ${(props) => (props.isDark === true ? " #7e403b" : "#000")};
-  ${lap({ flex: 1 })};
-`;
-const SummaryItemPrice = styled.span`
-  transition: 0.3s all;
-  color: ${(props) => (props.isDark === true ? " #7e403b" : "#000")};
-  ${lap({ fontSize: "15px", flex: 2, textAlign: "right" })};
-`;
-const SummaryButton = styled.button`
-  ${(props) => Btn(props.pos, props.isDark)}
-`;
-
 export {
   Container,
   Wrapper,
   Title,
   Top,
-  TopTexts,
-  TopText,
   TopButton,
   Bottom,
   Info,
-  Summary,
   Product,
   ProductDetail,
   Image,
   Details,
-  RemoveBtn,
-  Clear,
   ProductName,
   ProductId,
   ProductColor,
@@ -289,9 +231,6 @@ export {
   ProductPrice,
   Hr,
   NoItemFuond,
-  SummaryTitle,
-  SummaryItem,
-  SummaryItemText,
-  SummaryItemPrice,
-  SummaryButton,
+  RemoveBtn,
+  Button,
 };

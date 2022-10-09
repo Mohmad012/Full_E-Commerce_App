@@ -1,11 +1,19 @@
-import { styled } from "utils/ReactLibs";
+import { css, styled } from "utils/ReactLibs";
 import { mobile, tablet, lap } from "utils/responsive";
 import Btn from "assets/styledElements/Button";
+
+const commonTransition = () => css`
+  transition: 0.3s color;
+`;
+const commonColor = () => css`
+  color: ${(props) => (props.isDark === true ? "gray" : "#000")};
+`;
 
 const Container = styled.div``;
 const Wrapper = styled.div`
   padding: 50px;
   display: flex;
+  min-height: 100vh;
   ${mobile({ padding: "10px", flexDirection: "column" })};
   ${tablet({ padding: "10px", flexDirection: "column" })};
 `;
@@ -25,13 +33,19 @@ const InfoContainer = styled.div`
 `;
 const Title = styled.h1`
   font-weight: 200;
+  ${commonTransition()}
+  ${commonColor((props) => props)}
 `;
 const Desc = styled.p`
   margin: 20px 0px;
+  ${commonTransition()}
+  ${commonColor((props) => props)}
 `;
 const Price = styled.span`
   font-weight: 100;
   font-size: 40px;
+  ${commonTransition()}
+  ${commonColor((props) => props)}
 `;
 const FilterContainer = styled.div`
   width: 100%;
@@ -47,8 +61,10 @@ const Filter = styled.div`
   align-items: center;
 `;
 const FilterTitle = styled.span`
-    font-size:20px;
-    font-weight:200;|
+  font-size: 20px;
+  font-weight: 200;
+  ${commonTransition()}
+  ${commonColor((props) => props)}
 `;
 const FilterColor = styled.div`
   width: 20px;
@@ -61,7 +77,8 @@ const FilterColor = styled.div`
 const FilterSize = styled.select`
   margin-left: 10px;
   padding: 5px;
-  background-color: transparent;
+  background-color: ${(props) =>
+    props.isDark === true ? "gray" : "transparent"};
   border: 1px solid;
 `;
 const FilterSizeOption = styled.option``;
@@ -80,6 +97,8 @@ const AmountContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   font-weight: 700;
+  ${commonTransition()}
+  ${commonColor((props) => props)}
 `;
 const Amount = styled.span`
   width: 30px;
@@ -91,8 +110,16 @@ const Amount = styled.span`
   justify-content: center;
   margin: 0px 5px;
 `;
+const Status = styled.p`
+  width: 100%;
+  text-align: center;
+  margin: 2rem auto;
+  color: ${(props) => (props.isDark === true ? "gray" : "#000")};
+`;
 
-const Button = Btn();
+const Button = styled.button`
+  ${(props) => Btn(props.pos, props.isDark, props.addWidth)}
+`;
 
 export {
   Container,
@@ -112,6 +139,7 @@ export {
   AddContainer,
   AmountContainer,
   Amount,
+  Status,
   Button,
 };
 // styled.button`

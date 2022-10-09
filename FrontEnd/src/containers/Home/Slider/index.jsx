@@ -15,39 +15,31 @@ import {
 } from "./style";
 
 import data from "data/static.json";
+import { useSelector } from "react-redux";
 
 const Slider = () => {
   const [slideIndex, setslideIndex] = useState(0);
-  const [disabled, setDisabled] = useState(false);
-  const handleClick = (direction) => {
-    if (direction === "left") {
-      if (slideIndex > 0) {
-        setslideIndex((prev) => prev - 1);
-        setDisabled("");
-      } else {
-        setDisabled("left");
-      }
-    } else {
-      if (slideIndex < 2) {
-        setslideIndex((prev) => prev + 1);
-        setDisabled("");
-      } else {
-        setDisabled("right");
-      }
-    }
-  };
+  const isDark = useSelector((state) => state.mode.isDark);
 
+  const handleClick = (direction) =>
+    direction === "left"
+      ? slideIndex > 0 && setslideIndex((prev) => prev - 1)
+      : slideIndex < data[0]?.sliderItems?.length - 1 &&
+        setslideIndex((prev) => prev + 1);
   return (
     <Container>
       <Arrow
         direction="left"
         onClick={() => handleClick("left")}
-        disabled={disabled}>
+        disabled={slideIndex === 0}>
         <ArrowLeftOutlined />
       </Arrow>
-      <Wrapper slideIndex={slideIndex}>
+      <Wrapper slideIndex={slideIndex} isDark={isDark}>
         {data[0]?.sliderItems?.map((sliderItem) => (
-          <Slide bg={sliderItem.bg} key={sliderItem.id}>
+          <Slide
+            bg={isDark === true ? sliderItem.bgDark : sliderItem.bg}
+            color={isDark === true ? sliderItem.colorInDark : "000"}
+            key={sliderItem.id}>
             <ImgContainer>
               <Image src={sliderItem.img} />
             </ImgContainer>
@@ -62,7 +54,7 @@ const Slider = () => {
       <Arrow
         direction="right"
         onClick={() => handleClick("right")}
-        disabled={disabled}>
+        disabled={slideIndex === data[0]?.sliderItems?.length - 1}>
         <ArrowRightOutlined />
       </Arrow>
     </Container>

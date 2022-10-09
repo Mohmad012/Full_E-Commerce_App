@@ -1,28 +1,35 @@
 import { useState, useEffect } from "react";
 import Product from "./Product";
-import { Container } from "./style";
+import { Container, NoItemFuond } from "./style";
 import data from "data/static.json";
 import UseRequestApi from "hooks/UseRequestApi";
+import { useSelector } from "react-redux";
 
 const Products = ({ categ, filtersProds, sortProds }) => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const isDark = useSelector((state) => state.mode.isDark);
+  const [loading, setLoading] = useState(false);
 
   const { publicRequest } = UseRequestApi();
 
   useEffect(() => {
     const getProducts = async () => {
+      setLoading(true);
       try {
         const res = await publicRequest.get(
           categ ? `/products?category=${categ}` : "/products"
         );
         if (res.status === 200) {
           setProducts(res.data);
+          setLoading(false);
         } else {
           setProducts(data[0].popularProducts);
+          setLoading(false);
         }
       } catch (err) {
         setProducts(data[0].popularProducts);
+        setLoading(false);
         console.log(err);
       }
     };
@@ -67,15 +74,33 @@ const Products = ({ categ, filtersProds, sortProds }) => {
     <Container>
       {categ ? (
         <>
-          {filteredProducts?.map((item) => (
-            <Product item={item} key={item.id} />
-          ))}
+          {filteredProducts.length === 0 ? (
+            !loading ? (
+              <NoItemFuond isDark={isDark}>There is No Item !!</NoItemFuond>
+            ) : (
+              <NoItemFuond isDark={isDark}>Loading...</NoItemFuond>
+            )
+          ) : (
+            filteredProducts?.map((item) => (
+              <Product isDark={isDark} item={item} key={item.id} />
+            ))
+          )}
         </>
       ) : (
         <>
-          {products?.slice(0, 8).map((item) => (
-            <Product item={item} key={item.id} />
-          ))}
+          {products.length === 0 ? (
+            !loading ? (
+              <NoItemFuond isDark={isDark}>There is No Item !!</NoItemFuond>
+            ) : (
+              <NoItemFuond isDark={isDark}>Loading...</NoItemFuond>
+            )
+          ) : (
+            products
+              ?.slice(0, 8)
+              .map((item) => (
+                <Product isDark={isDark} item={item} key={item.id} />
+              ))
+          )}
         </>
       )}
     </Container>

@@ -17,9 +17,10 @@ import {
 } from "./style";
 
 import data from "data/static.json";
+import { useSelector } from "react-redux";
 
-const SelectItem = ({ name, handleFilters, data }) => (
-  <Select name={name} onChange={handleFilters}>
+const SelectItem = ({ name, handleFilters, data, isDark }) => (
+  <Select name={name} onChange={handleFilters} isDark={isDark}>
     {data.map((item, key) => (
       <>
         {key === 0 ? (
@@ -36,6 +37,7 @@ const SelectItem = ({ name, handleFilters, data }) => (
 
 const ProductListContainer = () => {
   const location = useLocation();
+  const isDark = useSelector((state) => state.mode.isDark);
 
   const categ = location.pathname.split("/")[2];
   const [filtersProds, setFiltersProds] = useState({});
@@ -53,17 +55,19 @@ const ProductListContainer = () => {
     <Container>
       <Layout>
         <Announcement />
-        <Title>{categ}</Title>
-        <FilterContainer>
+        <Title isDark={isDark}>{categ}</Title>
+        <FilterContainer isDark={isDark}>
           <Filter>
             <FilterText>Filter Products:</FilterText>
             <SelectItem
+              isDark={isDark}
               name="color"
               handleFilters={handleFilters}
               data={data[0].colors}
             />
 
             <SelectItem
+              isDark={isDark}
               name="size"
               handleFilters={handleFilters}
               data={data[0].Sizes}
@@ -71,7 +75,9 @@ const ProductListContainer = () => {
           </Filter>
           <Filter>
             <FilterText>Sort Products:</FilterText>
-            <Select onChange={(e) => setSortProds(e.target.value)}>
+            <Select
+              onChange={(e) => setSortProds(e.target.value)}
+              isDark={isDark}>
               <Option value="newest">Newest</Option>
               <Option value="asc">Price (asc)</Option>
               <Option value="desc">Price (desc)</Option>

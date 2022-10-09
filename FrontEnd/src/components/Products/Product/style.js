@@ -26,6 +26,8 @@ export const Container = styled.div`
   justify-content: center;
   background-color: #f5fbfd;
   position: relative;
+  background-color: ${(props) =>
+    props.isDark === true ? "#363636" : "#f5fbfd"};
   &:hover ${Info} {
     opacity: 1;
   }

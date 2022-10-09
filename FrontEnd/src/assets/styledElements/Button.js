@@ -1,16 +1,14 @@
-import { styled } from "utils/ReactLibs";
-
-const Button = (pos, addWidth) => {
-  return styled.button`
+const Button = (pos, isDark, addWidth) => {
+  return `
     margin: ${pos === "cnt" ? " 0 auto" : 0};
     border: none;
     padding: 10px;
-    color: gray;
+    color: ${isDark ? "#fff" : "gray"};
     cursor: pointer;
     font-weight: 600;
     width: ${addWidth === "addWidth" ? "150px" : "auto"};
     height: 50px;
-    border: 2px solid #b96f7a;
+    border: 2px solid ${isDark ? "#ffffff" : "#b96f7a"};
     font-family: "Cinzel", serif;
     font-size: 16px;
     cursor: pointer;
@@ -21,12 +19,12 @@ const Button = (pos, addWidth) => {
     position: relative;
     z-index: 0;
     transition: 0.8s;
-    background-color: #eee;
+    background-color: ${isDark ? "#767676" : "#eee"};
 
     &:before,
     &:after {
       position: absolute;
-      background: #eee;
+      background-color: ${isDark ? "#767676" : "#eee"};
       z-index: -1;
       transition: 0.3s;
       content: "";
@@ -53,16 +51,18 @@ const Button = (pos, addWidth) => {
 
     &:hover::before {
       width: 0px;
-      background: #4a2f26;
+      background: ${isDark ? "rgb(0 0 0 / 87%)" : "#4a2f26"};
     }
 
     &:hover::after {
       height: 0px;
-      background: #4a2f26;
+      background: ${isDark ? "rgb(0 0 0 / 87%)" : "#4a2f26"};
     }
 
     &:hover {
-      background: #4a2f26;
+      background: ${isDark ? "rgb(0 0 0 / 87%)" : "#4a2f26"};
+      border: 2px solid ${isDark ? "gray" : "#b96f7a"};
+      color: ${isDark ? "#7e403b" : "gray"};
     }
   `;
 };

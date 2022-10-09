@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const cartSlice = createSlice({
-  name: "cart",
+const favSlice = createSlice({
+  name: "fav",
   initialState: {
     products: {},
     quantity: 0,
@@ -9,7 +9,7 @@ const cartSlice = createSlice({
   },
 
   reducers: {
-    addProduct: (state, action) => {
+    addFav: (state, action) => {
       let { _id } = action.payload;
       if (state.products[_id]) {
         state.products[_id].quantity += action.payload.quantity;
@@ -22,12 +22,12 @@ const cartSlice = createSlice({
       state.quantity += action.payload.quantity;
       state.total += action.payload.price * action.payload.quantity;
     },
-    clearProducts: (state) => {
+    clearFavs: (state) => {
       state.products = {};
       state.quantity = 0;
       state.total = 0;
     },
-    removeProduct: (state, action) => {
+    removeFav: (state, action) => {
       const quantity = state.products[action.payload].quantity;
       const price = state.products[action.payload].price;
 
@@ -35,7 +35,7 @@ const cartSlice = createSlice({
       state.total -= +quantity * +price;
       delete state.products[action.payload];
     },
-    updateProduct: (state, action) => {
+    updateFav: (state, action) => {
       let { _id, type } = action.payload;
       let price = state.products[_id].price;
 
@@ -56,7 +56,6 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addProduct, clearProducts, removeProduct, updateProduct } =
-  cartSlice.actions;
+export const { addFav, clearFavs, removeFav, updateFav } = favSlice.actions;
 
-export default cartSlice.reducer;
+export default favSlice.reducer;

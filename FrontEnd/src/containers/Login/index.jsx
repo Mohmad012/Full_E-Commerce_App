@@ -26,8 +26,7 @@ const LoginContainer = () => {
       username,
       password,
     });
-
-    history.goBack();
+    !isFetching && !error && history.goBack();
   };
 
   return (

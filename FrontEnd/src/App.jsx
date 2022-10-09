@@ -9,12 +9,16 @@ import Product from "./pages/Product";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Cart from "./pages/Cart";
+import Favorite from "./pages/Favorite";
 
 import "aos/dist/aos.css";
 import "./assets/style.css";
 import Success from "./pages/Success";
+import { useSelector } from "react-redux";
 
 const App = () => {
+  const isDark = useSelector((state) => state.mode.isDark);
+
   useEffect(() => {
     Aos.init({
       duration: 1000,
@@ -22,7 +26,7 @@ const App = () => {
   }, []);
 
   return (
-    <>
+    <div className={`App ${isDark && "dark"}`}>
       <Helmet>
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
@@ -51,8 +55,11 @@ const App = () => {
         </Route>
 
         <Route path="/cart">
-          {" "}
           <Cart />
+        </Route>
+
+        <Route path="/favorite">
+          <Favorite />
         </Route>
 
         <Route path="/login">
@@ -63,7 +70,7 @@ const App = () => {
           <Register />
         </Route>
       </Switch>
-    </>
+    </div>
   );
 };
 

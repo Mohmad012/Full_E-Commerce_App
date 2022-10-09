@@ -14,7 +14,10 @@ export const encryptName = (message) => {
 };
 
 // Encrypt
-export const encrypt = (message, key = "secret") => {
+export const encrypt = (
+  message,
+  key = process.env.REACT_APP_ENCRYPTION_KEY
+) => {
   return CryptoJS.AES.encrypt(message, key, {
     mode: CryptoJS.mode.CBC,
     padding: CryptoJS.pad.Pkcs7,
@@ -22,7 +25,10 @@ export const encrypt = (message, key = "secret") => {
 };
 
 // Decrypt
-export const decrypt = (message, key = "secret") => {
+export const decrypt = (
+  message,
+  key = process.env.REACT_APP_ENCRYPTION_KEY
+) => {
   const bytes = CryptoJS.AES.decrypt(message, key, {
     mode: CryptoJS.mode.CBC,
     padding: CryptoJS.pad.Pkcs7,
