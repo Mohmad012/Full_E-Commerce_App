@@ -42,7 +42,7 @@ const FavoriteContainer = () => {
 
   console.log("favs", favs);
   let user = useSelector((state) => state.user.currentUser);
-  user = JSON.parse(decrypt(user));
+  // user = JSON.parse(decrypt(user));
   const isDark = useSelector((state) => state.mode.isDark);
 
   const dispatch = useDispatch();

@@ -50,7 +50,7 @@ const StripeKEY = process.env.REACT_APP_STRIPE_PUBLIC_KEY;
 const CartContainer = () => {
   const cart = useSelector((state) => state.cart);
   let user = useSelector((state) => state.user.currentUser);
-  user = JSON.parse(decrypt(user));
+  // user = JSON.parse(decrypt(user));
   const isDark = useSelector((state) => state.mode.isDark);
 
   const { userRequest } = UseRequestApi();
