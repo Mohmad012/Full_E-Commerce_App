@@ -62,7 +62,7 @@ const Button = (pos, isDark, addWidth) => {
     &:hover {
       background: ${isDark ? "rgb(0 0 0 / 87%)" : "#4a2f26"};
       border: 2px solid ${isDark ? "gray" : "#b96f7a"};
-      color: ${isDark ? "#7e403b" : "gray"};
+      color: ${isDark ? "#b11b60" : "#8899A6"};
     }
   `;
 };

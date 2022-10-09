@@ -6,53 +6,53 @@ const commonTransition = () => css`
   transition: 0.3s color;
 `;
 const commonColor = () => css`
-  color: ${(props) => (props.isDark === true ? "gray" : "#000")};
+  color: ${(props) => (props.isDark === true ? "#8899A6" : "#000")};
 `;
 
 const commonDisplay = () => css`
   display: flex;
 `;
 
-const commonLighting = (props) => css`
-  @keyframes lighting {
-    0% {
-      box-shadow: ${(props) =>
-        props.isDark === true
-          ? `0px 0px ${props.type === "TopButton" ? "10px" : "25px"} #898989`
-          : "none"};
-    }
-    20% {
-      box-shadow: ${(props) =>
-        props.isDark === true
-          ? `0px 0px ${props.type === "TopButton" ? "10px" : "25px"} #875030`
-          : "none"};
-    }
-    40% {
-      box-shadow: ${(props) =>
-        props.isDark === true
-          ? `0px 0px ${props.type === "TopButton" ? "10px" : "25px"} #fd5201`
-          : "none"};
-    }
-    60% {
-      box-shadow: ${(props) =>
-        props.isDark === true
-          ? `0px 0px ${props.type === "TopButton" ? "10px" : "25px"} #d19478`
-          : "none"};
-    }
-    80% {
-      box-shadow: ${(props) =>
-        props.isDark === true
-          ? `0px 0px ${props.type === "TopButton" ? "10px" : "25px"} #603a28`
-          : "none"};
-    }
-    100% {
-      box-shadow: ${(props) =>
-        props.isDark === true
-          ? `0px 0px ${props.type === "TopButton" ? "10px" : "25px"} #898989`
-          : "none"};
-    }
-  }
-`;
+// const commonLighting = (props) => css`
+//   @keyframes lighting {
+//     0% {
+//       box-shadow: ${(props) =>
+//         props.isDark === true
+//           ? `0px 0px ${props.type === "TopButton" ? "10px" : "25px"} #898989`
+//           : "none"};
+//     }
+//     20% {
+//       box-shadow: ${(props) =>
+//         props.isDark === true
+//           ? `0px 0px ${props.type === "TopButton" ? "10px" : "25px"} #875030`
+//           : "none"};
+//     }
+//     40% {
+//       box-shadow: ${(props) =>
+//         props.isDark === true
+//           ? `0px 0px ${props.type === "TopButton" ? "10px" : "25px"} #fd5201`
+//           : "none"};
+//     }
+//     60% {
+//       box-shadow: ${(props) =>
+//         props.isDark === true
+//           ? `0px 0px ${props.type === "TopButton" ? "10px" : "25px"} #d19478`
+//           : "none"};
+//     }
+//     80% {
+//       box-shadow: ${(props) =>
+//         props.isDark === true
+//           ? `0px 0px ${props.type === "TopButton" ? "10px" : "25px"} #603a28`
+//           : "none"};
+//     }
+//     100% {
+//       box-shadow: ${(props) =>
+//         props.isDark === true
+//           ? `0px 0px ${props.type === "TopButton" ? "10px" : "25px"} #898989`
+//           : "none"};
+//     }
+//   }
+// `;
 
 const Container = styled.div``;
 const Wrapper = styled.div`
@@ -91,13 +91,6 @@ const TopButton = styled.button`
   box-shadow: ${(props) =>
     props.isDark === true ? "0px 0px 10px #898989" : "0px 1px 5px #000000"};
 
-  &:hover {
-    animation: ${(props) =>
-      props.isDark === true && "lighting 5s linear infinite"};
-  }
-
-  ${commonLighting((props) => props)}
-
   background-color: ${(props) =>
     props.type === "filled" ? "#0000000a" : "transparent"};
   color: ${(props) =>
@@ -114,20 +107,10 @@ const Info = styled.div`
 `;
 const Summary = styled.div`
   flex: 1;
-  border: 0.5px solid lightgray;
   border-radius: 10px;
-  padding: 20px;
-  padding-bottom: 50px;
+  padding: 20px 20px 50px;
   min-height: 50vh;
-  transition: 0.3s all;
-  &:hover {
-    animation: ${(props) =>
-      props.isDark === true && "lighting 5s linear infinite"};
-  }
-
-  box-shadow: ${(props) =>
-    props.isDark === true ? "0px 0px 25px #898989" : "0px 0px 10px #959595"};
-  ${commonLighting((props) => props)}
+  background: #22303c;
 `;
 const Product = styled.div`
   ${commonDisplay()}
@@ -141,16 +124,16 @@ const ProductDetail = styled.div`
 `;
 
 const RemoveBtn = styled.button`
-  background-color: #6c0127;
+  background-color: #1b7ab1;
   border: none;
-  padding: 0.4rem;
+  padding: 16px 2rem;
   cursor: pointer;
-  color: #fff;
-  transition: 0.3s all;
+  color: rgb(255, 255, 255);
+  transition: all 0.3s ease 0s;
+  width: fit-content;
   &:hover {
-    background-color: #950035;
+    background-color: #3ea8e5;
   }
-  width: ${(props) => (props.type === "all" ? "50%" : "auto")};
 `;
 const Clear = styled.div`
   width: 100%;
@@ -165,8 +148,6 @@ const Image = styled.img`
     animation: ${(props) =>
       props.isDark === true && "lighting 5s linear infinite"};
   }
-
-  ${commonLighting((props) => props)}
   width: 200px;
 `;
 
@@ -239,7 +220,7 @@ const NoItemFuond = styled.p`
 const SummaryTitle = styled.h1`
   font-weight: 100;
   transition: 0.3s all;
-  color: ${(props) => (props.isDark === true ? " #7e403b" : "#000")};
+  color: ${(props) => (props.isDark === true ? " #3ea8e5" : "#000")};
 `;
 const SummaryItem = styled.div`
   margin: 30px 0px;
@@ -250,12 +231,12 @@ const SummaryItem = styled.div`
 `;
 const SummaryItemText = styled.span`
   transition: 0.3s all;
-  color: ${(props) => (props.isDark === true ? " #7e403b" : "#000")};
+  color: ${(props) => (props.isDark === true ? " #3ea8e5" : "#000")};
   ${lap({ flex: 1 })};
 `;
 const SummaryItemPrice = styled.span`
   transition: 0.3s all;
-  color: ${(props) => (props.isDark === true ? " #7e403b" : "#000")};
+  color: ${(props) => (props.isDark === true ? " #3ea8e5" : "#000")};
   ${lap({ fontSize: "15px", flex: 2, textAlign: "right" })};
 `;
 const SummaryButton = styled.button`
