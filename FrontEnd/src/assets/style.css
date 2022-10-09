@@ -4,8 +4,8 @@
 }
 
 ::selection {
-  background-color: #7e403b;
-  color: #fff;
+  background-color: #3ea8e5;
+  color: #8899a6;
 }
 
 body {
@@ -18,5 +18,5 @@ body {
 }
 
 .App.dark {
-  background-color: #15202B;
+  background-color: #15202b;
 }
