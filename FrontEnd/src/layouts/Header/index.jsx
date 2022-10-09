@@ -223,18 +223,18 @@ const Header = () => {
           </Link>
         </Center>
         <Right>
-          <button onClick={() => dispatch(changeMode())}>
-            <Icon isDark={isDark}>
-              <ReorderIcon style={{ width: "1rem", height: "1rem" }} />
-            </Icon>
-          </button>
-
           <button
             onClick={() => dispatch(changeMode())}
             style={{ backgroundColor: "transparent", border: "none" }}
           >
             <Icon isDark={isDark}>
               <ToggleOnIcon style={{ width: "1.5rem", height: "1.5rem" }} />
+            </Icon>
+          </button>
+          {/* // onClick={() => dispatch(changeMode())} */}
+          <button style={{ backgroundColor: "transparent", border: "none" }}>
+            <Icon isDark={isDark}>
+              <ReorderIcon style={{ width: "1rem", height: "1rem" }} />
             </Icon>
           </button>
           <div className={classesSignBx.root}>
@@ -318,7 +318,6 @@ const Header = () => {
               />
             </Icon>
           </Link>
-
           <Link to="/cart">
             <MenuItemLink isDark={isDark}>
               <Badge badgeContent={quantity} color="primary">
