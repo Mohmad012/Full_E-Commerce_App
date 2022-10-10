@@ -24,10 +24,9 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f5fbfd;
   position: relative;
   background-color: ${(props) =>
-    props.isDark === true ? "#363636" : "#f5fbfd"};
+    props.isDark === true ? "#0c0c0c30" : "#f5fbfd"};
   &:hover ${Info} {
     opacity: 1;
   }

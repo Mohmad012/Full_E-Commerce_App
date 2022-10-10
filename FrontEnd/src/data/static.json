@@ -3,28 +3,28 @@
     "sliderItems": [
       {
         "id": 1,
-        "img1": "/mo.jpg",
-        "img": "https://images.pexels.com/photos/2522681/pexels-photo-2522681.jpeg",
+        "img": "/mo.jpg",
+        "img1": "https://images.pexels.com/photos/2522681/pexels-photo-2522681.jpeg",
         "title": "SUMMER SALE",
         "desc": "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
         "bg": "0000000a",
-        "bgDark": "646464",
+        "bgDark": "191630",
         "colorInDark": "dfdfdf"
       },
       {
         "id": 2,
-        "img1": "/mo.jpg",
-        "img": "https://images.pexels.com/photos/1306246/pexels-photo-1306246.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "img": "/mo.jpg",
+        "img1": "https://images.pexels.com/photos/1306246/pexels-photo-1306246.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         "title": "AUTUMN COLLECTION",
         "desc": "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
         "bg": "fcf1ed",
-        "bgDark": "363636",
+        "bgDark": "133b5e",
         "colorInDark": "646464"
       },
       {
         "id": 3,
-        "img1": "/mo.jpg",
-        "img": "https://images.pexels.com/photos/4937352/pexels-photo-4937352.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "img": "/mo.jpg",
+        "img1": "https://images.pexels.com/photos/4937352/pexels-photo-4937352.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         "title": "LOUNGEWEAR LOVE",
         "desc": "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
         "bg": "0000000a",
@@ -36,22 +36,22 @@
     "categories": [
       {
         "id": 1,
-        "img1": "/mo.jpg",
-        "img": "https://images.pexels.com/photos/157675/fashion-men-s-individuality-black-and-white-157675.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "img": "/mo.jpg",
+        "img1": "https://images.pexels.com/photos/157675/fashion-men-s-individuality-black-and-white-157675.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         "title": "SHIRT STYLE!",
         "cat": "women's clothing"
       },
       {
         "id": 2,
-        "img1": "/mo.jpg",
-        "img": "https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "img": "/mo.jpg",
+        "img1": "https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         "title": "LOUNGEWEAR LOVE",
         "cat": "Men's clothing"
       },
       {
         "id": 3,
-        "img1": "/mo.jpg",
-        "img": "https://images.pexels.com/photos/1852382/pexels-photo-1852382.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "img": "/mo.jpg",
+        "img1": "https://images.pexels.com/photos/1852382/pexels-photo-1852382.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         "title": "LIGHT JACKETS",
         "cat": "jewelery"
       }
@@ -60,8 +60,8 @@
     "popularProducts": [
       {
         "_id": 1,
-        "img1": "/mo.jpg",
-        "img": "https://d3o2e4jr3mxnm3.cloudfront.net/Mens-Jake-Guitar-Vintage-Crusher-Tee_68382_1_lg.png",
+        "img": "/mo.jpg",
+        "img1": "https://d3o2e4jr3mxnm3.cloudfront.net/Mens-Jake-Guitar-Vintage-Crusher-Tee_68382_1_lg.png",
         "title": "title",
         "desc": "desc",
         "price": 50,
@@ -70,8 +70,8 @@
       },
       {
         "_id": 2,
-        "img1": "/mo.jpg",
-        "img": "https://pngimg.com/uploads/dress_shirt/dress_shirt_PNG8061.png",
+        "img": "/mo.jpg",
+        "img1": "https://pngimg.com/uploads/dress_shirt/dress_shirt_PNG8061.png",
         "title": "title",
         "desc": "desc",
         "price": 50,
@@ -80,8 +80,8 @@
       },
       {
         "_id": 3,
-        "img1": "/mo.jpg",
-        "img": "https://4.bp.blogspot.com/-DmWf6J7Kr-A/VPZfwq0ISwI/AAAAAAAAJjQ/MJ4Jf31dz5Q/s1600/www.fonxat.com-Design%2Band%2BGraphics%2Btshirt_PNG5431.png",
+        "img": "/mo.jpg",
+        "img1": "https://4.bp.blogspot.com/-DmWf6J7Kr-A/VPZfwq0ISwI/AAAAAAAAJjQ/MJ4Jf31dz5Q/s1600/www.fonxat.com-Design%2Band%2BGraphics%2Btshirt_PNG5431.png",
         "title": "title",
         "desc": "desc",
         "price": 50,
@@ -90,8 +90,8 @@
       },
       {
         "_id": 4,
-        "img1": "/mo.jpg",
-        "img": "https://www.burdastyle.com/pub/media/catalog/product/cache/7bd3727382ce0a860b68816435d76e26/107/BUS-PAT-BURTE-1320516/1170x1470_BS_2016_05_132_front.png",
+        "img": "/mo.jpg",
+        "img1": "https://www.burdastyle.com/pub/media/catalog/product/cache/7bd3727382ce0a860b68816435d76e26/107/BUS-PAT-BURTE-1320516/1170x1470_BS_2016_05_132_front.png",
         "title": "title",
         "desc": "desc",
         "price": 50,
@@ -100,8 +100,8 @@
       },
       {
         "_id": 5,
-        "img1": "/mo.jpg",
-        "img": "https://images.ctfassets.net/5gvckmvm9289/3BlDoZxSSjqAvv1jBJP7TH/65f9a95484117730ace42abf64e89572/Noissue-x-Creatsy-Tote-Bag-Mockup-Bundle-_4_-2.png",
+        "img": "/mo.jpg",
+        "img1": "https://images.ctfassets.net/5gvckmvm9289/3BlDoZxSSjqAvv1jBJP7TH/65f9a95484117730ace42abf64e89572/Noissue-x-Creatsy-Tote-Bag-Mockup-Bundle-_4_-2.png",
         "title": "title",
         "desc": "desc",
         "price": 50,
@@ -110,8 +110,8 @@
       },
       {
         "_id": 6,
-        "img1": "/mo.jpg",
-        "img": "https://i.pinimg.com/originals/1c/25/0f/1c250fab2cf879b4ebed9f0c1e585eaa.png",
+        "img": "/mo.jpg",
+        "img1": "https://i.pinimg.com/originals/1c/25/0f/1c250fab2cf879b4ebed9f0c1e585eaa.png",
         "title": "title",
         "desc": "desc",
         "price": 50,
@@ -120,8 +120,8 @@
       },
       {
         "_id": 7,
-        "img1": "/mo.jpg",
-        "img": "https://d3o2e4jr3mxnm3.cloudfront.net/Rocket-Vintage-Chill-Cap_66374_1_lg.png",
+        "img": "/mo.jpg",
+        "img1": "https://d3o2e4jr3mxnm3.cloudfront.net/Rocket-Vintage-Chill-Cap_66374_1_lg.png",
         "title": "title",
         "desc": "desc",
         "price": 50,
@@ -130,8 +130,8 @@
       },
       {
         "_id": 8,
-        "img1": "/mo.jpg",
-        "img": "https://www.pngarts.com/files/3/Women-Jacket-PNG-High-Quality-Image.png",
+        "img": "/mo.jpg",
+        "img1": "https://www.pngarts.com/files/3/Women-Jacket-PNG-High-Quality-Image.png",
         "title": "title",
         "desc": "desc",
         "price": 50,

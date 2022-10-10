@@ -1,10 +1,10 @@
-import { styled } from "../../utils/ReactLibs";
-import { mobile, tablet, smMobile } from "../../utils/responsive";
+import { styled } from "utils/ReactLibs";
+import { mobile, tablet, smMobile, lap } from "utils/responsive";
 
 export const Container = styled.div`
   height: 30vh;
   background-color: ${(props) =>
-    props.isDark === true ? "#363636" : "#7e403b"};
+    props.isDark === true ? "#07142e" : "#7e403b"};
   color: #fff;
   display: flex;
   align-items: center;
@@ -33,7 +33,9 @@ export const InputContainer = styled.div`
   display: flex;
   justify-content: space-between;
   border: 1px solid lightgray;
-  ${mobile({ width: "80%" })};
+  ${tablet({ width: "90%" })};
+  ${mobile({ width: "90%" })};
+  ${smMobile({ width: "90%" })};
 `;
 
 export const Input = styled.input`
@@ -44,6 +46,9 @@ export const Input = styled.input`
 
 export const Button = styled.button`
   flex: 1;
+  ${tablet({ flex: "2" })};
+  ${mobile({ flex: "2" })};
+  ${smMobile({ flex: "2" })};
   border: none;
   transition: 0.9s all;
   background-color: ${(props) =>

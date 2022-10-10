@@ -1,5 +1,5 @@
 import { css, styled } from "utils/ReactLibs";
-import { mobile, tablet, lap } from "utils/responsive";
+import { mobile, tablet, lap, smMobile } from "utils/responsive";
 import Btn from "assets/styledElements/Button";
 
 const commonTransition = () => css`
@@ -14,15 +14,17 @@ const Wrapper = styled.div`
   padding: 50px;
   display: flex;
   min-height: 100vh;
-  ${mobile({ padding: "10px", flexDirection: "column" })};
-  ${tablet({ padding: "10px", flexDirection: "column" })};
+  ${tablet({ padding: "10px", flexDirection: "column", textAlign: "center" })};
+  ${smMobile({ textAlign: "center" })};
+  ${mobile({ padding: "10px", flexDirection: "column", textAlign: "center" })};
 `;
 const ImgContainer = styled.div`
   flex: 1;
+  height: 50vh;
 `;
 const Image = styled.img`
-  width: 100%;
-  height: 90vh;
+  max-width: 100%;
+  height: 100%;
   object-fit: cover;
   ${mobile({ height: "40vh" })};
 `;

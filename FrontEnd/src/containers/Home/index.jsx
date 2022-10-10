@@ -16,7 +16,11 @@ const HomeContainer = () => {
   return (
     <>
       <Slider />
-      <Title isDark={isDark} color="#c88b77" colorText="" colorInDark="#363636">
+      <Title
+        isDark={isDark}
+        color="#c88b77"
+        colorText=""
+        colorInDark="rgb(0 0 0 / 0%)">
         <h2>Categories</h2>
         <span></span>
       </Title>

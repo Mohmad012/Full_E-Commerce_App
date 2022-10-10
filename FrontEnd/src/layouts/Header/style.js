@@ -1,10 +1,7 @@
 import { styled } from "utils/ReactLibs";
-import { mobile, smMobile, tablet } from "utils/responsive";
+import { lap, mobile, smMobile, tablet } from "utils/responsive";
 
-export const Container = styled.nav`
-  height: 60px;
-  ${mobile({ height: "50px" })};
-`;
+export const Container = styled.nav``;
 
 export const Wrapper = styled.div`
   padding: 10px 20px;
@@ -26,44 +23,24 @@ export const Icon = styled.div`
   &:hover {
     transform: scale(1.1);
   }
-  ${mobile({ display: "none" })};
-  ${tablet({ display: "none" })};
-`;
 
-// ${tablet({ padding: "10px 0px" })};
-export const Left = styled.div`
-  flex: 1;
-  display: flex;
-  align-items: center;
+  .MuiBadge-anchorOriginTopRightRectangle {
+    right: -5px;
+  }
+
+  ${(props) => props.type !== "list" && tablet({ display: "none" })};
+  ${(props) => props.type !== "list" && mobile({ display: "none" })};
 `;
 
 export const WrapperIcon = styled.span`
   transition: 0.3s color;
   display: flex;
   color: ${(props) => (props.isDark === true ? "gray" : "#000")};
-  ${mobile({ display: "none" })};
-  ${tablet({ display: "none" })};
+  ${(props) => props.type !== "list" && tablet({ display: "none" })};
+  ${(props) => props.type !== "list" && mobile({ display: "none" })};
 `;
 
-export const SearchContainer = styled.div`
-  border: 0.5px solid lightgray;
-  display: flex;
-  align-items: center;
-  margin-left: 25px;
-  padding: 5px;
-  ${mobile({ marginLeft: "10px" })};
-  ${tablet({ marginLeft: "0px" })};
-`;
-
-export const Input = styled.input`
-  border: none;
-  outline: none;
-  background-color: transparent;
-  ${mobile({ width: "50px" })};
-  ${tablet({ width: "100px" })};
-`;
-export const Center = styled.div`
-  flex: 1;
+export const Left = styled.div`
   text-align: center;
   color: #7e403b;
 
@@ -76,14 +53,19 @@ export const Logo = styled.h1`
   color: ${(props) => (props.isDark === true ? "gray" : "#7e403b")};
   font-weight: bold;
   ${mobile({ fontSize: "24px", marginLeft: "10px" })};
-  ${smMobile({ fontSize: "16px", marginLeft: "10px" })};
+  ${smMobile({ fontSize: "24px", marginLeft: "10px" })};
 `;
 export const Right = styled.div`
-  flex: 1;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  ${mobile({ flex: 2, justifyContent: "center" })};
+  ${mobile({ justifyContent: "center" })};
+`;
+export const IconListBtn = styled.button`
+  background-color: transparent;
+  border: none;
+  ${lap({ display: "none" })};
+  ${mobile({ marginRight: "0.5rem" })};
 `;
 
 export const MenuItemLink = styled.div`

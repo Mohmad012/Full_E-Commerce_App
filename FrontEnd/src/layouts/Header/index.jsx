@@ -5,18 +5,15 @@ import {
   Wrapper,
   Left,
   WrapperIcon,
-  SearchContainer,
-  Input,
-  Center,
   Logo,
   Right,
   Icon,
   MenuItemLink,
+  IconListBtn,
 } from "./style";
 
 import {
   FavoriteBorderOutlined,
-  Search,
   ShoppingCartOutlined,
 } from "@material-ui/icons";
 
@@ -37,11 +34,9 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import PublicIcon from "@material-ui/icons/Public";
 import ReorderIcon from "@material-ui/icons/Reorder";
 import ToggleOnIcon from "@material-ui/icons/ToggleOn";
-// import ToggleOnIcon from '@mui/icons-material/ToggleOn';
 import { removeUser } from "../../store/userReducer";
 import { changeMode } from "store/modeReducer";
-import { decrypt } from "utils/encryptions";
-// import ReorderIcon from "@mui/icons-material/Reorder";
+// import { decrypt } from "utils/encryptions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -55,7 +50,6 @@ const useStyles = makeStyles((theme) => ({
 const Header = () => {
   const quantity = useSelector((state) => state.cart.quantity);
   let user = useSelector((state) => state.user.currentUser);
-  // console.log("user", user);
   // user = JSON.parse(decrypt(user));
   const isDark = useSelector((state) => state.mode.isDark);
 
@@ -66,8 +60,10 @@ const Header = () => {
   const classesLangBx = useStyles();
   const [openSignBx, setOpenSignBx] = useState(false);
   const [openLangBx, setOpenLangBx] = useState(false);
+  const [openBtnList, setOpenBtnList] = useState(false);
   const anchorLangBxRef = useRef(null);
   const anchorSignBxRef = useRef(null);
+  const anchorBtnListRef = useRef(null);
 
   const handleToggle = (setOpen) => {
     setOpen((prev) => !prev);
@@ -89,6 +85,16 @@ const Header = () => {
     setOpenSignBx(false);
   };
 
+  const handleCloseBtnList = (event) => {
+    if (
+      anchorBtnListRef.current &&
+      anchorBtnListRef.current.contains(event.target)
+    ) {
+      return;
+    }
+
+    setOpenBtnList(false);
+  };
   const handleCloseLangBx = (event) => {
     if (
       anchorLangBxRef.current &&
@@ -102,6 +108,9 @@ const Header = () => {
 
   const handleLangBx = (anchorLangBxRef, e, setOpenLangBx) =>
     handleClose(anchorLangBxRef, e, setOpenLangBx);
+
+  const handleBtnList = (anchorBtnListRef, e, setOpenBtnList) =>
+    handleClose(anchorBtnListRef, e, setOpenBtnList);
 
   const handleLogin = (anchorSignBxRef, e, setOpenSignBx) => {
     handleClose(anchorSignBxRef, e, setOpenSignBx);
@@ -131,10 +140,17 @@ const Header = () => {
       setOpenLangBx(false);
     }
   }
+  function handleListKeyDownBtnList(event) {
+    if (event.key === "Tab") {
+      event.preventDefault();
+      setOpenBtnList(false);
+    }
+  }
 
   // return focus to the button when we transitioned from !openSignBx -> openSignBx
   const prevOpenSignBx = useRef(openSignBx);
   const prevOpenLangBx = useRef(openLangBx);
+  const prevOpenBtnList = useRef(openBtnList);
   useEffect(() => {
     if (prevOpenSignBx.current === true && openSignBx === false) {
       anchorSignBxRef.current.focus();
@@ -147,20 +163,42 @@ const Header = () => {
     }
 
     prevOpenLangBx.current = openLangBx;
-  }, [openSignBx, openLangBx, history]);
+
+    if (prevOpenBtnList.current === true && openBtnList === false) {
+      anchorBtnListRef.current.focus();
+    }
+
+    prevOpenBtnList.current = openBtnList;
+  }, [openSignBx, openLangBx, openBtnList, history]);
 
   return (
     <Container>
       <Wrapper>
         <Left>
-          <div className={classesLangBx.root}>
+          <Link to="/">
+            <Logo isDark={isDark}>Buy&amp;Sale</Logo>
+          </Link>
+        </Left>
+        <Right>
+          <button
+            onClick={() => dispatch(changeMode())}
+            style={{
+              backgroundColor: "transparent",
+              border: "none",
+              marginRight: "0.5rem",
+            }}>
+            <Icon isDark={isDark}>
+              <ToggleOnIcon style={{ width: "1.5rem", height: "1.5rem" }} />
+            </Icon>
+          </button>
+          <div className={`${classesLangBx.root} classesLangBxRoot`}>
             <div>
               <Button
+                style={{ minWidth: "40px" }}
                 ref={anchorLangBxRef}
                 aria-controls={openLangBx ? "menu-list-grow" : undefined}
                 aria-haspopup="true"
-                onClick={() => handleToggle(setOpenLangBx)}
-              >
+                onClick={() => handleToggle(setOpenLangBx)}>
                 <WrapperIcon isDark={isDark}>
                   <PublicIcon />
                 </WrapperIcon>
@@ -171,145 +209,35 @@ const Header = () => {
                 anchorEl={anchorLangBxRef.current}
                 role={undefined}
                 transition
-                disablePortal
-              >
+                disablePortal>
                 {({ TransitionProps, placement }) => (
                   <Grow
                     {...TransitionProps}
                     style={{
                       transformOrigin:
                         placement === "bottom" ? "center top" : "center bottom",
-                    }}
-                  >
+                    }}>
                     <Paper>
                       <ClickAwayListener
                         onClickAway={(e) =>
                           handleClose(anchorLangBxRef, e, setOpenLangBx)
-                        }
-                      >
+                        }>
                         <MenuList
                           autoFocusItem={openLangBx}
                           id="menu-list-grow"
-                          onKeyDown={handleListKeyDownLangBx}
-                        >
+                          onKeyDown={handleListKeyDownLangBx}>
                           <MenuItem
                             onClick={(e) =>
                               handleClose(anchorLangBxRef, e, setOpenLangBx)
-                            }
-                          >
+                            }>
                             AR
                           </MenuItem>
                           <MenuItem
                             onClick={(e) =>
                               handleClose(anchorLangBxRef, e, setOpenLangBx)
-                            }
-                          >
+                            }>
                             EN
                           </MenuItem>
-                        </MenuList>
-                      </ClickAwayListener>
-                    </Paper>
-                  </Grow>
-                )}
-              </Popper>
-            </div>
-          </div>
-
-          <SearchContainer>
-            <Input placeholder="Search" />
-            <Search style={{ color: "gray", fontSize: 16 }} />
-          </SearchContainer>
-        </Left>
-        <Center>
-          <Link to="/">
-            <Logo isDark={isDark}>Buy&amp;Sale</Logo>
-          </Link>
-        </Center>
-        <Right>
-          <button
-            onClick={() => dispatch(changeMode())}
-            style={{
-              backgroundColor: "transparent",
-              border: "none",
-              marginRight: "0.5rem",
-            }}
-          >
-            <Icon isDark={isDark}>
-              <ToggleOnIcon style={{ width: "1.5rem", height: "1.5rem" }} />
-            </Icon>
-          </button>
-          {/* // onClick={() => dispatch(changeMode())} */}
-          <button style={{ backgroundColor: "transparent", border: "none" }}>
-            <Icon isDark={isDark}>
-              <ReorderIcon style={{ width: "1rem", height: "1rem" }} />
-            </Icon>
-          </button>
-          <div className={classesSignBx.root}>
-            <div>
-              <Button
-                style={{ minWidth: "40px" }}
-                ref={anchorSignBxRef}
-                aria-controls={openSignBx ? "menu-list-grow" : undefined}
-                aria-haspopup="true"
-                onClick={() => handleToggle(setOpenSignBx)}
-              >
-                <WrapperIcon isDark={isDark}>
-                  <AccountCircleIcon />
-                </WrapperIcon>
-              </Button>
-              <Popper
-                style={{ zIndex: 1 }}
-                open={openSignBx}
-                anchorEl={anchorSignBxRef.current}
-                role={undefined}
-                transition
-                disablePortal
-              >
-                {({ TransitionProps, placement }) => (
-                  <Grow
-                    {...TransitionProps}
-                    style={{
-                      transformOrigin:
-                        placement === "bottom" ? "center top" : "center bottom",
-                    }}
-                  >
-                    <Paper>
-                      <ClickAwayListener onClickAway={handleCloseSignBx}>
-                        <MenuList
-                          autoFocusItem={openSignBx}
-                          id="menu-list-grow"
-                          onKeyDown={handleListKeyDownSignBx}
-                        >
-                          {user ? (
-                            <MenuItem
-                              onClick={(e) =>
-                                handleLogOut(anchorSignBxRef, e, setOpenSignBx)
-                              }
-                            >
-                              Logout
-                            </MenuItem>
-                          ) : (
-                            <>
-                              <MenuItem
-                                onClick={(e) =>
-                                  handleSignIn(
-                                    anchorSignBxRef,
-                                    e,
-                                    setOpenSignBx
-                                  )
-                                }
-                              >
-                                REGISTER
-                              </MenuItem>
-                              <MenuItem
-                                onClick={(e) =>
-                                  handleLogin(anchorSignBxRef, e, setOpenSignBx)
-                                }
-                              >
-                                SIGN IN
-                              </MenuItem>
-                            </>
-                          )}
                         </MenuList>
                       </ClickAwayListener>
                     </Paper>
@@ -325,12 +253,150 @@ const Header = () => {
               />
             </Icon>
           </Link>
+          <div className={classesSignBx.root}>
+            <div>
+              <Button
+                style={{ minWidth: "40px" }}
+                ref={anchorSignBxRef}
+                aria-controls={openSignBx ? "menu-list-grow" : undefined}
+                aria-haspopup="true"
+                onClick={() => handleToggle(setOpenSignBx)}>
+                <WrapperIcon isDark={isDark}>
+                  <AccountCircleIcon />
+                </WrapperIcon>
+              </Button>
+              <Popper
+                style={{ zIndex: 1 }}
+                open={openSignBx}
+                anchorEl={anchorSignBxRef.current}
+                role={undefined}
+                transition
+                disablePortal>
+                {({ TransitionProps, placement }) => (
+                  <Grow
+                    {...TransitionProps}
+                    style={{
+                      transformOrigin:
+                        placement === "bottom" ? "center top" : "center bottom",
+                    }}>
+                    <Paper>
+                      <ClickAwayListener onClickAway={handleCloseSignBx}>
+                        <MenuList
+                          autoFocusItem={openSignBx}
+                          id="menu-list-grow"
+                          onKeyDown={handleListKeyDownSignBx}>
+                          {user ? (
+                            <MenuItem
+                              onClick={(e) =>
+                                handleLogOut(anchorSignBxRef, e, setOpenSignBx)
+                              }>
+                              Logout
+                            </MenuItem>
+                          ) : (
+                            <>
+                              <MenuItem
+                                onClick={(e) =>
+                                  handleSignIn(
+                                    anchorSignBxRef,
+                                    e,
+                                    setOpenSignBx
+                                  )
+                                }>
+                                REGISTER
+                              </MenuItem>
+                              <MenuItem
+                                onClick={(e) =>
+                                  handleLogin(anchorSignBxRef, e, setOpenSignBx)
+                                }>
+                                SIGN IN
+                              </MenuItem>
+                            </>
+                          )}
+                        </MenuList>
+                      </ClickAwayListener>
+                    </Paper>
+                  </Grow>
+                )}
+              </Popper>
+            </div>
+          </div>
+          {/* // onClick={() => dispatch(changeMode())} */}
+          {/* <IconListBtn>
+            <Icon isDark={isDark} type="list">
+              <ReorderIcon style={{ width: "1rem", height: "1rem" }} />
+            </Icon>
+          </IconListBtn> */}
+
+          <div className={classesLangBx.root}>
+            <div>
+              <Button
+                style={{ minWidth: "40px" }}
+                ref={anchorLangBxRef}
+                aria-controls={openLangBx ? "menu-list-grow" : undefined}
+                aria-haspopup="true"
+                onClick={() => handleToggle(setOpenLangBx)}>
+                <WrapperIcon isDark={isDark} type="list">
+                  <IconListBtn>
+                    <Icon isDark={isDark} type="list">
+                      <ReorderIcon style={{ width: "1rem", height: "1rem" }} />
+                    </Icon>
+                  </IconListBtn>
+                </WrapperIcon>
+              </Button>
+              <Popper
+                style={{ zIndex: 1 }}
+                open={openLangBx}
+                anchorEl={anchorLangBxRef.current}
+                role={undefined}
+                transition
+                disablePortal>
+                {({ TransitionProps, placement }) => (
+                  <Grow
+                    {...TransitionProps}
+                    style={{
+                      transformOrigin:
+                        placement === "bottom" ? "center top" : "center bottom",
+                    }}>
+                    <Paper>
+                      <ClickAwayListener
+                        onClickAway={(e) =>
+                          handleClose(anchorLangBxRef, e, setOpenLangBx)
+                        }>
+                        <MenuList
+                          autoFocusItem={openLangBx}
+                          id="menu-list-grow"
+                          onKeyDown={handleListKeyDownLangBx}>
+                          <MenuItem
+                            onClick={(e) =>
+                              handleClose(anchorLangBxRef, e, setOpenLangBx)
+                            }>
+                            AR
+                          </MenuItem>
+                          <MenuItem
+                            onClick={(e) =>
+                              handleClose(anchorLangBxRef, e, setOpenLangBx)
+                            }>
+                            EN
+                          </MenuItem>
+                        </MenuList>
+                      </ClickAwayListener>
+                    </Paper>
+                  </Grow>
+                )}
+              </Popper>
+            </div>
+          </div>
+
           <Link to="/cart">
-            <MenuItemLink isDark={isDark}>
+            <Icon isDark={isDark}>
+              {/* <MenuItemLink isDark={isDark}> */}
               <Badge badgeContent={quantity} color="primary">
-                <ShoppingCartOutlined />
+                <ShoppingCartOutlined
+                  style={{ width: "1rem", height: "1rem" }}
+                />
               </Badge>
-            </MenuItemLink>
+              {/* </MenuItemLink> */}
+            </Icon>
           </Link>
         </Right>
       </Wrapper>

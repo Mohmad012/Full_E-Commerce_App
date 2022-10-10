@@ -6,7 +6,7 @@ export const Container = styled.div`
   padding: 20px;
   justify-content: space-between;
   background-color: ${(props) =>
-    props.isDark === true ? "#363636" : "#c88b77"};
+    props.isDark === true ? "rgb(0 0 0 / 0%)" : "#c88b77"};
   ${mobile({ padding: "0px", flexDirection: "column" })};
   ${tablet({ flexDirection: "column" })};
 `;

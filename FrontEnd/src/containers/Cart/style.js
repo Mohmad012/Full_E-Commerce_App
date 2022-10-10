@@ -13,47 +13,6 @@ const commonDisplay = () => css`
   display: flex;
 `;
 
-// const commonLighting = (props) => css`
-//   @keyframes lighting {
-//     0% {
-//       box-shadow: ${(props) =>
-//         props.isDark === true
-//           ? `0px 0px ${props.type === "TopButton" ? "10px" : "25px"} #898989`
-//           : "none"};
-//     }
-//     20% {
-//       box-shadow: ${(props) =>
-//         props.isDark === true
-//           ? `0px 0px ${props.type === "TopButton" ? "10px" : "25px"} #875030`
-//           : "none"};
-//     }
-//     40% {
-//       box-shadow: ${(props) =>
-//         props.isDark === true
-//           ? `0px 0px ${props.type === "TopButton" ? "10px" : "25px"} #fd5201`
-//           : "none"};
-//     }
-//     60% {
-//       box-shadow: ${(props) =>
-//         props.isDark === true
-//           ? `0px 0px ${props.type === "TopButton" ? "10px" : "25px"} #d19478`
-//           : "none"};
-//     }
-//     80% {
-//       box-shadow: ${(props) =>
-//         props.isDark === true
-//           ? `0px 0px ${props.type === "TopButton" ? "10px" : "25px"} #603a28`
-//           : "none"};
-//     }
-//     100% {
-//       box-shadow: ${(props) =>
-//         props.isDark === true
-//           ? `0px 0px ${props.type === "TopButton" ? "10px" : "25px"} #898989`
-//           : "none"};
-//     }
-//   }
-// `;
-
 const Container = styled.div``;
 const Wrapper = styled.div`
   padding: 20px;
@@ -144,13 +103,6 @@ const Clear = styled.div`
   margin-bottom: 2rem;
 `;
 const Image = styled.img`
-  box-shadow: ${(props) =>
-    props.isDark === true ? "0px 0px 10px #fff" : "0px 1px 5px #000000"};
-
-  &:hover {
-    animation: ${(props) =>
-      props.isDark === true && "lighting 5s linear infinite"};
-  }
   width: 200px;
 `;
 
