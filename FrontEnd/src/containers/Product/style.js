@@ -13,7 +13,8 @@ const Container = styled.div``;
 const Wrapper = styled.div`
   padding: 50px;
   display: flex;
-  min-height: 100vh;
+  min-height: ${(props) =>
+    props.type === "no data" || props.type === "Loading" ? "100vh" : "auto"};
   ${tablet({ padding: "10px", flexDirection: "column", textAlign: "center" })};
   ${smMobile({ textAlign: "center" })};
   ${mobile({ padding: "10px", flexDirection: "column", textAlign: "center" })};

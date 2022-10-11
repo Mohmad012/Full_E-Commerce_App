@@ -115,29 +115,23 @@ const ProductDetail = styled.div`
 `;
 
 const RemoveBtn = styled.button`
-  background-color: #6c0127;
+  background-color: ${(props) =>
+    props.isDark === true ? "#1b7ab1" : "#7e403b"};
   border: none;
-  padding: 0.4rem;
+  padding: 16px 2rem;
   cursor: pointer;
-  color: #fff;
-  transition: 0.3s all;
+  color: rgb(255, 255, 255);
+  transition: all 0.3s ease 0s;
+  width: fit-content;
   &:hover {
-    background-color: #950035;
+    background-color: ${(props) =>
+      props.isDark === true ? "#3ea8e5" : "rgb(201 146 141)"};
   }
-  width: ${(props) => (props.type === "all" ? "50%" : "auto")};
 `;
 
 const Image = styled.img`
-  box-shadow: ${(props) =>
-    props.isDark === true ? "0px 0px 10px #fff" : "0px 1px 5px #000000"};
-
-  &:hover {
-    animation: ${(props) =>
-      props.isDark === true && "lighting 5s linear infinite"};
-  }
-
-  ${commonLighting((props) => props)}
   width: 200px;
+  ${smMobile({ margin: "0 auto" })};
 `;
 
 const Details = styled.div`

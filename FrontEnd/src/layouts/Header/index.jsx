@@ -8,7 +8,7 @@ import {
   Logo,
   Right,
   Icon,
-  MenuItemLink,
+  // MenuItemLink,
   IconListBtn,
 } from "./style";
 
@@ -36,6 +36,7 @@ import ReorderIcon from "@material-ui/icons/Reorder";
 import ToggleOnIcon from "@material-ui/icons/ToggleOn";
 import { removeUser } from "../../store/userReducer";
 import { changeMode } from "store/modeReducer";
+import Switch from "@material-ui/core/Switch";
 // import { decrypt } from "utils/encryptions";
 
 const useStyles = makeStyles((theme) => ({
@@ -85,32 +86,32 @@ const Header = () => {
     setOpenSignBx(false);
   };
 
-  const handleCloseBtnList = (event) => {
-    if (
-      anchorBtnListRef.current &&
-      anchorBtnListRef.current.contains(event.target)
-    ) {
-      return;
-    }
+  // const handleCloseBtnList = (event) => {
+  //   if (
+  //     anchorBtnListRef.current &&
+  //     anchorBtnListRef.current.contains(event.target)
+  //   ) {
+  //     return;
+  //   }
 
-    setOpenBtnList(false);
-  };
-  const handleCloseLangBx = (event) => {
-    if (
-      anchorLangBxRef.current &&
-      anchorLangBxRef.current.contains(event.target)
-    ) {
-      return;
-    }
+  //   setOpenBtnList(false);
+  // };
+  // const handleCloseLangBx = (event) => {
+  //   if (
+  //     anchorLangBxRef.current &&
+  //     anchorLangBxRef.current.contains(event.target)
+  //   ) {
+  //     return;
+  //   }
 
-    setOpenLangBx(false);
-  };
+  //   setOpenLangBx(false);
+  // };
 
-  const handleLangBx = (anchorLangBxRef, e, setOpenLangBx) =>
-    handleClose(anchorLangBxRef, e, setOpenLangBx);
+  // const handleLangBx = (anchorLangBxRef, e, setOpenLangBx) =>
+  //   handleClose(anchorLangBxRef, e, setOpenLangBx);
 
-  const handleBtnList = (anchorBtnListRef, e, setOpenBtnList) =>
-    handleClose(anchorBtnListRef, e, setOpenBtnList);
+  // const handleBtnList = (anchorBtnListRef, e, setOpenBtnList) =>
+  //   handleClose(anchorBtnListRef, e, setOpenBtnList);
 
   const handleLogin = (anchorSignBxRef, e, setOpenSignBx) => {
     handleClose(anchorSignBxRef, e, setOpenSignBx);
@@ -180,17 +181,14 @@ const Header = () => {
           </Link>
         </Left>
         <Right>
-          <button
+          <Switch
             onClick={() => dispatch(changeMode())}
             style={{
-              backgroundColor: "transparent",
-              border: "none",
-              marginRight: "0.5rem",
-            }}>
-            <Icon isDark={isDark}>
-              <ToggleOnIcon style={{ width: "1.5rem", height: "1.5rem" }} />
-            </Icon>
-          </button>
+              color: !isDark && "#575757",
+            }}
+            value={isDark}
+            checked={isDark}
+          />
           <div className={`${classesLangBx.root} classesLangBxRoot`}>
             <div>
               <Button
@@ -331,10 +329,10 @@ const Header = () => {
             <div>
               <Button
                 style={{ minWidth: "40px" }}
-                ref={anchorLangBxRef}
-                aria-controls={openLangBx ? "menu-list-grow" : undefined}
+                ref={anchorBtnListRef}
+                aria-controls={openBtnList ? "menu-list-grow" : undefined}
                 aria-haspopup="true"
-                onClick={() => handleToggle(setOpenLangBx)}>
+                onClick={() => handleToggle(setOpenBtnList)}>
                 <WrapperIcon isDark={isDark} type="list">
                   <IconListBtn>
                     <Icon isDark={isDark} type="list">
@@ -344,9 +342,12 @@ const Header = () => {
                 </WrapperIcon>
               </Button>
               <Popper
-                style={{ zIndex: 1 }}
-                open={openLangBx}
-                anchorEl={anchorLangBxRef.current}
+                className="listOfBtns"
+                style={{
+                  zIndex: 1,
+                }}
+                open={openBtnList}
+                anchorEl={anchorBtnListRef.current}
                 role={undefined}
                 transition
                 disablePortal>
@@ -360,21 +361,21 @@ const Header = () => {
                     <Paper>
                       <ClickAwayListener
                         onClickAway={(e) =>
-                          handleClose(anchorLangBxRef, e, setOpenLangBx)
+                          handleClose(anchorBtnListRef, e, setOpenBtnList)
                         }>
                         <MenuList
-                          autoFocusItem={openLangBx}
+                          autoFocusItem={openBtnList}
                           id="menu-list-grow"
-                          onKeyDown={handleListKeyDownLangBx}>
+                          onKeyDown={handleListKeyDownBtnList}>
                           <MenuItem
                             onClick={(e) =>
-                              handleClose(anchorLangBxRef, e, setOpenLangBx)
+                              handleClose(anchorBtnListRef, e, setOpenBtnList)
                             }>
                             AR
                           </MenuItem>
                           <MenuItem
                             onClick={(e) =>
-                              handleClose(anchorLangBxRef, e, setOpenLangBx)
+                              handleClose(anchorBtnListRef, e, setOpenBtnList)
                             }>
                             EN
                           </MenuItem>

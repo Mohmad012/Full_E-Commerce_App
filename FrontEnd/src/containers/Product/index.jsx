@@ -96,11 +96,11 @@ const ProductContainer = () => {
         <Announcement />
         {Object.keys(product).length === 0 ? (
           !loading ? (
-            <Wrapper>
+            <Wrapper type="no data">
               <Status isDark={isDark}>There Is No Item!!</Status>
             </Wrapper>
           ) : (
-            <Wrapper>
+            <Wrapper type="Loading">
               <Status isDark={isDark}>Loading...</Status>
             </Wrapper>
           )

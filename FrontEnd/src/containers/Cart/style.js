@@ -76,11 +76,13 @@ const Product = styled.div`
   ${commonDisplay()}
   justify-content: space-between;
   margin-top: 2rem;
-  ${mobile({ flexDirection: "column" })};
+  ${tablet({ flexDirection: "column", gap: "3rem" })};
+  ${mobile({ flexDirection: "column", gap: "2rem" })};
 `;
 const ProductDetail = styled.div`
   flex: 2;
   ${commonDisplay()}
+  ${smMobile({ flexDirection: "column" })};
 `;
 
 const RemoveBtn = styled.button`
@@ -104,6 +106,7 @@ const Clear = styled.div`
 `;
 const Image = styled.img`
   width: 200px;
+  ${smMobile({ margin: "0 auto" })};
 `;
 
 const Details = styled.div`
@@ -111,6 +114,8 @@ const Details = styled.div`
   ${commonDisplay()}
   flex-direction: column;
   justify-content: space-around;
+
+  ${smMobile({ gap: "1rem" })};
 `;
 const ProductName = styled.span`
   ${commonTransition()}
