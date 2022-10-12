@@ -58,6 +58,7 @@ export const Slide = styled.div`
 export const ImgContainer = styled.div`
   height: 100%;
   flex: 1;
+  align-items: center;
   ${lap({ display: "flex" })};
 `;
 export const Image = styled.img`
@@ -72,7 +73,6 @@ export const InfoContainer = styled.div`
   flex: 2;
   padding: 50px;
   ${tablet({ display: "none" })};
-  ${lap({ display: "none" })};
 `;
 
 export const Title = styled.h1`
