@@ -6,12 +6,25 @@ import {
 } from "@material-ui/icons";
 
 import { Container, Circle, Image, Info, Icon } from "./style";
+// import { useDispatch } from "react-redux";
+import { inFavProds } from "store/favReducer";
+import { useEffect } from "react";
 
-const Product = ({ item, isDark }) => {
+const Product = ({
+  item,
+  isDark,
+  handleAddRemoveFavProd,
+  hasFavProd,
+  dispatch,
+}) => {
+  console.log("hasFavProd", hasFavProd);
+  // useEffect(() => {
+  //   // dispatch(inFavProds(item._id));
+  // }, []);
   return (
     <Container
       data-aos="fade-up"
-      data-aos-delay={`${200 + item.id * 50}`}
+      data-aos-delay={`${200 + item._id * 50}`}
       isDark={isDark}>
       <Circle />
       <Image src={item.img} />
@@ -24,7 +37,10 @@ const Product = ({ item, isDark }) => {
             <SearchOutlined />
           </Link>
         </Icon>
-        <Icon>
+        <Icon
+          type="fav"
+          inFavProds={hasFavProd[item._id]}
+          onClick={() => handleAddRemoveFavProd(item)}>
           <FavoriteBorderOutlined />
         </Icon>
       </Info>

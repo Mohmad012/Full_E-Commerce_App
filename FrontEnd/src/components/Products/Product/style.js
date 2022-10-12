@@ -49,14 +49,23 @@ export const Icon = styled.div`
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: white;
+  background-color: ${(props) =>
+    props.inFavProds && props.type == "fav" ? "#b91d7b" : "white"};
+  color: ${(props) =>
+    props.inFavProds && props.type == "fav" ? "#fff" : "#000"};
+  a,
+  svg {
+    color: ${(props) =>
+      props.inFavProds && props.type == "fav" ? "#fff" : "#000"};
+  }
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 10px;
   transition: all 0.5s ease;
   &:hover {
-    background-color: #e9f5f5;
+    background-color: ${(props) =>
+      props.inFavProds && props.type == "fav" ? "#b91d7b" : "white"};
     transform: scale(1.1);
   }
 `;

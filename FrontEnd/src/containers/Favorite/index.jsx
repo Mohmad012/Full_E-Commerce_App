@@ -53,11 +53,11 @@ const FavoriteContainer = () => {
   const handleRemoveAllItems = () => dispatch(clearFavs());
   const handleRemoveItems = (id) => dispatch(removeFav(id));
 
-  const handleAddToCard = () => {
+  const handleAddToCard = (product) => {
     dispatch(
       addProduct({
-        // ...product,
-        // quantity,
+        ...product,
+        quantity: fav.quantity,
         // color,
         // size,
       })
@@ -74,15 +74,14 @@ const FavoriteContainer = () => {
             <TopButton
               onClick={() => history.push("/")}
               type="TopButton"
-              isDark={isDark}
-            >
+              isDark={isDark}>
               CONTINUE SHOPPING
             </TopButton>
           </Top>
           <Bottom isDark={isDark}>
             <Info isDark={isDark}>
-              {Object.values(cart?.products).length ? (
-                Object.values(cart?.products)?.map((product) => (
+              {Object.values(fav?.products).length ? (
+                Object.values(fav?.products)?.map((product) => (
                   <>
                     <Product isDark={isDark}>
                       <ProductDetail isDark={isDark}>
@@ -103,8 +102,7 @@ const FavoriteContainer = () => {
                           </ProductSize>
                           <RemoveBtn
                             isDark={isDark}
-                            onClick={() => handleRemoveItems(product._id)}
-                          >
+                            onClick={() => handleRemoveItems(product._id)}>
                             remove
                           </RemoveBtn>
                         </Details>
@@ -133,8 +131,7 @@ const FavoriteContainer = () => {
                           pos="ltf"
                           addWidth
                           isDark={isDark}
-                          onClick={handleAddToCard}
-                        >
+                          onClick={() => handleAddToCard(product)}>
                           ADD TO CART
                         </Button>
                       </PriceDetail>

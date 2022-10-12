@@ -2,6 +2,11 @@ import { styled } from "utils/ReactLibs";
 import { lap, mobile, smMobile, tablet } from "utils/responsive";
 
 export const Container = styled.nav``;
+export const BtnListBx = styled.div`
+  ${(props) => props.type !== "list" && tablet({ display: "none !important" })};
+  ${(props) => props.type !== "list" && mobile({ display: "none !important" })};
+  ${(props) => props.type === "list" && lap({ display: "none !important" })};
+`;
 
 export const Wrapper = styled.div`
   padding: 10px 20px;

@@ -3,15 +3,30 @@ import Product from "./Product";
 import { Container, NoItemFuond } from "./style";
 import data from "data/static.json";
 import UseRequestApi from "hooks/UseRequestApi";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addFav, removeFav } from "store/favReducer";
 
 const Products = ({ categ, filtersProds, sortProds }) => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const isDark = useSelector((state) => state.mode.isDark);
   const [loading, setLoading] = useState(false);
+  // const [idFavProd, setIdFavProd] = useState("");
+  const dispatch = useDispatch();
 
   const { publicRequest } = UseRequestApi();
+
+  const hasFavProd = useSelector((state) => state.fav.inFavProds);
+
+  const handleAddRemoveFavProd = (item) => {
+    const id = item._id;
+
+    if (hasFavProd[id]) {
+      dispatch(removeFav(id));
+    } else {
+      dispatch(addFav({ ...item }));
+    }
+  };
 
   useEffect(() => {
     const getProducts = async () => {
@@ -82,7 +97,14 @@ const Products = ({ categ, filtersProds, sortProds }) => {
             )
           ) : (
             filteredProducts?.map((item) => (
-              <Product isDark={isDark} item={item} key={item.id} />
+              <Product
+                dispatch={dispatch}
+                hasFavProd={hasFavProd}
+                handleAddRemoveFavProd={handleAddRemoveFavProd}
+                isDark={isDark}
+                item={item}
+                key={item.id}
+              />
             ))
           )}
         </>
@@ -98,7 +120,14 @@ const Products = ({ categ, filtersProds, sortProds }) => {
             products
               ?.slice(0, 8)
               .map((item) => (
-                <Product isDark={isDark} item={item} key={item.id} />
+                <Product
+                  dispatch={dispatch}
+                  hasFavProd={hasFavProd}
+                  handleAddRemoveFavProd={handleAddRemoveFavProd}
+                  isDark={isDark}
+                  item={item}
+                  key={item.id}
+                />
               ))
           )}
         </>
