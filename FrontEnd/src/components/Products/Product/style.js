@@ -49,14 +49,29 @@ export const Icon = styled.div`
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: ${(props) =>
-    props.inFavProds && props.type == "fav" ? "#b91d7b" : "white"};
-  color: ${(props) =>
-    props.inFavProds && props.type == "fav" ? "#fff" : "#000"};
+  background-color: ${(props) => {
+    if (props.type == "fav") {
+      return props.inFavProds ? "#b91d7b" : "white";
+    } else {
+      return props.inCart ? "#b91d7b" : "white";
+    }
+  }};
+  color: ${(props) => {
+    if (props.type == "fav") {
+      return props.inFavProds ? "#fff" : "#000";
+    } else {
+      return props.inCart ? "#fff" : "#000";
+    }
+  }};
   a,
   svg {
-    color: ${(props) =>
-      props.inFavProds && props.type == "fav" ? "#fff" : "#000"};
+    color: ${(props) => {
+      if (props.type == "fav") {
+        return props.inFavProds ? "#fff" : "#000";
+      } else {
+        return props.inCart ? "#fff" : "#000";
+      }
+    }};
   }
   display: flex;
   align-items: center;
@@ -64,8 +79,13 @@ export const Icon = styled.div`
   margin: 10px;
   transition: all 0.5s ease;
   &:hover {
-    background-color: ${(props) =>
-      props.inFavProds && props.type == "fav" ? "#b91d7b" : "white"};
+    background-color: ${(props) => {
+      if (props.type == "fav") {
+        return props.inFavProds ? "#b91d7b" : "white";
+      } else {
+        return props.inCart ? "#b91d7b" : "white";
+      }
+    }};
     transform: scale(1.1);
   }
 `;

@@ -5,26 +5,36 @@ import data from "data/static.json";
 import UseRequestApi from "hooks/UseRequestApi";
 import { useDispatch, useSelector } from "react-redux";
 import { addFav, removeFav } from "store/favReducer";
+import { addProduct, removeProduct } from "store/cartReducer";
 
 const Products = ({ categ, filtersProds, sortProds }) => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const isDark = useSelector((state) => state.mode.isDark);
   const [loading, setLoading] = useState(false);
-  // const [idFavProd, setIdFavProd] = useState("");
   const dispatch = useDispatch();
 
   const { publicRequest } = UseRequestApi();
 
-  const hasFavProd = useSelector((state) => state.fav.inFavProds);
+  const FavProd = useSelector((state) => state.fav.inFavProds);
+  const cart = useSelector((state) => state.cart.products);
 
   const handleAddRemoveFavProd = (item) => {
     const id = item._id;
 
-    if (hasFavProd[id]) {
+    if (FavProd[id]) {
       dispatch(removeFav(id));
     } else {
       dispatch(addFav({ ...item }));
+    }
+  };
+  const handleAddRemoveCartProd = (item) => {
+    const id = item._id;
+
+    if (cart[id]) {
+      dispatch(removeProduct(id));
+    } else {
+      dispatch(addProduct({ ...item }));
     }
   };
 
@@ -99,8 +109,10 @@ const Products = ({ categ, filtersProds, sortProds }) => {
             filteredProducts?.map((item) => (
               <Product
                 dispatch={dispatch}
-                hasFavProd={hasFavProd}
+                FavProd={FavProd}
+                cart={cart}
                 handleAddRemoveFavProd={handleAddRemoveFavProd}
+                handleAddRemoveCartProd={handleAddRemoveFavProd}
                 isDark={isDark}
                 item={item}
                 key={item.id}
@@ -122,8 +134,10 @@ const Products = ({ categ, filtersProds, sortProds }) => {
               .map((item) => (
                 <Product
                   dispatch={dispatch}
-                  hasFavProd={hasFavProd}
+                  FavProd={FavProd}
+                  cart={cart}
                   handleAddRemoveFavProd={handleAddRemoveFavProd}
+                  handleAddRemoveCartProd={handleAddRemoveCartProd}
                   isDark={isDark}
                   item={item}
                   key={item.id}

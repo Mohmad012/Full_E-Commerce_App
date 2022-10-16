@@ -5,6 +5,7 @@ export const Container = styled.div`
   padding: 20px;
   flex-wrap: wrap;
   justify-content: space-between;
+  min-height: 100vh;
 `;
 export const NoItemFuond = styled.p`
   transition: 0.3s color;

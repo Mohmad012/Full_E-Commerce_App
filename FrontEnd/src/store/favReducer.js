@@ -25,15 +25,6 @@ const favSlice = createSlice({
       state.quantity = 0;
       state.total = 0;
     },
-    inFavProds: (state, action) => {
-      // const id = action.payload;
-      // // const targetProduct = state.products.hasOwnProperty(id);
-      // if (state.inFavProds[id]) {
-      //   state.inFavProds = true;
-      // } else {
-      //   state.inFavProds = false;
-      // }
-    },
     removeFav: (state, action) => {
       const id = action.payload;
       const quantity = state.products[id].quantity;
@@ -65,7 +56,6 @@ const favSlice = createSlice({
   },
 });
 
-export const { addFav, clearFavs, inFavProds, removeFav, updateFav } =
-  favSlice.actions;
+export const { addFav, clearFavs, removeFav, updateFav } = favSlice.actions;
 
 export default favSlice.reducer;

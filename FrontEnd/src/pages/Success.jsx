@@ -1,10 +1,4 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
-
-const Success = () => {
-  const location = useLocation();
-
-  return <div>Success</div>;
-};
+import SuccessContainer from "containers/Success";
+const Success = () => <SuccessContainer />;
 
 export default Success;
