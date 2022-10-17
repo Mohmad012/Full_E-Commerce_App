@@ -96,8 +96,7 @@ const CartContainer = () => {
             <TopButton
               onClick={() => history.push("/")}
               type="TopButton"
-              isDark={isDark}
-            >
+              isDark={isDark}>
               CONTINUE SHOPPING
             </TopButton>
             <TopTexts isDark={isDark}>
@@ -130,8 +129,7 @@ const CartContainer = () => {
                           </ProductSize>
                           <RemoveBtn
                             isDark={isDark}
-                            onClick={() => handleRemoveItems(product._id)}
-                          >
+                            onClick={() => handleRemoveItems(product._id)}>
                             remove
                           </RemoveBtn>
                         </Details>
@@ -205,8 +203,7 @@ const CartContainer = () => {
                   <RemoveBtn
                     type="all"
                     isDark={isDark}
-                    onClick={handleRemoveAllItems}
-                  >
+                    onClick={handleRemoveAllItems}>
                     Clear
                   </RemoveBtn>
                 </Clear>
@@ -215,21 +212,19 @@ const CartContainer = () => {
                   <SummaryButton
                     pos="cnt"
                     isDark={isDark}
-                    onClick={() => history.push("/login")}
-                  >
+                    onClick={() => history.push("/login")}>
                     CHECKOUT NOW
                   </SummaryButton>
                 ) : (
                   <StripeCheckout
                     name="Buy & Sale"
-                    image="https://img.freepik.com/free-vector/buy-sell-arrows-stock-market-trading_1017-13717.jpg?w=2000"
+                    image="https://avatars.githubusercontent.com/u/1486366?v=4"
                     billingAddress
                     shippingAddress
                     description={`Your total is $${cart.total}`}
                     amount={cart.total * 100}
                     token={onToken}
-                    stripeKey={StripeKEY}
-                  >
+                    stripeKey={StripeKEY}>
                     <SummaryButton pos="cnt" isDark={isDark}>
                       CHECKOUT NOW
                     </SummaryButton>
