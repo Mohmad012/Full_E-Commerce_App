@@ -46,7 +46,17 @@ const Products = ({ categ, filtersProds, sortProds }) => {
           categ ? `/products?category=${categ}` : "/products"
         );
         if (res.status === 200) {
-          setProducts(res.data);
+          const updatedData = res?.data?.map((item) => {
+            const blob = new Blob([messageData.img], { type: "file" });
+            const reader = new FileReader();
+            reader.readAsDataURL(blob);
+            reader.onloadend = async function () {
+              messageData.img = reader.result;
+              return item
+            };
+          })
+
+          setProducts([...updatedData]);
           setLoading(false);
         } else {
           setProducts(data[0].popularProducts);
