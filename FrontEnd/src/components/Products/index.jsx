@@ -53,7 +53,7 @@ const Products = ({ categ, filtersProds, sortProds }) => {
           setLoading(false);
         }
       } catch (err) {
-        setProducts(data[0].popularProducts);
+        // setProducts(data[0].popularProducts);
         setLoading(false);
         console.log(err);
       }
