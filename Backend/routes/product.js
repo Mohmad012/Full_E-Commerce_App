@@ -51,8 +51,8 @@ router.delete("/:id", async (req, res) => {
 // DELETE ALL verifyTokenAndAdmin
 router.delete("/delALL", async (req, res) => {
   try {
-    let findByIdAndDelete = await Product.remove( { } );
-    findByIdAndDelete !== null
+    let deleteAll = await Product.remove( { } );
+    deleteAll !== null
       ? res.status(200).json("Products has been deleted...")
       : res.status(500).json("Can Not Find Products To Delete them...");
   } catch (err) {
