@@ -9,7 +9,12 @@ const ProductSchema = new mongoose.Schema(
     size: { type: Array },
     color: { type: Array },
     price: { type: Number, required: true },
+    stock: { type: Number, required: true },
+    rating: { type: Number, required: true },
+    discountPercentage: { type: Number, required: true },
     inStock: { type: Boolean, default: true },
+    images: { type: Array },
+    brand: { type: String, required: true },
   },
   {
     timestamps: true, // to add time for each Product is created
