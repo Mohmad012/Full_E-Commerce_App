@@ -49,7 +49,7 @@ router.delete("/:id", async (req, res) => {
 });
 
 // DELETE ALL verifyTokenAndAdmin
-router.delete("/delALL", async (req, res) => {
+router.get("/delALL", async (req, res) => {
   try {
     let deleteAll = await Product.remove( { } );
     deleteAll !== null
