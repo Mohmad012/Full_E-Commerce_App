@@ -40,6 +40,14 @@ export const Circle = styled.div`
   position: absolute;
 `;
 
+export const ImageBox = styled.div`
+    width: 20rem;
+    height: 25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
 export const Image = styled.img`
   height: 75%;
   max-width: 100%;
