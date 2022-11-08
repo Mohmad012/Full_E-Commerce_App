@@ -32,14 +32,6 @@ export const Container = styled.div`
   }
 `;
 
-export const Circle = styled.div`
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  background-color: white;
-  position: absolute;
-`;
-
 export const ImageBox = styled.div`
     width: 20rem;
     height: 25rem;

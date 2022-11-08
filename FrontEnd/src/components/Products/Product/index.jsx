@@ -5,7 +5,7 @@ import {
   FavoriteBorderOutlined,
 } from "@material-ui/icons";
 
-import { Container, Circle,ImageBox, Image, Info, Icon } from "./style";
+import { Container,ImageBox, Image, Info, Icon } from "./style";
 
 const Product = ({
   item,
@@ -20,7 +20,6 @@ const Product = ({
       data-aos="fade-up"
       data-aos-delay={`${200 + item._id * 50}`}
       isDark={isDark}>
-      {/*<Circle />*/}
       <ImageBox>
         <Image src={item.img} />
       </ImageBox>
