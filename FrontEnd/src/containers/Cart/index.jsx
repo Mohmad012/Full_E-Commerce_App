@@ -218,7 +218,7 @@ const CartContainer = () => {
                 ) : (
                   <StripeCheckout
                     name="Buy & Sale"
-                    image="https://avatars.githubusercontent.com/u/1486366?v=4"
+                    image="https://img.freepik.com/free-vector/buy-sell-arrows-stock-market-trading_1017-13717.jpg?w=2000"
                     billingAddress
                     shippingAddress
                     description={`Your total is $${cart.total}`}
