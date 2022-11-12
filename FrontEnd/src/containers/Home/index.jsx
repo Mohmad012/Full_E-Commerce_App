@@ -4,7 +4,9 @@ import Products from "components/Products";
 import UseRequestApi from "hooks/UseRequestApi";
 import Newsletter from "components/Newsletter";
 import { useSelector } from "react-redux";
-import { NoItemFuond } from "./style";
+// import { NoItemFuond } from "./style";
+import Spinner from "components/Spinner";
+
 // import { decrypt, encrypt } from "utils/encryptions";
 
 const HomeContainer = () => {
@@ -41,7 +43,7 @@ const HomeContainer = () => {
   return (
     <>
       <Slider />
-      {!loading ? categNames?.map((item, key) => <Products key={key} categ={item} numOfProd={3} />) : <NoItemFuond isDark={isDark}>Loading...</NoItemFuond>}
+      {!loading ? categNames?.map((item, key) => <Products key={key} categ={item} numOfProd={3} />) : <Spinner />}
       <Newsletter />
     </>
   );

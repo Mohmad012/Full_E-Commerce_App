@@ -6,6 +6,7 @@ import UseRequestApi from "hooks/UseRequestApi";
 import { useDispatch, useSelector } from "react-redux";
 import { addFav, removeFav } from "store/favReducer";
 import { addProduct, removeProduct } from "store/cartReducer";
+import Spinner from "components/Spinner";
 
 const Products = ({ categ, numOfProd, sortProds, addAll = false }) => {
   const [products, setProducts] = useState([]);
@@ -91,7 +92,7 @@ const Products = ({ categ, numOfProd, sortProds, addAll = false }) => {
           !loading ? (
             <NoItemFuond isDark={isDark}>There is No Item !!</NoItemFuond>
           ) : (
-            <NoItemFuond isDark={isDark}>Loading...</NoItemFuond>
+            <Spinner />
           )
         ) : (
           <>

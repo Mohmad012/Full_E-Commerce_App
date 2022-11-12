@@ -31,6 +31,7 @@ import {
 } from "./style";
 import UseRequestApi from "hooks/UseRequestApi";
 import data from "data/static.json";
+import Spinner from "components/Spinner";
 
 const ProductContainer = () => {
   const location = useLocation();
@@ -101,13 +102,13 @@ const ProductContainer = () => {
             </Wrapper>
           ) : (
             <Wrapper type="Loading">
-              <Status isDark={isDark}>Loading...</Status>
+              <Spinner />
             </Wrapper>
           )
         ) : (
           <Wrapper>
             <ImgContainer>
-              <Image src={product?.img} />
+              <Image loading="lazy" src={product?.img} />
             </ImgContainer>
             <InfoContainer>
               <Title isDark={isDark}>{product?.title}</Title>

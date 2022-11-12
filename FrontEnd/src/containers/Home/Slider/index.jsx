@@ -25,7 +25,7 @@ const Slider = () => {
     direction === "left"
       ? slideIndex > 0 && setslideIndex((prev) => prev - 1)
       : slideIndex < data[0]?.sliderItems?.length - 1 &&
-        setslideIndex((prev) => prev + 1);
+      setslideIndex((prev) => prev + 1);
   return (
     <Container>
       <Arrow
@@ -41,7 +41,7 @@ const Slider = () => {
             color={isDark === true ? sliderItem.colorInDark : "000"}
             key={sliderItem.id}>
             <ImgContainer>
-              <Image src={sliderItem.img} />
+              <Image loading="lazy" src={sliderItem.img} />
             </ImgContainer>
             <InfoContainer>
               <Title>{sliderItem.title}</Title>

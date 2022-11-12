@@ -85,7 +85,7 @@ const FavoriteContainer = () => {
                   <>
                     <Product isDark={isDark}>
                       <ProductDetail isDark={isDark}>
-                        <Image isDark={isDark} src={product.img} />
+                        <Image loading="lazy" isDark={isDark} src={product.img} />
                         <Details isDark={isDark}>
                           <ProductName isDark={isDark}>
                             {" "}

@@ -38,7 +38,7 @@ const Product = ({
     <Wrapper>
       <Container>
         <Link to={`/product/${item._id}`}>
-          <Top src={item.img} alt={item.title} />
+          <Top loading="lazy" src={item.img} alt={item.title} />
         </Link>
         <FavBtn
           inFavProds={FavProd[item._id]}
