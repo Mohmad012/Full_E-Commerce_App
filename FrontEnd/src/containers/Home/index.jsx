@@ -1,35 +1,47 @@
+import { useEffect, useState } from "react";
 import Slider from "./Slider";
-import Categories from "./Categories";
 import Products from "components/Products";
+import UseRequestApi from "hooks/UseRequestApi";
 import Newsletter from "components/Newsletter";
-import { Title } from "./Style";
 import { useSelector } from "react-redux";
+import { NoItemFuond } from "./style";
 // import { decrypt, encrypt } from "utils/encryptions";
 
 const HomeContainer = () => {
-  const isDark = useSelector((state) => state.mode.isDark);
   // const data = encrypt(JSON.stringify({ name: "mo Gamal", age: 25 }));
   // const keyD = encrypt("id");
 
   // const allD = { [decrypt(keyD)]: JSON.parse(decrypt(data)) };
   // console.log("allD", allD, keyD);
+  const isDark = useSelector((state) => state.mode.isDark);
+  const [loading, setLoading] = useState(false);
+  const [categNames, setCategNames] = useState([]);
+  const { publicRequest } = UseRequestApi();
+
+
+  useEffect(() => {
+    const getProducts = async () => {
+      setLoading(true);
+      try {
+        const res = await publicRequest.get("/products/findCategories");
+
+        if (res.status === 200) {
+          setCategNames(res.data);
+          setLoading(false);
+        }
+      } catch (err) {
+        setLoading(false);
+        console.log(err);
+      }
+    };
+    getProducts();
+  }, []);
+
+
   return (
     <>
       <Slider />
-      <Title
-        isDark={isDark}
-        color="#c88b77"
-        colorText=""
-        colorInDark="rgb(0 0 0 / 0%)">
-        <h2>Categories</h2>
-        <span></span>
-      </Title>
-      <Categories />
-      <Title isDark={isDark} color="" colorText="" colorInDark="transparent">
-        <h2>Best Products</h2>
-        <span></span>
-      </Title>
-      <Products />
+      {!loading ? categNames?.map((item, key) => <Products key={key} categ={item} numOfProd={3} />) : <NoItemFuond isDark={isDark}>Loading...</NoItemFuond>}
       <Newsletter />
     </>
   );

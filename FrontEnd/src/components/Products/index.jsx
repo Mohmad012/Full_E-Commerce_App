@@ -1,18 +1,19 @@
 import { useState, useEffect } from "react";
 import Product from "./Product";
-import { Container, NoItemFuond } from "./style";
-import data from "data/static.json";
+import { Container, NoItemFuond, Title, More } from "./style";
+import { useHistory } from "react-router-dom";
 import UseRequestApi from "hooks/UseRequestApi";
 import { useDispatch, useSelector } from "react-redux";
 import { addFav, removeFav } from "store/favReducer";
 import { addProduct, removeProduct } from "store/cartReducer";
 
-const Products = ({ categ, filtersProds, sortProds }) => {
+const Products = ({ categ, numOfProd, sortProds, addAll = false }) => {
   const [products, setProducts] = useState([]);
-  const [filteredProducts, setFilteredProducts] = useState([]);
+
   const isDark = useSelector((state) => state.mode.isDark);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const { publicRequest } = UseRequestApi();
 
@@ -25,7 +26,7 @@ const Products = ({ categ, filtersProds, sortProds }) => {
     if (FavProd[id]) {
       dispatch(removeFav(id));
     } else {
-      dispatch(addFav({ ...item }));
+      dispatch(addFav({ ...item, quantity: 1 }));
     }
   };
   const handleAddRemoveCartProd = (item) => {
@@ -34,7 +35,7 @@ const Products = ({ categ, filtersProds, sortProds }) => {
     if (cart[id]) {
       dispatch(removeProduct(id));
     } else {
-      dispatch(addProduct({ ...item }));
+      dispatch(addProduct({ ...item, quantity: 1 }));
     }
   };
 
@@ -43,110 +44,90 @@ const Products = ({ categ, filtersProds, sortProds }) => {
       setLoading(true);
       try {
         const res = await publicRequest.get(
-          categ ? `/products?category=${categ}` : "/products"
+          numOfProd ? `/products/findProductsByCategories?category=${categ}&numberOfProducts=${numOfProd}` : `/products/findProductsByCategories?category=${categ}`
         );
         if (res.status === 200) {
           setProducts(res.data);
           setLoading(false);
-        } else {
-          setProducts(data[0].popularProducts);
-          setLoading(false);
         }
       } catch (err) {
-        setProducts(data[0].popularProducts);
         setLoading(false);
         console.log(err);
       }
     };
     getProducts();
-  }, [categ]);
-
-  useEffect(() => {
-    categ &&
-      setFilteredProducts(
-        products.filter((item) =>
-          Object.entries(filtersProds).every(([key, value]) =>
-            item[key].includes(value)
-          )
-        )
-      );
-  }, [products?.length, categ, filtersProds]);
+  }, [numOfProd]);
 
   useEffect(() => {
     if (
-      filteredProducts.some(
-        (item) =>
-          item.hasOwnProperty("createdAt") || item.hasOwnProperty("price")
-      )
+      sortProds
     ) {
       if (sortProds === "newest ") {
-        setFilteredProducts((prev) =>
+        setProducts((prev) =>
           [...prev].sort((a, b) => a.createdAt - b.createdAt)
         );
       } else if (sortProds === "asc") {
-        setFilteredProducts((prev) =>
+        setProducts((prev) =>
           [...prev].sort((a, b) => a.price - b.price)
         );
       } else {
-        setFilteredProducts((prev) =>
+        setProducts((prev) =>
           [...prev].sort((a, b) => b.price - a.price)
         );
       }
     }
   }, [sortProds]);
 
+
   return (
-    <Container>
-      {categ ? (
-        <>
-          {filteredProducts.length === 0 ? (
-            !loading ? (
-              <NoItemFuond isDark={isDark}>There is No Item !!</NoItemFuond>
-            ) : (
-              <NoItemFuond isDark={isDark}>Loading...</NoItemFuond>
-            )
+    <>
+      <Title isDark={isDark} color="" colorText="" colorInDark="transparent">
+        <h2>{categ}</h2>
+        <span></span>
+      </Title>
+      <Container>
+
+        {products?.length === 0 ? (
+          !loading ? (
+            <NoItemFuond isDark={isDark}>There is No Item !!</NoItemFuond>
           ) : (
-            filteredProducts?.map((item) => (
-              <Product
-                dispatch={dispatch}
-                FavProd={FavProd}
-                cart={cart}
-                handleAddRemoveFavProd={handleAddRemoveFavProd}
-                handleAddRemoveCartProd={handleAddRemoveFavProd}
-                isDark={isDark}
-                item={item}
-                key={item.id}
-              />
-            ))
-          )}
-        </>
+            <NoItemFuond isDark={isDark}>Loading...</NoItemFuond>
+          )
+        ) : (
+          <>
+            {
+              products
+                .map((item) => (
+                  <Product
+                    dispatch={dispatch}
+                    FavProd={FavProd}
+                    cart={cart}
+                    handleAddRemoveFavProd={handleAddRemoveFavProd}
+                    handleAddRemoveCartProd={handleAddRemoveCartProd}
+                    isDark={isDark}
+                    item={item}
+                    key={item.id}
+                  />
+                ))
+            }
+          </>
+        )}
+
+      </Container>
+
+      {!products?.length ? (
+        !loading ? (
+          ""
+        ) : (
+          ""
+        )
       ) : (
+
         <>
-          {products.length === 0 ? (
-            !loading ? (
-              <NoItemFuond isDark={isDark}>There is No Item !!</NoItemFuond>
-            ) : (
-              <NoItemFuond isDark={isDark}>Loading...</NoItemFuond>
-            )
-          ) : (
-            products
-              ?.slice(0, 8)
-              .map((item) => (
-                <Product
-                  dispatch={dispatch}
-                  FavProd={FavProd}
-                  cart={cart}
-                  handleAddRemoveFavProd={handleAddRemoveFavProd}
-                  handleAddRemoveCartProd={handleAddRemoveCartProd}
-                  isDark={isDark}
-                  item={item}
-                  key={item.id}
-                />
-              ))
-          )}
+          {!addAll && <More onClick={() => history.push(`/productsForCategory/${categ}`)}>More</More>}
         </>
       )}
-    </Container>
+    </>
   );
 };
 export default Products;

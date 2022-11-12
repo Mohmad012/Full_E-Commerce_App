@@ -42,3 +42,9 @@ export const Select = styled.select`
 `;
 
 export const Option = styled.option``;
+
+export const ProductsBox = styled.div`
+  min-height: 100vh;
+`;
+
+
