@@ -1,10 +1,5 @@
 import { styled } from "utils/ReactLibs";
 
-export const ContainerBox = styled.div`
-    position: relative;
-    margin: 50% auto;
-`
-
 export const Container = styled.div`
     position: absolute;
     top: 50%;

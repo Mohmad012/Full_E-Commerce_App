@@ -11,6 +11,10 @@ export const NoItemFuond = styled.p`
   margin: 0 auto;
   color: ${(props) => (props.isDark === true ? "gray" : "#000")};
 `;
+export const SpinnerBox = styled.div`
+  position: relative;
+  margin: 50% auto;
+`;
 
 export const More = styled.button`
 

@@ -28,6 +28,7 @@ import {
   Amount,
   Status,
   Button,
+  SpinnerBox
 } from "./style";
 import UseRequestApi from "hooks/UseRequestApi";
 import data from "data/static.json";
@@ -102,7 +103,9 @@ const ProductContainer = () => {
             </Wrapper>
           ) : (
             <Wrapper type="Loading">
-              <Spinner />
+              <SpinnerBox>
+                <Spinner />
+              </SpinnerBox>
             </Wrapper>
           )
         ) : (

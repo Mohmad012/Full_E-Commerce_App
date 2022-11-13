@@ -4,7 +4,7 @@ import Products from "components/Products";
 import UseRequestApi from "hooks/UseRequestApi";
 import Newsletter from "components/Newsletter";
 import { useSelector } from "react-redux";
-// import { NoItemFuond } from "./style";
+import { SpinnerBox } from "./style";
 import Spinner from "components/Spinner";
 
 // import { decrypt, encrypt } from "utils/encryptions";
@@ -15,7 +15,7 @@ const HomeContainer = () => {
 
   // const allD = { [decrypt(keyD)]: JSON.parse(decrypt(data)) };
   // console.log("allD", allD, keyD);
-  const isDark = useSelector((state) => state.mode.isDark);
+
   const [loading, setLoading] = useState(false);
   const [categNames, setCategNames] = useState([]);
   const { publicRequest } = UseRequestApi();
@@ -43,7 +43,12 @@ const HomeContainer = () => {
   return (
     <>
       <Slider />
-      {!loading ? categNames?.map((item, key) => <Products key={key} categ={item} numOfProd={3} />) : <Spinner />}
+      {!loading ? categNames?.map((item, key) => <Products key={key} categ={item} numOfProd={3} />) : (
+        <SpinnerBox>
+          <Spinner />
+        </SpinnerBox>
+      )
+      }
       <Newsletter />
     </>
   );

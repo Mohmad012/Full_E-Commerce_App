@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Product from "./Product";
-import { Container, NoItemFuond, Title, More } from "./style";
+import { Container, NoItemFuond, Title, More, SpinnerBox } from "./style";
 import { useHistory } from "react-router-dom";
 import UseRequestApi from "hooks/UseRequestApi";
 import { useDispatch, useSelector } from "react-redux";
@@ -92,7 +92,9 @@ const Products = ({ categ, numOfProd, sortProds, addAll = false }) => {
           !loading ? (
             <NoItemFuond isDark={isDark}>There is No Item !!</NoItemFuond>
           ) : (
-            <Spinner />
+            <SpinnerBox>
+              <Spinner />
+            </SpinnerBox>
           )
         ) : (
           <>
