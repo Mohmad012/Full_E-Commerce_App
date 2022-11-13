@@ -45,7 +45,7 @@ const Products = ({ categ, numOfProd, sortProds, addAll = false }) => {
       setLoading(true);
       try {
         const res = await publicRequest.get(
-          numOfProd ? `/products/findProductsByCategories?category=${categ}&numberOfProducts=${numOfProd}` : `/products/findProductsByCategories?category=${categ}`
+          numOfProd ? `/products/findSomeOfProductsByCategories?category=${categ}&numberOfProducts=${numOfProd}` : `/products/findAllProductsByCategories?category=${categ}`
         );
         if (res.status === 200) {
           setProducts(res.data);

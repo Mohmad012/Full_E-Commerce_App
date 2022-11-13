@@ -74,32 +74,38 @@ router.get("/find/:id", async (req, res) => {
 // GET ONLY Categories
 router.get("/findCategories", async (req, res) => {
   try {
-    const allCategories = await Product.find({},{category:1})
-    const categories = getUniqeItems(allCategories, "category")
+    const categories = await Product.distinct("category")
     res.status(200).json(categories);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-// GET Products By Category
-router.get("/findProductsByCategories", async (req, res) => {
+// GET All Products By Category
+router.get("/findAllProductsByCategories", async (req, res) => {
+  const qCategory = req.query.category;
+
+  try {
+    let ProductsCategories = await Product.find({ category: { "$eq": qCategory } }).sort({ createdAt: -1 });; // 1988.10 ms
+    // const ProductsCategories = await Product.find({ category: { "$in": [ qCategory ] } }); // 5524.20 ms
+    
+    res.status(200).json(ProductsCategories);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// GET Some of Products By Category
+router.get("/findSomeOfProductsByCategories", async (req, res) => {
   const qCategory = req.query.category;
   const numberOfProducts = req.query.numberOfProducts;
 
   try {
-    let ProductsCategories;
-    ProductsCategories = await Product.find({ category: { "$eq": qCategory } }).sort({ createdAt: -1 });; // 1988.10 ms
-    // const ProductsCategories = await Product.find({ category: { "$in": [ qCategory ] } }); // 5524.20 ms
-    
-    if(numberOfProducts && numberOfProducts !== undefined){
+    let ProductsCategories = await Product.find( 
+      {
+        category: { "$eq": qCategory }
+      }).sort({ createdAt: -1 }).limit(numberOfProducts)
 
-      ProductsCategories = await Product.find( {
-        $and: [
-           { category: { "$eq": qCategory } },
-        ]
-     } ).sort({ createdAt: -1 }).limit(numberOfProducts)
-    }
     res.status(200).json(ProductsCategories);
   } catch (err) {
     res.status(500).json(err);
@@ -110,6 +116,19 @@ router.get("/findProductsByCategories", async (req, res) => {
 router.get("/findBestProducts", async (req, res) => {
   
   try {
+
+  //   const aggregateRatings = await Product.aggregate([
+  //     {
+  //       $match:
+  //         { $expr:
+  //           { $gte: [ { $getField: "rating" }, 0 ] }
+  //         }
+  //      },
+  //     { $group:{ _id:'$rating'} }
+  //   ])
+
+  //  console.log("aggregateRatings" , aggregateRatings)
+
     const allRatings = await Product.find({},{rating:1})
     const ratings = allRatings.map((itme) => itme.rating)
     if(ratings.length){
