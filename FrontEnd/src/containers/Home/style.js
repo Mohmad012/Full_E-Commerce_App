@@ -6,7 +6,7 @@ export const SpinnerBox = styled.div`
 `;
 
 export const Main = styled.main`
-  padding: 4rem;
+  padding: 1rem;
   min-height: calc(100vh - 60px);
   margin-top: 2rem;
 
