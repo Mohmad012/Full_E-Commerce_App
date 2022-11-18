@@ -42,18 +42,14 @@ import { updateProduct, clearProducts, removeProduct } from "store/cartReducer";
 import { useEffect } from "react";
 import StripeCheckout from "react-stripe-checkout";
 import { useHistory } from "react-router-dom";
-import UseRequestApi from "hooks/UseRequestApi";
-import { decrypt } from "utils/encryptions";
+import { checkoutPayment } from "utils/apis";
 
 const StripeKEY = process.env.REACT_APP_STRIPE_PUBLIC_KEY;
 
 const CartContainer = () => {
   const cart = useSelector((state) => state.cart);
   let user = useSelector((state) => state.user.currentUser);
-  // user = JSON.parse(decrypt(user));
   const isDark = useSelector((state) => state.mode.isDark);
-
-  const { userRequest } = UseRequestApi();
 
   const dispatch = useDispatch();
 
@@ -66,10 +62,12 @@ const CartContainer = () => {
   useEffect(() => {
     const makeCheckout = async () => {
       try {
-        const res = await userRequest.post("/checkout/payment", {
-          tokenId: StripeToken.id,
-          amount: cart.total * 100,
-        });
+        const res = await checkoutPayment(
+          {
+            tokenId: StripeToken.id,
+            amount: cart.total * 100,
+          }
+        )
         if (res.status === 200) {
           dispatch(clearProducts());
           history.push("/success", { data: res.data });

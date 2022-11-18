@@ -18,6 +18,7 @@ import {
 } from "./style";
 
 import { useSelector } from "react-redux";
+import { findAllProductsByCategories } from "utils/apis";
 
 const ProductListContainer = () => {
   const location = useLocation();
@@ -47,6 +48,8 @@ const ProductListContainer = () => {
         <ProductsBox>
           <Products
             categ={categ}
+            args={[categ]}
+            fetchProducts={findAllProductsByCategories}
             sortProds={sortProds}
             addAll={true}
           />

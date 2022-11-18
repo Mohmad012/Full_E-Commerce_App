@@ -2,21 +2,18 @@ import { useState, useEffect } from "react";
 import Product from "./Product";
 import { Container, NoItemFuond, Title, More, SpinnerBox } from "./style";
 import { useHistory } from "react-router-dom";
-import UseRequestApi from "hooks/UseRequestApi";
 import { useDispatch, useSelector } from "react-redux";
 import { addFav, removeFav } from "store/favReducer";
 import { addProduct, removeProduct } from "store/cartReducer";
 import Spinner from "components/Spinner";
 
-const Products = ({ categ, numOfProd, sortProds, addAll = false }) => {
+const Products = ({ categ, args, fetchProducts, sortProds, addAll = false }) => {
   const [products, setProducts] = useState([]);
 
   const isDark = useSelector((state) => state.mode.isDark);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
-
-  const { publicRequest } = UseRequestApi();
 
   const FavProd = useSelector((state) => state.fav.inFavProds);
   const cart = useSelector((state) => state.cart.products);
@@ -44,9 +41,7 @@ const Products = ({ categ, numOfProd, sortProds, addAll = false }) => {
     const getProducts = async () => {
       setLoading(true);
       try {
-        const res = await publicRequest.get(
-          numOfProd ? `/products/findSomeOfProductsByCategories?category=${categ}&numberOfProducts=${numOfProd}` : `/products/findAllProductsByCategories?category=${categ}`
-        );
+        const res = await fetchProducts(...args)
         if (res.status === 200) {
           setProducts(res.data);
           setLoading(false);
@@ -57,7 +52,7 @@ const Products = ({ categ, numOfProd, sortProds, addAll = false }) => {
       }
     };
     getProducts();
-  }, [numOfProd]);
+  }, []);
 
   useEffect(() => {
     if (

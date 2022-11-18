@@ -127,8 +127,10 @@ router.get("/findBestProducts", async (req, res) => {
   //     { $group:{ _id:'$rating'} }
   //   ])
 
-  //  console.log("aggregateRatings" , aggregateRatings)
+  
+    // await Product.createIndex({ rating: 1 })
 
+    
     const allRatings = await Product.find({},{rating:1})
     const ratings = allRatings.map((itme) => itme.rating)
     if(ratings.length){

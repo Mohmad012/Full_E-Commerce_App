@@ -40,8 +40,8 @@
     "react-typed": "^1.2.0",
     "redux-persist": "^6.0.0",
     "sass": "^1.42.0",
-    "styled-components": "^4.1.2",
     "swiper": "^6.7.0",
+    "styled-components": "^4.1.2",
     "web-vitals": "^1.0.1"
   },
   "scripts": {

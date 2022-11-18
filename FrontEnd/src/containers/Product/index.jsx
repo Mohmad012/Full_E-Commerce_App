@@ -30,9 +30,9 @@ import {
   Button,
   SpinnerBox
 } from "./style";
-import UseRequestApi from "hooks/UseRequestApi";
 import data from "data/static.json";
 import Spinner from "components/Spinner";
+import { findProducts } from "utils/apis";
 
 const ProductContainer = () => {
   const location = useLocation();
@@ -46,15 +46,13 @@ const ProductContainer = () => {
   const [size, setSize] = useState("S");
   const [loading, setLoading] = useState(false);
 
-  const { publicRequest } = UseRequestApi();
-
   const dispatch = useDispatch();
 
   useEffect(() => {
     const getProduct = async () => {
       setLoading(true);
       try {
-        const res = await publicRequest.get(`/products/find/${id}`);
+        const res = await findProducts(id)
         if (res.status === 200) {
           setProduct(res.data);
           setLoading(false);
