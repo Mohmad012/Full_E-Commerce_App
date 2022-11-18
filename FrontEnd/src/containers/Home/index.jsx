@@ -130,7 +130,7 @@ const HomeContainer = () => {
           pagination={{ clickable: true }}
           scrollbar={{ draggable: true }}
           loop={true}
-          autoplay={{ delay: 100000, disableOnInteraction: false }}
+          autoplay={{ delay: 3000, disableOnInteraction: false }}
 
         >
           {bestProducts.length ? bestProducts?.map((item) => (
