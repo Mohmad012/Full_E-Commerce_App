@@ -4,7 +4,7 @@ const User = require("../models/User")
 const {verifyTokenAndAdmin , verifyTokenAndAuthorization} = require("./verifyToken")
 
 // UPDATE
-router.put("/:id" , verifyTokenAndAuthorization , async (req , res) => {
+const UpdateUser = async (req , res) => {
     if(req.body.password){
         req.body.password = CryptoJS.AES.encrypt(req.body.password, process.env.PASS_SEC).toString()
     }
@@ -20,21 +20,20 @@ router.put("/:id" , verifyTokenAndAuthorization , async (req , res) => {
     }catch(err){
         res.status(500).json(err)
     }
-})
-
+}
 
 // DELETE
-router.delete("/:id" , verifyTokenAndAuthorization , async (req , res) => {
+const DeleteUser = async (req , res) => {
     try{
         await User.findByIdAndDelete(req.params.id)
         res.status(200).json("User has been deleted...")
     }catch(err){
         res.status(500).json(err)
     }
-})
+}
 
 // GET
-router.get("/find/:id" , verifyTokenAndAdmin , async (req , res) => {
+const GetUser = async (req , res) => {
     try{
         const user = await User.findById(req.params.id)
         const {password , ...others} = user._doc;
@@ -42,10 +41,10 @@ router.get("/find/:id" , verifyTokenAndAdmin , async (req , res) => {
     }catch(err){
         res.status(500).json(err)
     }
-})
+}
 
 // GET ALL
-router.get("/" , verifyTokenAndAdmin , async (req , res) => {
+const GetAllUsers = async (req , res) => {
     const query = req.query.new;
     try{
         const users = query ? await User.find().sort({_id:-1}).limit(1) : await User.find() // sorting from down to up
@@ -53,10 +52,10 @@ router.get("/" , verifyTokenAndAdmin , async (req , res) => {
     }catch(err){
         res.status(500).json(err)
     }
-})
+}
 
 // GET STATS
-router.get("/stats" , verifyTokenAndAdmin , async (req , res) => {
+const GetStatsOfUser = async (req , res) => {
     const date = new Date();
     const lastYear = new Date(date.setFullYear(date.getFullYear() - 1))
     try{
@@ -81,6 +80,12 @@ router.get("/stats" , verifyTokenAndAdmin , async (req , res) => {
     }catch(err){
         res.status(500).json(err)
     }
-})
+}
 
-module.exports = router;
+module.exports = {
+    UpdateUser,
+    DeleteUser,
+    GetUser,
+    GetAllUsers,
+    GetStatsOfUser
+}

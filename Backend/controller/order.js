@@ -1,9 +1,7 @@
-const router = require("express").Router()
 const Order = require("../models/Order")
-const {verifyTokenAndAdmin , verifyTokenAndAuthorization , verifyToken} = require("./verifyToken")
 
 // CREATE
-router.post("/" , verifyToken , async (req , res) => {
+const CreateOrder = async (req , res) => {
     const newOrder = new Order(req.body)
 
     try{
@@ -12,11 +10,10 @@ router.post("/" , verifyToken , async (req , res) => {
     }catch(err){
         res.status(500).json(err)
     }
-})
-
+}
 
 // UPDATE
-router.put("/:id" , verifyTokenAndAdmin , async (req , res) => {
+const UpdateOrder = async (req , res) => {
 
     try{
         const updatedOrder = await Order.findByIdAndUpdate(req.params.id , {
@@ -29,41 +26,40 @@ router.put("/:id" , verifyTokenAndAdmin , async (req , res) => {
     }catch(err){
         res.status(500).json(err)
     }
-})
-
+}
 
 // DELETE
-router.delete("/:id" , verifyTokenAndAdmin , async (req , res) => {
+const DeleteOrder = async (req , res) => {
     try{
         await Order.findByIdAndDelete(req.params.id)
         res.status(200).json("Order has been deleted...")
     }catch(err){
         res.status(500).json(err)
     }
-})
+}
 
 // GET USER ORDERS
-router.get("/find/:userId" , verifyTokenAndAuthorization , async (req , res) => {
+const GetUserOrders = async (req , res) => {
     try{
         const orders = await Order.find({userId: req.params.userId})
         res.status(200).json(orders)
     }catch(err){
         res.status(500).json(err)
     }
-})
+}
 
 // GET ALL
-router.get("/" , verifyTokenAndAdmin , async (req , res) => {
+const GetAllOrders = async (req , res) => {
     try{
         const orders = await Order.find()
         res.status(200).json(orders)
     }catch(err){
         res.status(500).json(err)
     }
-})
+}
 
 // GET MONTHLY INCOME
-router.get("/income" , verifyTokenAndAdmin , async (req , res) => {
+const GetMonthlyIncome = async (req , res) => {
     const date = new Date();
     const lastMonth = new Date(date.setMonth(date.getMonth() - 1)) // get month now
     const previousMonth = new Date(new Date().setMonth(lastMonth.getMonth() - 1)) // get month now - 1 (5 - 1 = 4)
@@ -91,6 +87,14 @@ router.get("/income" , verifyTokenAndAdmin , async (req , res) => {
     }catch(err){
         res.status(500).json(err)
     }
-})
+}
 
-module.exports = router;
+
+module.exports = {
+    CreateOrder,
+    UpdateOrder,
+    DeleteOrder,
+    GetUserOrders,
+    GetAllOrders,
+    GetMonthlyIncome
+};

@@ -1,13 +1,7 @@
-const router = require("express").Router();
 const Product = require("../models/Product");
-const { getUniqeItems } = require("../utilities");
-const {
-  verifyTokenAndAdmin,
-  verifyTokenAndAuthorization,
-} = require("./verifyToken");
 
-// CREATE verifyTokenAndAdmin
-router.post("/", async (req, res) => {
+// CREATE 
+const CreateProduct = async (req, res) => {
   const newProduct = new Product(req.body);
 
   try {
@@ -16,10 +10,10 @@ router.post("/", async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-});
+}
 
 // UPDATE
-router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
+const UpdateProduct = async (req, res) => {
   try {
     const updatedProduct = await Product.findByIdAndUpdate(
       req.params.id,
@@ -35,10 +29,10 @@ router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-});
+}
 
-// DELETE verifyTokenAndAdmin
-router.delete("/:id", async (req, res) => {
+// DELETE
+const DeleteProduct = async (req, res) => {
   try {
     let findByIdAndDelete = await Product.findByIdAndDelete(req.params.id);
     findByIdAndDelete !== null
@@ -47,10 +41,10 @@ router.delete("/:id", async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-});
+}
 
-// DELETE ALL verifyTokenAndAdmin
-router.get("/delALL", async (req, res) => {
+// DELETE ALL 
+const DeleteAllProducts = async (req, res) => {
   try {
     let deleteAll = await Product.remove( { } );
     deleteAll !== null
@@ -59,30 +53,30 @@ router.get("/delALL", async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-});
+}
 
 // GET
-router.get("/find/:id", async (req, res) => {
+const GetProduct = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
     res.status(200).json(product);
   } catch (err) {
     res.status(500).json(err);
   }
-});
+}
 
 // GET ONLY Categories
-router.get("/findCategories", async (req, res) => {
+const GetCategoriesOfAllProducts = async (req, res) => {
   try {
     const categories = await Product.distinct("category")
     res.status(200).json(categories);
   } catch (err) {
     res.status(500).json(err);
   }
-});
+}
 
 // GET All Products By Category
-router.get("/findAllProductsByCategories", async (req, res) => {
+const GETAllProductsByCategory = async (req, res) => {
   const qCategory = req.query.category;
 
   try {
@@ -93,10 +87,10 @@ router.get("/findAllProductsByCategories", async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-});
+}
 
 // GET Some of Products By Category
-router.get("/findSomeOfProductsByCategories", async (req, res) => {
+const GETSomeOfProductsByCategory = async (req, res) => {
   const qCategory = req.query.category;
   const numberOfProducts = req.query.numberOfProducts;
 
@@ -110,10 +104,10 @@ router.get("/findSomeOfProductsByCategories", async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-});
+}
 
 // GET Best Products
-router.get("/findBestProducts", async (req, res) => {
+const GETBestProducts = async (req, res) => {
   
   try {
 
@@ -144,7 +138,16 @@ router.get("/findBestProducts", async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-});
+}
 
-
-module.exports = router;
+module.exports = {
+  CreateProduct,
+  UpdateProduct,
+  DeleteProduct,
+  DeleteAllProducts,
+  GetProduct,
+  GetCategoriesOfAllProducts,
+  GETAllProductsByCategory,
+  GETSomeOfProductsByCategory,
+  GETBestProducts
+}

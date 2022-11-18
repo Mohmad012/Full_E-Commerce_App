@@ -1,11 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const userRoute = require("./routes/users");
-const authRoute = require("./routes/auth");
-const productRoute = require("./routes/product");
-const cartRoute = require("./routes/cart");
-const orderRoute = require("./routes/order");
-const stripeRoute = require("./routes/stripe");
+const allRoutes = require("./routes/allRoutes");
+
 const cors = require("cors");
 dotenv.config();
 require("./database/mongoose");
@@ -27,11 +23,6 @@ app.get("/", (req, res) => {
 });
 
 app.use(express.json());
-app.use("/api/users", userRoute);
-app.use("/api/products", productRoute);
-app.use("/api/carts", cartRoute);
-app.use("/api/orders", orderRoute);
-app.use("/api/auth", authRoute);
-app.use("/api/checkout", stripeRoute);
+app.use("/api", allRoutes);
 
 app.listen(PORT, () => console.log("Server is Runnig....."));

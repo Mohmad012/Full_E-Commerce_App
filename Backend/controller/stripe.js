@@ -1,6 +1,4 @@
-const router = require("express").Router();
-
-router.post("/payment", async (req, res) => {
+const StripePayment = async (req, res) => {
   try {
     const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
     const charge = await stripe.charges.create({
@@ -12,6 +10,8 @@ router.post("/payment", async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-});
+}
 
-module.exports = router;
+module.exports = {
+  StripePayment
+}
