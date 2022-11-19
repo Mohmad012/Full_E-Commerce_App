@@ -34,11 +34,9 @@ router.get("/orders/" , verifyTokenAndAdmin , GetAllOrders)
 router.get("/orders/income" , verifyTokenAndAdmin , GetMonthlyIncome)
 
 // Products
-// verifyTokenAndAdmin 
-router.post("/products/" , CreateProduct);
+router.post("/products/", verifyTokenAndAdmin , CreateProduct);
 router.put("/products/:id", verifyTokenAndAdmin, UpdateProduct);
-// verifyTokenAndAdmin
-router.delete("/products/:id", DeleteProduct);
+router.delete("/products/:id", verifyTokenAndAdmin, DeleteProduct);
 router.get("/products/delALL", verifyTokenAndAdmin, DeleteAllProducts);
 router.get("/products/find/:id", GetProduct);
 router.get("/products/findCategories", GetCategoriesOfAllProducts);
