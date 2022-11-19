@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import Announcement from "components/Announcement";
 import Layout from "layouts";
-import Newsletter from "components/Newsletter";
 import Products from "components/Products";
 
 import {
@@ -54,7 +53,6 @@ const ProductListContainer = () => {
             addAll={true}
           />
         </ProductsBox>
-        <Newsletter />
       </Layout>
     </Container>
   );

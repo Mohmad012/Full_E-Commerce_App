@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Slider from "./Slider";
 import Products from "components/Products";
-import Newsletter from "components/Newsletter";
 import { Main, Title, NoItemFuond } from "./style";
 import Spinner from "components/Spinner";
 
@@ -146,7 +145,6 @@ const HomeContainer = () => {
           </NoItemFuond>
         )}
       </Main>
-      {/* <Newsletter /> */}
     </>
   );
 };
