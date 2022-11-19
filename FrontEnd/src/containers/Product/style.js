@@ -124,9 +124,19 @@ const Button = styled.button`
   ${(props) => Btn(props.pos, props.isDark, props.addWidth)}
 `;
 
-const SpinnerBox = styled.div`
-  position: relative;
-  margin: 50% auto;
+const BoxImages = styled.div`
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin: 2rem auto;
+`;
+
+const Img = styled.img`
+  width: 13rem;
+  height: 10rem;
 `;
 
 export {
@@ -149,5 +159,6 @@ export {
   Amount,
   Status,
   Button,
-  SpinnerBox
+  BoxImages,
+  Img
 };

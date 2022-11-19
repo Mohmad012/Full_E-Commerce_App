@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 
 import Announcement from "components/Announcement";
-import Newsletter from "components/Newsletter";
 import Layout from "layouts";
 import { addProduct } from "store/cartReducer";
 
@@ -28,7 +27,8 @@ import {
   Amount,
   Status,
   Button,
-  SpinnerBox
+  BoxImages,
+  Img
 } from "./style";
 import data from "data/static.json";
 import Spinner from "components/Spinner";
@@ -101,9 +101,7 @@ const ProductContainer = () => {
             </Wrapper>
           ) : (
             <Wrapper type="Loading">
-              <SpinnerBox>
-                <Spinner />
-              </SpinnerBox>
+              <Spinner />
             </Wrapper>
           )
         ) : (
@@ -163,7 +161,11 @@ const ProductContainer = () => {
             </InfoContainer>
           </Wrapper>
         )}
-        <Newsletter />
+        {product?.images?.length ?
+          <BoxImages>
+            {product?.images?.map((img, key) => <Img key={key} src={img} alt={key} />)}
+          </BoxImages>
+          : ""}
       </Layout>
     </Container>
   );

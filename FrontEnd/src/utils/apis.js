@@ -16,6 +16,16 @@ const userRequest = axios.create({
   header: { token: `Bearer ${TOKEN}` },
 });
 
+export const findSliders = async () => {
+    let res;
+    try {
+        res = await publicRequest.get("/Sliders");
+    } catch (err) {
+        console.log(err);
+    }
+    return res
+}
+
 export const findCategories = async () => {
     let res;
     try {

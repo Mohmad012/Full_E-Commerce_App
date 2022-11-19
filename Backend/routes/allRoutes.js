@@ -3,6 +3,7 @@ const { Register, Login } = require("../controller/auth");
 const { CreateCart, UpdateCart, DeleteCart, GetUserCart, GetAllCarts } = require("../controller/cart");
 const { CreateOrder, UpdateOrder, DeleteOrder, GetUserOrders, GetAllOrders, GetMonthlyIncome } = require("../controller/order");
 const { CreateProduct, UpdateProduct, DeleteProduct, DeleteAllProducts, GetProduct, GetCategoriesOfAllProducts, GETAllProductsByCategory, GETSomeOfProductsByCategory, GETBestProducts } = require("../controller/product");
+const { CreateSlider, UpdateSlider, DeleteSlider, GetAllSliders } = require("../controller/Slider");
 const { StripePayment } = require("../controller/stripe");
 const { UpdateUser, DeleteUser, GetUser, GetStatsOfUser, GetAllUsers } = require("../controller/users");
 const { verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin } = require("../controller/verifyToken");
@@ -10,6 +11,12 @@ const { verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin } = requir
 // Auth
 router.post("/auth/register", Register);
 router.post("/auth/login", Login);
+
+// Slider
+router.post("/Sliders/" ,verifyToken , CreateSlider)
+router.put("/Sliders/:id" , verifyTokenAndAuthorization , UpdateSlider)
+router.delete("/Sliders/:id" , verifyTokenAndAuthorization , DeleteSlider)
+router.get("/Sliders/"  , GetAllSliders)
 
 // Cart
 router.post("/carts/" , verifyToken , CreateCart)

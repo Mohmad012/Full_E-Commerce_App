@@ -1,62 +1,71 @@
-import { useState } from "react";
-import { ArrowLeftOutlined, ArrowRightOutlined } from "@material-ui/icons";
-
 import {
   Container,
-  Arrow,
-  Wrapper,
-  Slide,
   ImgContainer,
   Image,
-  InfoContainer,
-  Title,
-  Desc,
-  Button,
+  NoItemFuond
 } from "./style";
 
-import data from "data/static.json";
+import SwiperCore, { Navigation } from 'swiper';
+
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/swiper.scss';
+import 'swiper/components/navigation/navigation.scss';
+import { useEffect, useState } from "react";
+import { findSliders } from "utils/apis";
 import { useSelector } from "react-redux";
+import Spinner from "components/Spinner";
+
+// install Swiper modules
+SwiperCore.use([Navigation]);
 
 const Slider = () => {
-  const [slideIndex, setslideIndex] = useState(0);
+
+  const [sliders, setSliders] = useState([]);
+  const [loadingAfterGetSliders, setLoadingAfterGetSliders] = useState(false);
   const isDark = useSelector((state) => state.mode.isDark);
 
-  const handleClick = (direction) =>
-    direction === "left"
-      ? slideIndex > 0 && setslideIndex((prev) => prev - 1)
-      : slideIndex < data[0]?.sliderItems?.length - 1 &&
-      setslideIndex((prev) => prev + 1);
+  useEffect(() => {
+    const getSliders = async () => {
+      setLoadingAfterGetSliders(true);
+      try {
+        const res = await findSliders()
+        if (res.status === 200) {
+          setSliders(res.data);
+          setLoadingAfterGetSliders(false);
+        }
+      } catch (err) {
+        setLoadingAfterGetSliders(false);
+        console.log(err);
+      }
+    };
+
+    getSliders();
+  }, []);
+
   return (
     <Container>
-      <Arrow
-        direction="left"
-        onClick={() => handleClick("left")}
-        disabled={slideIndex === 0}>
-        <ArrowLeftOutlined />
-      </Arrow>
-      <Wrapper slideIndex={slideIndex} isDark={isDark}>
-        {data[0]?.sliderItems?.map((sliderItem) => (
-          <Slide
-            bg={isDark === true ? sliderItem.bgDark : sliderItem.bg}
-            color={isDark === true ? sliderItem.colorInDark : "000"}
-            key={sliderItem.id}>
-            <ImgContainer>
-              <Image loading="lazy" src={sliderItem.img} />
-            </ImgContainer>
-            <InfoContainer>
-              <Title>{sliderItem.title}</Title>
-              <Desc>{sliderItem.desc}</Desc>
-              <Button>SHOW NOW</Button>
-            </InfoContainer>
-          </Slide>
-        ))}
-      </Wrapper>
-      <Arrow
-        direction="right"
-        onClick={() => handleClick("right")}
-        disabled={slideIndex === data[0]?.sliderItems?.length - 1}>
-        <ArrowRightOutlined />
-      </Arrow>
+      <Swiper navigation={true} modules={[Navigation]} className="mySwiper" grabCursor={true} loop={true}
+        autoplay={{ delay: 3000 }}>
+        {loadingAfterGetSliders ? (
+          <Spinner />
+        ) : sliders.length ? (
+          sliders?.map((sliderItem, key) => (
+            <SwiperSlide key={key}>
+              <ImgContainer>
+                <Image loading="lazy" src={sliderItem} />
+              </ImgContainer>
+            </SwiperSlide>
+          ))
+        ) : (
+          <NoItemFuond isDark={isDark}>
+            there is no sliders right now!!
+          </NoItemFuond>
+        )}
+
+      </Swiper>
     </Container>
   );
 };

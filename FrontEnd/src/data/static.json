@@ -4,7 +4,8 @@
       {
         "id": 1,
         "img1": "/mo.jpg",
-        "img": "https://images.pexels.com/photos/2522681/pexels-photo-2522681.jpeg",
+        "img2": "https://images.pexels.com/photos/2522681/pexels-photo-2522681.jpeg",
+        "img": "https://firebasestorage.googleapis.com/v0/b/uploadingfiles-3f278.appspot.com/o/images%2Fwatche2.pngf002a99f-2cb2-4640-82f0-42fa113d2298?alt=media&token=c76577a6-fc15-4d3e-b227-5bdc4da9e5cc",
         "title": "SUMMER SALE",
         "desc": "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
         "bg": "0000000a",
@@ -14,7 +15,8 @@
       {
         "id": 2,
         "img1": "/mo.jpg",
-        "img": "https://images.pexels.com/photos/1306246/pexels-photo-1306246.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "img2": "https://images.pexels.com/photos/1306246/pexels-photo-1306246.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "img": "https://firebasestorage.googleapis.com/v0/b/uploadingfiles-3f278.appspot.com/o/images%2Fcloth1.jpg61cd53bc-e8ca-4955-8e19-ea03d2563e87?alt=media&token=45cf04c1-18af-4420-8bde-1c9dd8043530",
         "title": "AUTUMN COLLECTION",
         "desc": "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
         "bg": "fcf1ed",
@@ -24,7 +26,41 @@
       {
         "id": 3,
         "img1": "/mo.jpg",
-        "img": "https://images.pexels.com/photos/4937352/pexels-photo-4937352.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "img2": "https://images.pexels.com/photos/4937352/pexels-photo-4937352.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "img": "https://firebasestorage.googleapis.com/v0/b/uploadingfiles-3f278.appspot.com/o/images%2Fcloth2.jpg22322130-0448-4a38-b569-46e3d4514bfd?alt=media&token=945cfd89-0a99-48e3-bf9c-5fc651e80a71",
+        "title": "LOUNGEWEAR LOVE",
+        "desc": "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
+        "bg": "0000000a",
+        "bgDark": "141414",
+        "colorInDark": "7e403b"
+      },
+      {
+        "id": 4,
+        "img1": "/mo.jpg",
+        "img2": "https://images.pexels.com/photos/2522681/pexels-photo-2522681.jpeg",
+        "img": "https://firebasestorage.googleapis.com/v0/b/uploadingfiles-3f278.appspot.com/o/images%2Fphon2.pngba250641-7b2b-4de9-8eda-b5ea4d07e5d5?alt=media&token=7bc65915-b46e-4944-81cf-63fb20a85f6a",
+        "title": "SUMMER SALE",
+        "desc": "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
+        "bg": "0000000a",
+        "bgDark": "191630",
+        "colorInDark": "dfdfdf"
+      },
+      {
+        "id": 5,
+        "img1": "/mo.jpg",
+        "img2": "https://images.pexels.com/photos/1306246/pexels-photo-1306246.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "img": "https://firebasestorage.googleapis.com/v0/b/uploadingfiles-3f278.appspot.com/o/images%2Fwatche1.jpeg1ada3b56-796c-4746-a959-7d4fec055610?alt=media&token=afdfa811-a3a4-48ba-a2b8-9c95b467c0b4",
+        "title": "AUTUMN COLLECTION",
+        "desc": "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
+        "bg": "fcf1ed",
+        "bgDark": "133b5e",
+        "colorInDark": "646464"
+      },
+      {
+        "id": 6,
+        "img1": "/mo.jpg",
+        "img2": "https://images.pexels.com/photos/4937352/pexels-photo-4937352.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "img": "https://firebasestorage.googleapis.com/v0/b/uploadingfiles-3f278.appspot.com/o/images%2FNew-year-new-phone-Top-5-smartphones-to-launch-in-2022.jpgfbb8a187-4ccd-49ec-bd5d-35093542b196?alt=media&token=6f22fad0-932f-48fa-9eb7-32b52e696efa",
         "title": "LOUNGEWEAR LOVE",
         "desc": "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
         "bg": "0000000a",

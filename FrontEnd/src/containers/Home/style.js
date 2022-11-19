@@ -1,9 +1,5 @@
 import { styled } from "utils/ReactLibs";
 
-export const SpinnerBox = styled.div`
-  position: relative;
-  margin: 50% auto;
-`;
 
 export const Main = styled.main`
   padding: 1rem;
@@ -44,6 +40,7 @@ export const Title = styled.div`
     text-transform: capitalize;
     font-size: 30px;
     transition: 0.3s all;
+
     &:hover {
       & ~ span {
         width: 150px;
@@ -59,4 +56,11 @@ export const Title = styled.div`
     border-bottom-style: solid;
     display: block;
   }
+`;
+
+export const NoItemFuond = styled.p`
+  text-align: center;
+  text-transform: capitalize;
+  transition: 0.3s color;
+  color: ${(props) => (props.isDark === true ? "#8899A6" : "#000")};
 `;

@@ -1,17 +1,19 @@
-import { Container } from "./style";
+import { Loader } from "./style";
 
 const Spinner = () => {
     return (
-        <Container>
-            <svg viewBox="0 0 100 100">
-                <defs>
-                    <filter id="shadow">
-                        <feDropShadow dx={0} dy={0} stdDeviation="1.5" floodColor="#fc6767" />
-                    </filter>
-                </defs>
-                <circle id="spinner" style={{ fill: 'transparent', stroke: '#dd2476', strokeWidth: '7px', strokeLinecap: 'round', filter: 'url(#shadow)' }} cx={50} cy={50} r={45} />
+        <Loader>
+            <svg viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <circle className="load one" cx={60} cy={60} r={40} />
+                <circle className="load two" cx={60} cy={60} r={40} />
+                <circle className="load three" cx={60} cy={60} r={40} />
+                <g>
+                    <circle className="point one" cx={45} cy={70} r={5} />
+                    <circle className="point two" cx={60} cy={70} r={5} />
+                    <circle className="point three" cx={75} cy={70} r={5} />
+                </g>
             </svg>
-        </Container>
+        </Loader>
     )
 }
 

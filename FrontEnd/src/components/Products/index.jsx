@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import Product from "./Product";
-import { Container, NoItemFuond, Title, More, SpinnerBox } from "./style";
+import { Container, NoItemFuond, Title, More } from "./style";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addFav, removeFav } from "store/favReducer";
 import { addProduct, removeProduct } from "store/cartReducer";
 import Spinner from "components/Spinner";
 
-const Products = ({ categ, args, fetchProducts, sortProds, addAll = false }) => {
+const Products = ({ categ, args, fetchProducts, sortProds, index, addAll = false }) => {
   const [products, setProducts] = useState([]);
 
   const isDark = useSelector((state) => state.mode.isDark);
@@ -74,10 +74,9 @@ const Products = ({ categ, args, fetchProducts, sortProds, addAll = false }) => 
     }
   }, [sortProds]);
 
-
   return (
     <>
-      <Title isDark={isDark} color="" colorText="" colorInDark="transparent">
+      <Title isDark={isDark} color="" colorText="" colorInDark="transparent" index={index}>
         <h2>{categ}</h2>
         <span></span>
       </Title>
@@ -86,11 +85,7 @@ const Products = ({ categ, args, fetchProducts, sortProds, addAll = false }) => 
         {products?.length === 0 ? (
           !loading ? (
             <NoItemFuond isDark={isDark}>There is No Item !!</NoItemFuond>
-          ) : (
-            <SpinnerBox>
-              <Spinner />
-            </SpinnerBox>
-          )
+          ) : <Spinner />
         ) : (
           <>
             {
@@ -104,7 +99,7 @@ const Products = ({ categ, args, fetchProducts, sortProds, addAll = false }) => 
                     handleAddRemoveCartProd={handleAddRemoveCartProd}
                     isDark={isDark}
                     item={item}
-                    key={item.id}
+                    index={item.id}
                   />
                 ))
             }
