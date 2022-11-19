@@ -146,7 +146,7 @@ const HomeContainer = () => {
           </NoItemFuond>
         )}
       </Main>
-      <Newsletter />
+      {/* <Newsletter /> */}
     </>
   );
 };

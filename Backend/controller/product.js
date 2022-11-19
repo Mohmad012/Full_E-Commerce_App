@@ -82,8 +82,7 @@ const GETAllProductsByCategory = async (req, res) => {
   try {
     let ProductsCategories = await Product.find({ category: { "$eq": qCategory } }).sort({ createdAt: -1 });; // 1988.10 ms
     // const ProductsCategories = await Product.find({ category: { "$in": [ qCategory ] } }); // 5524.20 ms
-    
-    res.status(200).json(ProductsCategories);
+    ProductsCategories.length ? res.status(200).json(ProductsCategories) : res.status(200).json("there is no products for this category")
   } catch (err) {
     res.status(500).json(err);
   }

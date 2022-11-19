@@ -13,6 +13,9 @@ export const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  .darkModeIcon, .lightModeIcon{
+    cursor: pointer;
+  }
   ${mobile({ padding: "10px 0px" })};
 `;
 export const Icon = styled.div`

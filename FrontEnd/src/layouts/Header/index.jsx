@@ -29,8 +29,9 @@ import PublicIcon from "@material-ui/icons/Public";
 import ReorderIcon from "@material-ui/icons/Reorder";
 import { removeUser } from "../../store/userReducer";
 import { changeMode } from "store/modeReducer";
-import Switch from "@material-ui/core/Switch";
 import BtnList from "./BtnList";
+import Dark from "./Dark";
+import Light from "./Light";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -145,14 +146,18 @@ const Header = () => {
           </Link>
         </Left>
         <Right>
-          <Switch
-            onClick={() => dispatch(changeMode())}
-            style={{
-              color: !isDark && "#575757",
-            }}
-            value={isDark}
-            checked={isDark}
-          />
+          {!isDark ?
+            <Dark
+              dispatch={dispatch}
+              changeMode={changeMode}
+            />
+            :
+            <Light
+              dispatch={dispatch}
+              changeMode={changeMode}
+            />
+          }
+
           <BtnList
             ClassList={"classesLangBxRoot"}
             classes={classesLangBx}
@@ -321,7 +326,7 @@ const Header = () => {
           </Link>
         </Right>
       </Wrapper>
-    </Container>
+    </Container >
   );
 };
 

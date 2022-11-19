@@ -1,3 +1,4 @@
+import { mobile } from "utils/responsive";
 import { styled } from "../../utils/ReactLibs";
 
 export const Container = styled.div`
@@ -57,4 +58,5 @@ export const Title = styled.div`
     border-bottom-style: solid;
     display: block;
   }
+  ${mobile({ boxShadow: "none" })};
 `;
