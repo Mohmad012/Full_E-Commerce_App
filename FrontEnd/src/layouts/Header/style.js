@@ -15,6 +15,9 @@ export const Wrapper = styled.div`
   justify-content: space-between;
   .darkModeIcon, .lightModeIcon{
     cursor: pointer;
+    background-color: black;
+    padding: 5px;
+    border-radius: 50%;
   }
   ${mobile({ padding: "10px 0px" })};
 `;

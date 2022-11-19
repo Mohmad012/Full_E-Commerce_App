@@ -196,7 +196,7 @@ const Header = () => {
           <Link to="/favorite">
             <Icon isDark={isDark}>
               <FavoriteBorderOutlined
-                style={{ width: "1rem", height: "1rem" }}
+                style={{ width: "1.5rem", height: "1.5rem" }}
               />
             </Icon>
           </Link>
@@ -319,7 +319,7 @@ const Header = () => {
             <Icon isDark={isDark}>
               <Badge badgeContent={quantity} color="primary">
                 <ShoppingCartOutlined
-                  style={{ width: "1rem", height: "1rem" }}
+                  style={{ width: "1.5rem", height: "1.5rem" }}
                 />
               </Badge>
             </Icon>
