@@ -94,7 +94,7 @@ const Products = ({ categ, args, fetchProducts, sortProds, index, addAll = false
         ) : (
           <Swiper
             className="mySwiper"
-            spaceBetween={"auto"}
+            spaceBetween={10}
             grabCursor={true}
             centeredSlides={true}
             slidesPerView={3}
