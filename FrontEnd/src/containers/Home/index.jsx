@@ -13,7 +13,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/swiper.scss';
 import 'swiper/components/effect-coverflow/effect-coverflow.scss';
-import { findBestProducts, findCategories, findSomeOfProductsByCategories } from "utils/apis";
+import { findAllProductsByCategories, findBestProducts, findCategories, findSomeOfProductsByCategories } from "utils/apis";
 import Product from "components/Products/Product";
 import { useDispatch, useSelector } from "react-redux";
 import { addFav, removeFav } from "store/favReducer";
@@ -94,8 +94,9 @@ const HomeContainer = () => {
 
   return (
     <>
+      {/* findSomeOfProductsByCategories */}
       <Slider />
-      {!loadingAfterGetProducts ? categNames?.map((item, key) => <Products key={key} index={key} categ={item} args={[item, 3]} fetchProducts={findSomeOfProductsByCategories} />) : <Spinner />}
+      {!loadingAfterGetProducts ? categNames?.map((item, key) => <Products key={key} index={key} categ={item} args={[item]} fetchProducts={findAllProductsByCategories} />) : <Spinner />}
       <Title isDark={isDark} color="" colorText="" colorInDark="transparent">
         <h2>best products</h2>
         <span></span>

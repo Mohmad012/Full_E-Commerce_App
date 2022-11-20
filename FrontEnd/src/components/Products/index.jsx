@@ -7,6 +7,11 @@ import { addFav, removeFav } from "store/favReducer";
 import { addProduct, removeProduct } from "store/cartReducer";
 import Spinner from "components/Spinner";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import 'swiper/swiper.scss';
+
 const Products = ({ categ, args, fetchProducts, sortProds, index, addAll = false }) => {
   const [products, setProducts] = useState([]);
 
@@ -87,23 +92,36 @@ const Products = ({ categ, args, fetchProducts, sortProds, index, addAll = false
             <NoItemFuond isDark={isDark}>There is No Item !!</NoItemFuond>
           ) : <Spinner />
         ) : (
-          <>
+          <Swiper
+            className="mySwiper"
+            spaceBetween={"auto"}
+            grabCursor={true}
+            centeredSlides={true}
+            slidesPerView={3}
+            pagination={{ clickable: true }}
+            scrollbar={{ draggable: true }}
+            loop={true}
+            autoplay={{ delay: 3000 }}
+          >
             {
               products
                 .map((item) => (
-                  <Product
-                    dispatch={dispatch}
-                    FavProd={FavProd}
-                    cart={cart}
-                    handleAddRemoveFavProd={handleAddRemoveFavProd}
-                    handleAddRemoveCartProd={handleAddRemoveCartProd}
-                    isDark={isDark}
-                    item={item}
-                    index={item.id}
-                  />
+                  <SwiperSlide>
+
+                    <Product
+                      dispatch={dispatch}
+                      FavProd={FavProd}
+                      cart={cart}
+                      handleAddRemoveFavProd={handleAddRemoveFavProd}
+                      handleAddRemoveCartProd={handleAddRemoveCartProd}
+                      isDark={isDark}
+                      item={item}
+                      index={item.id}
+                    />
+                  </SwiperSlide>
                 ))
             }
-          </>
+          </Swiper>
         )}
 
       </Container>

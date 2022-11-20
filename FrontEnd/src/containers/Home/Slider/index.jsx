@@ -47,8 +47,17 @@ const Slider = () => {
 
   return (
     <Container>
-      <Swiper navigation={true} modules={[Navigation]} className="mySwiper" grabCursor={true} loop={true}
-        autoplay={{ delay: 3000 }}>
+      <Swiper
+        className="mySwiper"
+        navigation={true}
+        modules={[Navigation]}
+        pagination={{ clickable: true }}
+        scrollbar={{ draggable: true }}
+        loop={true}
+        autoplay={{ delay: 3000, disableOnInteraction: false }}
+        grabCursor={true}
+        centeredSlides={true}
+      >
         {loadingAfterGetSliders ? (
           <Spinner />
         ) : sliders.length ? (
