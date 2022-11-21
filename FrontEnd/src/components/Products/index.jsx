@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Product from "./Product";
 import { Container, NoItemFuond, Title, More } from "./style";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addFav, removeFav } from "store/favReducer";
 import { addProduct, removeProduct } from "store/cartReducer";
@@ -18,7 +18,7 @@ const Products = ({ categ, args, fetchProducts, sortProds, index, addAll = false
   const isDark = useSelector((state) => state.mode.isDark);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-  const history = useHistory();
+  // const history = useHistory();
 
   const FavProd = useSelector((state) => state.fav.inFavProds);
   const cart = useSelector((state) => state.cart.products);
@@ -97,11 +97,24 @@ const Products = ({ categ, args, fetchProducts, sortProds, index, addAll = false
             spaceBetween={10}
             grabCursor={true}
             centeredSlides={true}
-            slidesPerView={3}
+            breakpoints={{
+              // when window width is >= 640px
+              640: {
+                width: 640,
+                slidesPerView: 1,
+              },
+              // when window width is >= 768px
+              768: {
+                width: 768,
+                slidesPerView: 2,
+              },
+            }}
             pagination={{ clickable: true }}
             scrollbar={{ draggable: true }}
             loop={true}
             autoplay={{ delay: 3000 }}
+
+
           >
             {
               products
@@ -126,7 +139,7 @@ const Products = ({ categ, args, fetchProducts, sortProds, index, addAll = false
 
       </Container>
 
-      {!products?.length ? (
+      {/* {!products?.length ? (
         !loading ? (
           ""
         ) : (
@@ -137,7 +150,7 @@ const Products = ({ categ, args, fetchProducts, sortProds, index, addAll = false
         <>
           {!addAll && <More onClick={() => history.push(`/productsForCategory/${categ}`)}>More</More>}
         </>
-      )}
+      )} */}
     </>
   );
 };
