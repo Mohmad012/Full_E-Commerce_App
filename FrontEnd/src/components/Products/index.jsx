@@ -112,7 +112,7 @@ const Products = ({ categ, args, fetchProducts, sortProds, index, addAll = false
             pagination={{ clickable: true }}
             scrollbar={{ draggable: true }}
             loop={true}
-            autoplay={{ delay: 3000 }}
+            autoplay={{ delay: 3000, disableOnInteraction: false }}
 
 
           >

@@ -89,3 +89,57 @@ export const MenuItemLink = styled.div`
   ${smMobile({ fontSize: "10px", marginLeft: "10px" })};
   ${tablet({ fontSize: "9px", marginLeft: "9px" })};
 `;
+
+export const DropDownBx = styled.div`
+  display:none;
+  .iconBtn{
+    position: relative;
+    
+    &:before {
+      content: '';
+      border-width: 10px;
+      border-style: solid;
+      border-color: transparent transparent #898989 transparent;
+      position: absolute;
+      bottom: 0rem;
+      left: 0.9375rem; 
+      transition: all 0.2s;
+      opacity:${(props) => props.showMenu ? "1" : "0"};
+      z-index:${(props) => props.showMenu ? "10" : "-1"};
+    }
+    ul {
+      list-style: none;
+      padding-left: 0;
+      -webkit-transition: all 0.8s;
+      transition: all 0.2s;
+      background-color: #898989;
+      padding: 10px 0px;
+      display: block;
+      position: absolute;
+      top: 2.9rem;
+      right: 0.6rem;
+      width: 10rem;
+      border-radius: 4px;
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      opacity:${(props) => props.showMenu ? "1" : "0"};
+      z-index:${(props) => props.showMenu ? "10" : "-1"};
+  
+      li {
+        display: inline-block;
+        transition: background-color 0.2s, color 0.2s;
+        position: relative;
+        padding-right: 10px;
+        
+        &:hover {
+          color:#898989;
+          background-color: #15202b;
+        }
+      }
+    }
+  }
+  ${tablet({ display: "block" })}
+  ${mobile({ display: "block" })}
+`;

@@ -51,12 +51,12 @@ const Slider = () => {
         className="mySwiper"
         navigation={true}
         modules={[Navigation]}
+        grabCursor={true}
+        centeredSlides={true}
         pagination={{ clickable: true }}
         scrollbar={{ draggable: true }}
         loop={true}
         autoplay={{ delay: 3000, disableOnInteraction: false }}
-        grabCursor={true}
-        centeredSlides={true}
       >
         {loadingAfterGetSliders ? (
           <Spinner />

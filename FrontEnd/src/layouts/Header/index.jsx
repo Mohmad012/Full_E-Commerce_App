@@ -9,13 +9,14 @@ import {
   Icon,
   WrapperIcon,
   BtnListBx,
+  DropDownBx
 } from "./style";
 
 import {
   FavoriteBorderOutlined,
   ShoppingCartOutlined,
 } from "@material-ui/icons";
-
+import Button from "@material-ui/core/Button";
 import { Badge } from "@material-ui/core";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -27,7 +28,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import PublicIcon from "@material-ui/icons/Public";
 import ReorderIcon from "@material-ui/icons/Reorder";
-import { removeUser } from "../../store/userReducer";
+import { removeUser } from "store/userReducer";
 import { changeMode } from "store/modeReducer";
 import BtnList from "./BtnList";
 import Dark from "./Dark";
@@ -47,6 +48,7 @@ const Header = () => {
   let user = useSelector((state) => state.user.currentUser);
   // user = JSON.parse(decrypt(user));
   const isDark = useSelector((state) => state.mode.isDark);
+  const [showMenu, setShowMenu] = useState(false);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -62,6 +64,10 @@ const Header = () => {
 
   const handleToggle = (setOpen) => {
     setOpen((prev) => !prev);
+  };
+
+  const handleToggleAlt = () => {
+    setShowMenu((prev) => !prev);
   };
 
   const handleClose = (anchorRef, event, setOpen) => {
@@ -242,7 +248,25 @@ const Header = () => {
             </ClickAwayListener>
           </BtnList>
 
-          <BtnList
+          <DropDownBx showMenu={showMenu}>
+            <Button
+              style={{ minWidth: "40px" }}
+              className="iconBtn"
+              onClick={handleToggleAlt}>
+              <WrapperIcon isDark={isDark} type="list">
+                <ReorderIcon style={{ width: "2.2rem", height: "2.2rem" }} />
+              </WrapperIcon>
+              <ul>
+
+                <li>Account</li>
+                <li>Language</li>
+                <li>Favorite</li>
+                <li>Cart</li>
+              </ul>
+            </Button>
+          </DropDownBx>
+
+          {/* <BtnList
             classes={classesLangBx}
             anchorBtn={anchorBtnListRef}
             openBtn={openBtnList}
@@ -250,6 +274,7 @@ const Header = () => {
             WrapperIcon={WrapperIcon}
             isDark={isDark}
             handleToggle={handleToggle}
+            // IconBtn={AccountCircleIcon}
             IconBtn={ReorderIcon}
             BtnListBx={BtnListBx}
             type="list">
@@ -313,7 +338,7 @@ const Header = () => {
                 </MenuItem>
               </MenuList>
             </ClickAwayListener>
-          </BtnList>
+          </BtnList> */}
 
           <Link to="/cart">
             <Icon isDark={isDark}>
