@@ -91,10 +91,8 @@ export const MenuItemLink = styled.div`
 `;
 
 export const DropDownBx = styled.div`
-  display:none;
-  .iconBtn{
+  .iconMenuBtn,.iconOthersBtn{
     position: relative;
-    
     &:before {
       content: '';
       border-width: 10px;
@@ -132,7 +130,38 @@ export const DropDownBx = styled.div`
         transition: background-color 0.2s, color 0.2s;
         position: relative;
         padding-right: 10px;
-        
+        div{
+          list-style: none;
+          padding-left: 0;
+          -webkit-transition: all 0.8s;
+          transition: all 0.2s;
+          background-color: #afafaf;
+          
+          display: block;
+          position: absolute;
+          top: 1.5rem;
+          right: 0.6rem;
+          width: 9rem;
+          border-radius: 4px;
+          text-align: right;
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+          opacity:0;
+          z-index:-1;
+          span{
+            display: block;
+            transition: background-color 0.2s, color 0.2s;
+            position: relative;
+            padding: 10px 0px;
+            padding-right: 10px;
+            color:#000;
+            &:hover {
+              color:#898989;
+              background-color: #15202b;
+            }
+          }
+        }
         &:hover {
           color:#898989;
           background-color: #15202b;
@@ -140,6 +169,14 @@ export const DropDownBx = styled.div`
       }
     }
   }
-  ${tablet({ display: "block" })}
-  ${mobile({ display: "block" })}
+  .iconMenuBtn{
+    ${lap({ display: "none" })};
+    ${tablet({ display: "block" })};
+    ${mobile({ display: "block" })};
+  }
+  .iconOthersBtn{
+    ${lap({ display: "block" })};
+    ${tablet({ display: "none" })};
+    ${mobile({ display: "none" })};
+  }
 `;
