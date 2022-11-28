@@ -82,7 +82,10 @@ const Product = styled.div`
 const ProductDetail = styled.div`
   flex: 2;
   ${commonDisplay()}
-  ${smMobile({ flexDirection: "column" })};
+  ${tablet({ flexDirection: "column", gap: "3rem" })};
+  ${mobile({ flexDirection: "column", gap: "2rem" })};
+  ${smMobile({ flexDirection: "column", gap: "2rem" })};
+  
 `;
 
 const RemoveBtn = styled.button`
@@ -106,6 +109,7 @@ const Clear = styled.div`
 `;
 const Image = styled.img`
   width: 200px;
+  margin: 0 auto;
   ${smMobile({ margin: "0 auto" })};
 `;
 
@@ -120,12 +124,16 @@ const Details = styled.div`
 const ProductName = styled.span`
   ${commonTransition()}
   ${commonColor((props) => props)}
-  ${smMobile({ fontSize: "12px" })};
+  ${tablet({ marginBottom: "1rem" })};
+  ${mobile({ marginBottom: "1rem" })};
+  ${smMobile({ marginBottom: "1rem"})};
 `;
 const ProductId = styled.span`
   ${commonTransition()}
   ${commonColor((props) => props)}
-  ${smMobile({ fontSize: "12px" })};
+  ${tablet({ marginBottom: "1rem" })};
+  ${mobile({ marginBottom: "1rem" })};
+  ${smMobile({ marginBottom: "1rem"})};
 `;
 const ProductColor = styled.div`
   width: 20px;

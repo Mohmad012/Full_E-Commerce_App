@@ -120,11 +120,11 @@ const CartContainer = () => {
                             {" "}
                             <b> ID:</b> {product._id}
                           </ProductId>
-                          <ProductColor isDark={isDark} color={product.color} />
-                          <ProductSize isDark={isDark}>
+                          {/* <ProductColor isDark={isDark} color={product.color} /> */}
+                          {/* <ProductSize isDark={isDark}>
                             {" "}
                             <b> Size: </b> {product.size}
-                          </ProductSize>
+                          </ProductSize> */}
                           <RemoveBtn
                             isDark={isDark}
                             onClick={() => handleRemoveItems(product._id)}>
@@ -205,29 +205,31 @@ const CartContainer = () => {
                     Clear
                   </RemoveBtn>
                 </Clear>
+                <div className="koko">
 
-                {!user ? (
-                  <SummaryButton
-                    pos="cnt"
-                    isDark={isDark}
-                    onClick={() => history.push("/login")}>
-                    CHECKOUT NOW
-                  </SummaryButton>
-                ) : (
-                  <StripeCheckout
-                    name="Buy & Sale"
-                    image="https://img.freepik.com/free-vector/buy-sell-arrows-stock-market-trading_1017-13717.jpg?w=2000"
-                    billingAddress
-                    shippingAddress
-                    description={`Your total is $${cart.total}`}
-                    amount={cart.total * 100}
-                    token={onToken}
-                    stripeKey={StripeKEY}>
-                    <SummaryButton pos="cnt" isDark={isDark}>
+                  {!user ? (
+                    <SummaryButton
+                      pos="cnt"
+                      isDark={isDark}
+                      onClick={() => history.push("/login")}>
                       CHECKOUT NOW
                     </SummaryButton>
-                  </StripeCheckout>
-                )}
+                  ) : (
+                    <StripeCheckout
+                      name="Buy & Sale"
+                      image="./logo.webp"
+                      billingAddress
+                      shippingAddress
+                      description={`Your total is $${cart.total}`}
+                      amount={cart.total * 100}
+                      token={onToken}
+                      stripeKey={StripeKEY}>
+                      <SummaryButton pos="cnt" isDark={isDark}>
+                        CHECKOUT NOW
+                      </SummaryButton>
+                    </StripeCheckout>
+                  )}
+                </div>
               </Summary>
             ) : (
               ""
