@@ -205,31 +205,28 @@ const CartContainer = () => {
                     Clear
                   </RemoveBtn>
                 </Clear>
-                <div className="koko">
-
-                  {!user ? (
-                    <SummaryButton
-                      pos="cnt"
-                      isDark={isDark}
-                      onClick={() => history.push("/login")}>
+                {!user ? (
+                  <SummaryButton
+                    pos="cnt"
+                    isDark={isDark}
+                    onClick={() => history.push("/login")}>
+                    CHECKOUT NOW
+                  </SummaryButton>
+                ) : (
+                  <StripeCheckout
+                    name="Buy & Sale"
+                    image="./logo.webp"
+                    billingAddress
+                    shippingAddress
+                    description={`Your total is $${cart.total}`}
+                    amount={cart.total * 100}
+                    token={onToken}
+                    stripeKey={StripeKEY}>
+                    <SummaryButton pos="cnt" isDark={isDark}>
                       CHECKOUT NOW
                     </SummaryButton>
-                  ) : (
-                    <StripeCheckout
-                      name="Buy & Sale"
-                      image="./logo.webp"
-                      billingAddress
-                      shippingAddress
-                      description={`Your total is $${cart.total}`}
-                      amount={cart.total * 100}
-                      token={onToken}
-                      stripeKey={StripeKEY}>
-                      <SummaryButton pos="cnt" isDark={isDark}>
-                        CHECKOUT NOW
-                      </SummaryButton>
-                    </StripeCheckout>
-                  )}
-                </div>
+                  </StripeCheckout>
+                )}
               </Summary>
             ) : (
               ""
