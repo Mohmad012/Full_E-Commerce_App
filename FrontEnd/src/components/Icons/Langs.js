@@ -4,7 +4,7 @@ function Langs({style}) {
         xmlns="http://www.w3.org/2000/svg"
         width="24"
         height="24"
-        fill={style}        
+        fill={style || "currentColor"}        
         x="0"
         y="0"
         enableBackground="new 0 0 356.926 356.926"

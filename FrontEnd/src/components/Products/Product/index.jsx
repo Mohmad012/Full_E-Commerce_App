@@ -1,5 +1,10 @@
 import { Link } from "react-router-dom";
-import { AddShoppingCart, InfoOutlined, Clear, Done, FavoriteBorderOutlined } from "@material-ui/icons";
+import Favorite from "components/Icons/Favorite";
+import CartIcon from "components/Icons/Cart"
+import Info from "components/Icons/Info"
+import Done from "components/Icons/Right"
+import Clear from "components/Icons/Clear"
+
 import {
   Wrapper,
   Container,
@@ -44,7 +49,7 @@ const Product = ({
           inFavProds={FavProd[item._id]}
           onClick={() => handleAddRemoveFavProd(item)}
         >
-          <FavoriteBorderOutlined style={{ color: FavProd[item._id] ? "#fff" : "red" }} />
+          <Favorite style={FavProd[item._id] ? "#fff" : "red"} />
         </FavBtn>
         <Bottom className={cart[item._id] ? "clicked" : ""}>
           <Left>
@@ -56,7 +61,7 @@ const Product = ({
               inCart={cart[item._id]}
               onClick={() => handleAddRemoveCartProd(item)}
             >
-              <AddShoppingCart />
+              <CartIcon />
             </Buy>
           </Left>
           <Right>
@@ -67,15 +72,15 @@ const Product = ({
               <h1>{item.title.length > 9 ? `${item.title.slice(0, 7)}...` : item.title}</h1>
               <p>Added to your cart</p>
             </DetailsRight>
-            <Remove>
-              <Clear onClick={() => handleAddRemoveCartProd(item)} />
+            <Remove onClick={() => handleAddRemoveCartProd(item)}>
+              <Clear />
             </Remove>
           </Right>
         </Bottom>
       </Container>
       <Inside>
         <Icon>
-          <InfoOutlined />
+          <Info />
         </Icon>
         <Contents>
           <TextBox>
