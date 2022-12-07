@@ -95,7 +95,6 @@ const HomeContainer = () => {
   return (
     <>
       <Slider />
-      {!loadingAfterGetProducts ? categNames?.map((item, key) => <Products key={key} index={key} categ={item} args={[item]} fetchProducts={findAllProductsByCategories} />) : <Spinner />}
       <Title isDark={isDark} color="" colorText="" colorInDark="transparent">
         <h2>best products</h2>
         <span></span>
@@ -145,6 +144,8 @@ const HomeContainer = () => {
           </NoItemFuond>
         )}
       </Main>
+
+      {!loadingAfterGetProducts ? categNames?.map((item, key) => <Products key={key} index={key} categ={item} args={[item]} fetchProducts={findAllProductsByCategories} />) : <Spinner />}
     </>
   );
 };

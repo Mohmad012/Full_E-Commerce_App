@@ -3,14 +3,14 @@ import { styled } from "utils/ReactLibs";
 
 export const Main = styled.main`
   padding: 1rem;
-  min-height: calc(100vh - 60px);
+  min-height: calc(100vh - 12.5rem);
   margin-top: 2rem;
 
   .swiper-container {
     box-shadow: 0 0 10px #006785;
     border-radius: 10px;
     width: 100%;
-    background-color: #111;
+    background-image: linear-gradient(to bottom,#000000,#000000,#000000,#8899a6,#8899a6);
     padding-top: 50px;
     padding-bottom: 200px;
 

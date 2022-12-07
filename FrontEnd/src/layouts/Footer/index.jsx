@@ -1,12 +1,11 @@
-import {
-  Facebook,
-  Instagram,
-  MailOutline,
-  Phone,
-  Pinterest,
-  Room,
-  Twitter,
-} from "@material-ui/icons";
+import Facebook from "components/Icons/Facebook";
+import Instagram from "components/Icons/Instagram";
+import Mail from "components/Icons/Mail";
+import Phone from "components/Icons/Phone";
+import Pinterest from "components/Icons/Pinterest";
+import Room from "components/Icons/Room";
+import Twitter from "components/Icons/Twitter";
+
 import { useSelector } from "react-redux";
 import {
   Container,
@@ -68,13 +67,13 @@ const Footer = () => {
       <Right>
         <Title>Contact</Title>
         <ContactItem>
-          <Room /> Cairo, Egypt
+          <Room isDark={isDark} /> Cairo, Egypt
         </ContactItem>
         <ContactItem>
-          <Phone /> +2 012 230 723 59
+          <Phone isDark={isDark} /> +2 012 230 723 59
         </ContactItem>
         <ContactItem>
-          <MailOutline /> mohmadgamal454@gmail.com
+          <Mail isDark={isDark} /> mohmadgamal454@gmail.com
         </ContactItem>
         <Payment src="https://i.ibb.co/Qfvn4z6/payment.png" />
       </Right>

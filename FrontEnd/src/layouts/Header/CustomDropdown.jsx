@@ -6,12 +6,11 @@ import {
 const CustomDropdown = ({
     showMenu,
     handleToggle,
-    width = "2.2rem",
-    height = "2.2rem",
     isDark,
     Icon,
     Class = "iconOthersBtn",
-    children
+    children,
+    styleCs
 }) => {
     return (
         <DropDownBx showMenu={showMenu}>
@@ -20,7 +19,7 @@ const CustomDropdown = ({
                 className={Class}
                 onClick={handleToggle}>
                 <WrapperIcon isDark={isDark} type="list">
-                    <Icon style={{ width, height }} />
+                    <Icon style={styleCs} />
                 </WrapperIcon>
                 {children}
             </Button>

@@ -21,32 +21,37 @@ export const Wrapper = styled.div`
   }
   ${mobile({ padding: "10px 0px" })};
 `;
+
+const CommonIcon = (isDark, type) => {
+  return `
+    border-radius: 50%;
+    color: ${isDark === true ? "#000" : "#fff"};
+    padding: 0.313rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    background-color: ${isDark === true ? "gray" : "#000"};
+    cursor: pointer;
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    .MuiBadge-anchorOriginTopRightRectangle {
+      right: -5px;
+    }
+
+  `
+}
+
 export const Icon = styled.div`
-  border-radius: 50%;
-  color: ${(props) => (props.isDark === true ? "#000" : "#fff")};
-  padding: 3px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.5s ease;
-  background-color: ${(props) => (props.isDark === true ? "gray" : "#000")};
-  cursor: pointer;
-  &:hover {
-    transform: scale(1.1);
-  }
-
-  .MuiBadge-anchorOriginTopRightRectangle {
-    right: -5px;
-  }
-
+  ${props => CommonIcon(props.isDark)}
   ${(props) => props.type !== "list" && tablet({ display: "none" })};
   ${(props) => props.type !== "list" && mobile({ display: "none" })};
 `;
 
-export const WrapperIcon = styled.span`
-  transition: 0.3s color;
-  display: flex;
-  color: ${(props) => (props.isDark === true ? "gray" : "#000")};
+export const WrapperIcon = styled.div`
+  ${props => CommonIcon(props.isDark)}
   ${(props) => props.type !== "list" && tablet({ display: "none" })};
   ${(props) => props.type !== "list" && mobile({ display: "none" })};
 `;

@@ -34,7 +34,6 @@ export const Title = styled.div`
   ${(props) => props.index === 0 && `
     position: relative;
     z-index: 1000000000;
-    box-shadow: 13px -87px 100px white;
   `}
   ${(props) =>
     props.isDark === true ? "h2 {color:gray;}" : "h2 {color:#7e403b;}"};

@@ -1,8 +1,8 @@
 const Light = ({ dispatch, changeMode }) => {
     return (
         <svg
-            width="20"
-            height="20"
+            width="24"
+            height="24"
             className="lightModeIcon"
             onClick={() => dispatch(changeMode())}
             xmlns="http://www.w3.org/2000/svg"

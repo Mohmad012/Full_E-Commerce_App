@@ -9,17 +9,15 @@ import {
   Icon,
 } from "./style";
 
-import {
-  FavoriteBorderOutlined,
-  ShoppingCartOutlined,
-} from "@material-ui/icons";
+import Favorite from "components/Icons/Favorite";
+import Account from "components/Icons/Account"
+import Langs from "components/Icons/Langs"
+import Cart from "components/Icons/Cart"
+import List from "components/Icons/List"
 import { Badge } from "@material-ui/core";
 
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import PublicIcon from "@material-ui/icons/Public";
-import ReorderIcon from "@material-ui/icons/Reorder";
 import { removeUser } from "store/userReducer";
 import { changeMode } from "store/modeReducer";
 import Dark from "./Dark";
@@ -91,7 +89,8 @@ const Header = () => {
             showMenu={showLang}
             handleToggle={() => handleToggle(setShowLang)}
             isDark={isDark}
-            Icon={PublicIcon}
+            Icon={Langs}
+            styleCs={isDark ? "#000" : "#fff"}
           >
             <ul>
               <li
@@ -108,10 +107,8 @@ const Header = () => {
           </CustomDropdown>
 
           <Link to="/favorite">
-            <Icon isDark={isDark}>
-              <FavoriteBorderOutlined
-                style={{ width: "1.5rem", height: "1.5rem" }}
-              />
+            <Icon isDark={isDark} type="icon">
+              <Favorite style={isDark ? "#000" : "#fff"} />
             </Icon>
           </Link>
 
@@ -119,7 +116,8 @@ const Header = () => {
             showMenu={showAccountState}
             handleToggle={() => handleToggle(setShowAccountState)}
             isDark={isDark}
-            Icon={AccountCircleIcon}
+            Icon={Account}
+            styleCs={isDark ? "#000" : "#fff"}
           >
             <ul>
               {user ? (
@@ -148,7 +146,8 @@ const Header = () => {
             showMenu={showMenu}
             handleToggle={() => handleToggle(setShowMenu)}
             isDark={isDark}
-            Icon={ReorderIcon}
+            Icon={List}
+            styleCs={isDark ? "#000" : "#fff"}
             Class="iconMenuBtn"
           >
             <ul>
@@ -186,11 +185,11 @@ const Header = () => {
             </ul>
 
           </CustomDropdown>
-          <Link to="/cart">
+          <Link to="/cart" type="icon">
             <Icon isDark={isDark}>
               <Badge badgeContent={quantity} color="primary">
-                <ShoppingCartOutlined
-                  style={{ width: "1.5rem", height: "1.5rem" }}
+                <Cart
+                   style={isDark ? "#000" : "#fff"}
                 />
               </Badge>
             </Icon>
