@@ -47,34 +47,34 @@ const Slider = () => {
 
   return (
     <Container>
-      <Swiper
-        className="mySwiper"
-        navigation={true}
-        modules={[Navigation]}
-        grabCursor={true}
-        centeredSlides={true}
-        pagination={{ clickable: true }}
-        scrollbar={{ draggable: true }}
-        loop={true}
-        autoplay={{ delay: 3000, disableOnInteraction: false }}
-      >
         {loadingAfterGetSliders ? (
           <Spinner />
         ) : sliders.length ? (
-          sliders?.map((sliderItem, key) => (
-            <SwiperSlide key={key}>
-              <ImgContainer>
-                <Image loading="lazy" src={sliderItem} />
-              </ImgContainer>
-            </SwiperSlide>
-          ))
+          <Swiper
+            className="mySwiper"
+            navigation={true}
+            modules={[Navigation]}
+            grabCursor={true}
+            centeredSlides={true}
+            pagination={{ clickable: true }}
+            scrollbar={{ draggable: true }}
+            loop={true}
+            autoplay={{ delay: 3000, disableOnInteraction: false }}
+          >
+              {sliders?.map((sliderItem, key) => (
+                          <SwiperSlide key={key}>
+                            <ImgContainer>
+                              <Image loading="lazy" src={sliderItem} />
+                            </ImgContainer>
+                          </SwiperSlide>
+                        ))}
+
+          </Swiper>
         ) : (
           <NoItemFuond isDark={isDark}>
             there is no sliders right now!!
           </NoItemFuond>
         )}
-
-      </Swiper>
     </Container>
   );
 };
