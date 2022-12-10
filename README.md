@@ -102,4 +102,4 @@ order summary that have:
 - shipping discount
 - total
 - clear button and this will clear all of products in cart page
-- checkout button this will be by stripe
+- checkout button this will be by stripe payment

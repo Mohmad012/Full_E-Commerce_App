@@ -27,6 +27,7 @@
     "react-scripts": "4.0.3",
     "react-stripe-checkout": "^2.6.3",
     "redux-persist": "^6.0.0",
+    "react-i18next": "10.5.1",
     "sass": "^1.42.0",
     "swiper": "^6.7.0",
     "styled-components": "^4.1.2",
