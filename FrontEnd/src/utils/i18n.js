@@ -1,8 +1,8 @@
-import i18n from "i18next";
+import i18next from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
 
-i18n
+i18next
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
@@ -10,17 +10,19 @@ i18n
     resources: {
       en: {
         translations: {
-          "asd":"asfsfs"
+          "best_products_key":"the best products",
+          "there_is_no_best_products_right_now_key":"there is no best products right now!!"
         }
       },
       ar: {
         translations: {
-          "ﺲﻴﺒﻴﺳ":"ﻲﺴﺷ"
+          "best_products_key":"ﺕﺎﺠﺘﻨﻤﻟا ﻞﻀﻓﺃ",
+          "there_is_no_best_products_right_now_key":"!!ﺎﻴﻟﺎﺣ ﺕﺎﺠﺘﻨﻣ ﻞﻀﻓا ﺪﺟﻮﻳ ﻻ"
         }
       }
     },
-    fallbackLng: "en",
-    debug: true,
+    fallbackLng: ["ar" , "en"],
+    debug: process.env.NODE_ENV === "development",
 
     // have a common namespace used around the full app
     ns: ["translations"],
@@ -33,4 +35,4 @@ i18n
     }
   });
 
-export default i18n;
+export default i18next;

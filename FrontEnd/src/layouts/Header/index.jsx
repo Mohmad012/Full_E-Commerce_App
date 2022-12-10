@@ -23,6 +23,7 @@ import { changeMode } from "store/modeReducer";
 import Dark from "./Dark";
 import Light from "./Light";
 import CustomDropdown from "./CustomDropdown";
+import { useTranslation } from "react-i18next";
 
 const Header = () => {
   const quantity = useSelector((state) => state.cart.quantity);
@@ -36,6 +37,8 @@ const Header = () => {
 
   const dispatch = useDispatch();
   const history = useHistory()
+
+  const { i18n } = useTranslation();
 
   const handleClose = (e, setOpen) => {
     e.stopPropagation()
@@ -63,6 +66,11 @@ const Header = () => {
     e.stopPropagation()
     setSubMenu((prev) => !prev);
   }
+
+  const changeLanguage = (e, setOpen , lng) => {
+    handleClose(e, setOpen)
+    i18n.changeLanguage(lng);
+  };
 
   return (
     <Container>
@@ -94,11 +102,13 @@ const Header = () => {
           >
             <ul>
               <li
-                onClick={(e) => handleClose(e, setShowLang)}>
+                value={i18n.language}
+                onClick={(e) => changeLanguage(e, setShowLang, "ar")}>
                 AR
               </li>
               <li
-                onClick={(e) => handleClose(e, setShowLang)}>
+                value={i18n.language}
+                onClick={(e) => changeLanguage(e, setShowLang , "en")}>
                 EN
               </li>
 

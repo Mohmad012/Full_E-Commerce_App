@@ -18,7 +18,7 @@ import Product from "components/Products/Product";
 import { useDispatch, useSelector } from "react-redux";
 import { addFav, removeFav } from "store/favReducer";
 import { addProduct, removeProduct } from "store/cartReducer";
-
+import { useTranslation } from "react-i18next";
 
 // install Swiper modules
 SwiperCore.use([EffectCoverflow, Autoplay]);
@@ -37,6 +37,7 @@ const HomeContainer = () => {
   const [categNames, setCategNames] = useState([]);
   const [bestProducts, setBestProducts] = useState([]);
 
+  const { t } = useTranslation();
 
   useEffect(() => {
     const getProducts = async () => {
@@ -96,7 +97,7 @@ const HomeContainer = () => {
     <>
       <Slider />
       <Title isDark={isDark} color="" colorText="" colorInDark="transparent">
-        <h2>best products</h2>
+        <h2>{t("best_products_key")}</h2>
         <span></span>
       </Title>
       <Main>
@@ -140,7 +141,7 @@ const HomeContainer = () => {
           </Swiper>
         ) : (
           <NoItemFuond isDark={isDark}>
-            there is no best products right now!!
+            {t("there_is_no_best_products_right_now_key")}
           </NoItemFuond>
         )}
       </Main>
