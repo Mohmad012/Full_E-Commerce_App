@@ -16,8 +16,8 @@ i18next
       },
       ar: {
         translations: {
-          "best_products_key":"أفضل المنتجات",
-          "there_is_no_best_products_right_now_key":"ﻻ يوجد أفضل منتجات حاليا!!"
+          "best_products_key":"ﺕﺎﺠﺘﻨﻤﻟا ﻞﻀﻓﺃ",
+          "there_is_no_best_products_right_now_key":"!!ﺎﻴﻟﺎﺣ ﺕﺎﺠﺘﻨﻣ ﻞﻀﻓا ﺪﺟﻮﻳ ﻻ"
         }
       }
     },

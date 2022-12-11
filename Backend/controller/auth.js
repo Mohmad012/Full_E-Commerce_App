@@ -34,6 +34,7 @@ const Login = async (req, res) => {
       user.password,
       process.env.PASS_SEC
     );
+
     const OriginalPassword = hashPassword.toString(CryptoJS.enc.Utf8);
 
     if (OriginalPassword !== req.body.password) {
@@ -41,6 +42,7 @@ const Login = async (req, res) => {
     }
 
     const { password, ...others } = user._doc;
+    console.log("user._doc" , user._doc)
     const accessToken = jwt.sign(
       {
         id: user._id,
