@@ -38,7 +38,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const history = useHistory()
 
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const handleClose = (e, setOpen) => {
     e.stopPropagation()
@@ -104,12 +104,12 @@ const Header = () => {
               <li
                 value={i18n.language}
                 onClick={(e) => changeLanguage(e, setShowLang, "ar")}>
-                AR
+                {t("ar_key")}
               </li>
               <li
                 value={i18n.language}
                 onClick={(e) => changeLanguage(e, setShowLang , "en")}>
-                EN
+                {t("en_key")}
               </li>
 
             </ul>
@@ -133,17 +133,17 @@ const Header = () => {
               {user ? (
                 <li
                   onClick={handleLogOut}>
-                  Logout
+                  {t("logout_key")}
                 </li>
               ) : (
                 <>
                   <li
                     onClick={handleSignIn}>
-                    REGISTER
+                    {t("register_key")}
                   </li>
                   <li
                     onClick={handleLogin}>
-                    SIGN IN
+                    {t("sign_in_key")}
                   </li>
                 </>
               )}
@@ -162,36 +162,36 @@ const Header = () => {
           >
             <ul>
               <li onClick={(e) => handleSubMenu(e, setSubAccount)}>
-                Account
+                {t("account_key")}
                 <div style={{ opacity: subAccount ? "1" : "0", zIndex: subAccount ? "13" : "-1" }}>
                   {user ? (
                     <span
                       onClick={handleLogOut}>
-                      Logout
+                      {t("logout_key")}
                     </span>
                   ) : (
                     <>
                       <span
                         onClick={handleSignIn}>
-                        REGISTER
+                        {t("register_key")}
                       </span>
                       <span
                         onClick={handleLogin}>
-                        SIGN IN
+                        {t("sign_in_key")}
                       </span>
                     </>
                   )}
                 </div>
               </li>
               <li onClick={(e) => handleSubMenu(e, setSubLang)}>
-                Language
+                {t("language_key")}
                 <div style={{ opacity: subLang ? "1" : "0", zIndex: subLang ? "13" : "-1" }}>
-                  <span>AR</span>
-                  <span>EN</span>
+                  <span>{t("ar_key")}</span>
+                  <span>{t("en_key")}</span>
                 </div>
               </li>
-              <li onClick={() => history.push("/favorite")}>Favorite</li>
-              <li onClick={() => history.push("/cart")}>Cart</li>
+              <li onClick={() => history.push("/favorite")}>{t("favorite_key")}</li>
+              <li onClick={() => history.push("/cart")}>{t("cart_key")}</li>
             </ul>
 
           </CustomDropdown>

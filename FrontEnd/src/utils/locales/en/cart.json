@@ -1,0 +1,12 @@
+{
+	"your_bag_key":"your bag",
+	"there_is_no_item_in_your_bag_right_now_key":"there is no item in your bag right now!!",
+	"remove_key":"remove",
+	"continue_shopping_key":"CONTINUE SHOPPING",
+	"order_summary_key":"ORDER SUMMARY",
+	"estimated_shipping_key":"Estimated Shipping",
+	"shipping_discount_key":"Shipping Discount",
+	"total_key":"Total",
+	"clear_key":"Clear",
+	"checkout_now_key":"CHECKOUT NOW"
+}

@@ -1,0 +1,12 @@
+{
+	"your_bag_key":"حقيبتك",
+	"there_is_no_item_in_your_bag_right_now_key":"ﻻ يوجد اي عنصر في حقيبتك حاليا",
+	"remove_key":"أمسح",
+	"continue_shopping_key":"أستمرار التسوق",
+    "order_summary_key":"ملخص الطلب",
+    "estimated_shipping_key":"الشحن المقدر",
+    "shipping_discount_key":"خصم الشحن",
+    "total_key":"المجموع",
+	"clear_key":"مسح الكل",
+	"checkout_now_key":"أدفع ألان"
+}

@@ -1,0 +1,11 @@
+{
+	"logout_key":"خروج",
+	"register_key":"تسجيل",
+	"sign_in_key":"دخول",
+	"language_key":"أللغة",
+	"favorite_key":"المفضله",
+	"cart_key":"عربة التسوق",
+	"account_key":"ألحساب",
+	"ar_key":"عربي",
+	"en_key":"أنجليزي"
+}

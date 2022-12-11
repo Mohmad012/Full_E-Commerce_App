@@ -2,6 +2,20 @@ import i18next from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
 
+import translationsEnCart from "./locales/en/cart.json"
+import translationsEnFavorite from "./locales/en/favorite.json"
+import translationsEnHome from "./locales/en/home.json"
+import translationsEnCommon from "./locales/en/common.json"
+import translationsEnLogin from "./locales/en/login.json"
+import translationsEnRegister from "./locales/en/register.json"
+
+import translationsArCart from "./locales/ar/cart.json"
+import translationsArFavorite from "./locales/ar/favorite.json"
+import translationsArHome from "./locales/ar/home.json"
+import translationsArCommon from "./locales/ar/common.json"
+import translationsArLogin from "./locales/ar/login.json"
+import translationsArRegister from "./locales/ar/register.json"
+
 i18next
   .use(LanguageDetector)
   .use(initReactI18next)
@@ -10,14 +24,22 @@ i18next
     resources: {
       en: {
         translations: {
-          "best_products_key":"the best products",
-          "there_is_no_best_products_right_now_key":"there is no best products right now!!"
+          ...translationsEnCart,
+          ...translationsEnFavorite,
+          ...translationsEnHome,
+          ...translationsEnCommon,
+          ...translationsEnLogin,
+          ...translationsEnRegister
         }
       },
       ar: {
         translations: {
-          "best_products_key":"ﺕﺎﺠﺘﻨﻤﻟا ﻞﻀﻓﺃ",
-          "there_is_no_best_products_right_now_key":"!!ﺎﻴﻟﺎﺣ ﺕﺎﺠﺘﻨﻣ ﻞﻀﻓا ﺪﺟﻮﻳ ﻻ"
+          ...translationsArCart,
+          ...translationsArFavorite,
+          ...translationsArHome,
+          ...translationsArCommon,
+          ...translationsArLogin,
+          ...translationsArRegister
         }
       }
     },

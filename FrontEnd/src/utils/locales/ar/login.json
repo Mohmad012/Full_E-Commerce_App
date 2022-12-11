@@ -1,0 +1,11 @@
+{
+	"sign_in_key":"تسجيل الدخول",
+	"username_key":"أسم المستخدم",
+	"password_key":"كلمة ألمرور",
+	"loading_key":"تحميل",
+	"login_key":"تسجيل الدخول",
+	"error_key":"خطأ",
+	"a_username_or_password_is_wrong_key":"أسم المستخدم أو كلمة المرور غير صحيحه",
+	"do_not_you_remember_the_password_key":"هل تتذكر كلمة المرور",
+	"create_a_new_account_key":"انشاء حساب جديد"
+}

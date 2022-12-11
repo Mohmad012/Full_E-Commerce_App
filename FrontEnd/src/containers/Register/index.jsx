@@ -26,6 +26,7 @@ const RegisterContainer = () => {
                 data in accordance with the <br/> <b> PRIVACY POLICY </b>
               </Agreement>
               <Button>CREATER</Button>
+              {/* <Button>SIGN IN</Button> */}
           </Form>
       </Wrapper>
     </Container>

@@ -12,6 +12,7 @@ import {
   LinkItem,
   Button,
 } from "./style";
+import { useTranslation } from "react-i18next";
 
 const LoginContainer = () => {
   const [username, setUsername] = useState("");
@@ -19,6 +20,7 @@ const LoginContainer = () => {
   const dispatch = useDispatch();
   const { isFetching, error } = useSelector((state) => state.user);
   const history = useHistory();
+  const { t } = useTranslation();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -32,26 +34,26 @@ const LoginContainer = () => {
   return (
     <Container>
       <Wrapper>
-        <Title>SIGN IN</Title>
+        <Title>{t("sign_in_key")}</Title>
         <Form>
           <Input
             type="text"
             onChange={(e) => setUsername(e.target.value)}
-            placeholder="username"
+            placeholder={t("username_key")}
           />
           <Input
             type="password"
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="password"
+            placeholder={t("password_key")}
           />
           <Button onClick={handleLogin} disabled={isFetching}>
-            {isFetching ? "Loading..." : "LOGIN"}
+            {isFetching ? t("loading_key") : t("login_key")}
           </Button>
-          {error ? <Error> a Username Or Password Is Wrong!!</Error> : ""}
-          <LinkItem>DO NOT YOU REMEMBER THE PASSWORD?</LinkItem>
+          {t("error_key") ? <Error> {t("a_username_or_password_is_wrong_key")}</Error> : ""}
+          <LinkItem>{t("do_not_you_remember_the_password_key")}</LinkItem>
 
           <LinkItem onClick={() => history.push("/register")}>
-            CREATEANEW ACCOUNT
+            {t("create_a_new_account_key")}
           </LinkItem>
         </Form>
       </Wrapper>

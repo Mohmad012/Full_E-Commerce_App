@@ -1,0 +1,11 @@
+{
+	"logout_key":"Logout",
+	"register_key":"REGISTER",
+	"sign_in_key":"SIGN IN",
+	"language_key":"Language",
+	"favorite_key":"Favorite",
+	"cart_key":"Cart",
+	"account_key":"Account",
+	"ar_key":"AR",
+	"en_key":"EN"
+}

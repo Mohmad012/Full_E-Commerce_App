@@ -1,0 +1,11 @@
+{
+	"sign_in_key":"SIGN IN",
+	"username_key":"username",
+	"password_key":"password",
+	"loading_key":"Loading...",
+	"login_key":"LOGIN",
+	"error_key":"error",
+	"a_username_or_password_is_wrong_key":"a Username Or Password Is Wrong!!",
+	"do_not_you_remember_the_password_key":"DO NOT YOU REMEMBER THE PASSWORD?",
+	"create_a_new_account_key":"CREATEANEW ACCOUNT"
+}

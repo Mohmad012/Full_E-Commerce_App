@@ -15,8 +15,6 @@ import {
   Details,
   ProductName,
   ProductId,
-  ProductColor,
-  ProductSize,
   PriceDetail,
   ProductAmountContainer,
   ProductAmount,
@@ -34,13 +32,14 @@ import { clearFavs, removeFav, updateFav } from "store/favReducer";
 import { addProduct } from "store/cartReducer";
 import { useState } from "react";
 import { decrypt } from "utils/encryptions";
+import { useTranslation } from "react-i18next";
 
 const FavoriteContainer = () => {
   const cart = useSelector((state) => state.cart);
   const fav = useSelector((state) => state.fav);
   const [favs, setFavs] = useState(fav);
+  const { t } = useTranslation();
 
-  // console.log("favs", favs);
   let user = useSelector((state) => state.user.currentUser);
   // user = JSON.parse(decrypt(user));
   const isDark = useSelector((state) => state.mode.isDark);
@@ -57,9 +56,7 @@ const FavoriteContainer = () => {
     dispatch(
       addProduct({
         ...product,
-        quantity: fav.quantity,
-        // color,
-        // size,
+        quantity: fav.quantity
       })
     );
   };
@@ -69,13 +66,13 @@ const FavoriteContainer = () => {
       <Layout>
         <Announcement />
         <Wrapper isDark={isDark}>
-          <Title isDark={isDark}>your favorite items</Title>
+          <Title isDark={isDark}>{t("your_favorite_items_key")}</Title>
           <Top isDark={isDark}>
             <TopButton
               onClick={() => history.push("/")}
               type="TopButton"
               isDark={isDark}>
-              CONTINUE SHOPPING
+              {t("continue_shopping_key")}
             </TopButton>
           </Top>
           <Bottom isDark={isDark}>
@@ -89,21 +86,16 @@ const FavoriteContainer = () => {
                         <Details isDark={isDark}>
                           <ProductName isDark={isDark}>
                             {" "}
-                            <b> Product: </b> {product.title}
+                            <b> Title: </b> {product.title}
                           </ProductName>
                           <ProductId isDark={isDark}>
                             {" "}
                             <b> ID:</b> {product._id}
                           </ProductId>
-                          <ProductColor isDark={isDark} color={product.color} />
-                          <ProductSize isDark={isDark}>
-                            {" "}
-                            <b> Size: </b> {product.size}
-                          </ProductSize>
                           <RemoveBtn
                             isDark={isDark}
                             onClick={() => handleRemoveItems(product._id)}>
-                            remove
+                            {t("remove_key")}
                           </RemoveBtn>
                         </Details>
                       </ProductDetail>
@@ -132,7 +124,7 @@ const FavoriteContainer = () => {
                           addWidth
                           isDark={isDark}
                           onClick={() => handleAddToCard(product)}>
-                          ADD TO CART
+                          {t("add_to_cart_key")}
                         </Button>
                       </PriceDetail>
                     </Product>
@@ -141,7 +133,7 @@ const FavoriteContainer = () => {
                 ))
               ) : (
                 <NoItemFuond isDark={isDark}>
-                  there is no item in your favorite page right now!!
+                  {t("there_is_no_item_in_your_favorite_page_right_now_key")}
                 </NoItemFuond>
               )}
             </Info>

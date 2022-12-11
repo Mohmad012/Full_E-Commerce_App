@@ -43,6 +43,7 @@ import { useEffect } from "react";
 import StripeCheckout from "react-stripe-checkout";
 import { useHistory } from "react-router-dom";
 import { checkoutPayment } from "utils/apis";
+import { useTranslation } from "react-i18next";
 
 const StripeKEY = process.env.REACT_APP_STRIPE_PUBLIC_KEY;
 
@@ -56,6 +57,7 @@ const CartContainer = () => {
   const [StripeToken, setStripeToken] = useState(null);
 
   const history = useHistory();
+  const { t } = useTranslation();
 
   const onToken = (token) => setStripeToken(token);
 
@@ -89,19 +91,15 @@ const CartContainer = () => {
       <Layout isDark={isDark}>
         <Announcement />
         <Wrapper isDark={isDark}>
-          <Title isDark={isDark}>your bag</Title>
+          <Title isDark={isDark}>{t("your_bag_key")}</Title>
           <Top isDark={isDark}>
             <TopButton
               onClick={() => history.push("/")}
               type="TopButton"
               isDark={isDark}>
-              CONTINUE SHOPPING
+              {t("continue_shopping_key")}
             </TopButton>
-            <TopTexts isDark={isDark}>
-              <TopText isDark={isDark}> Shopping Bag (2) </TopText>
-              <TopText isDark={isDark}> Your Wishlist (0) </TopText>
-            </TopTexts>
-            {/* <TopButton type="filled">CHECKOUT NOW</TopButton> */}
+
           </Top>
           <Bottom isDark={isDark}>
             <Info isDark={isDark}>
@@ -114,21 +112,16 @@ const CartContainer = () => {
                         <Details isDark={isDark}>
                           <ProductName isDark={isDark}>
                             {" "}
-                            <b> Product: </b> {product.title}
+                            <b> Title: </b> {product.title}
                           </ProductName>
                           <ProductId isDark={isDark}>
                             {" "}
                             <b> ID:</b> {product._id}
                           </ProductId>
-                          {/* <ProductColor isDark={isDark} color={product.color} /> */}
-                          {/* <ProductSize isDark={isDark}>
-                            {" "}
-                            <b> Size: </b> {product.size}
-                          </ProductSize> */}
                           <RemoveBtn
                             isDark={isDark}
                             onClick={() => handleRemoveItems(product._id)}>
-                            remove
+                            {t("remove_key")}
                           </RemoveBtn>
                         </Details>
                       </ProductDetail>
@@ -159,25 +152,17 @@ const CartContainer = () => {
                 ))
               ) : (
                 <NoItemFuond isDark={isDark}>
-                  there is no item in your bag right now!!
+                  {t("there_is_no_item_in_your_bag_right_now_key")}
                 </NoItemFuond>
               )}
             </Info>
             {Object.values(cart?.products).length ? (
               <Summary isDark={isDark}>
-                <SummaryTitle isDark={isDark}> ORDER SUMMARY </SummaryTitle>
-                <SummaryItem isDark={isDark}>
-                  <SummaryItemText isDark={isDark}> Subtotal </SummaryItemText>
-                  <SummaryItemPrice isDark={isDark}>
-                    {" "}
-                    $ {Number(cart.total).toFixed(2)}{" "}
-                  </SummaryItemPrice>
-                </SummaryItem>
-
+                <SummaryTitle isDark={isDark}>{t("order_summary_key")}</SummaryTitle>
                 <SummaryItem isDark={isDark}>
                   <SummaryItemText isDark={isDark}>
                     {" "}
-                    Estimated Shipping{" "}
+                    {t("estimated_shipping_key")}{" "}
                   </SummaryItemText>
                   <SummaryItemPrice isDark={isDark}> $ 5.90 </SummaryItemPrice>
                 </SummaryItem>
@@ -185,13 +170,13 @@ const CartContainer = () => {
                 <SummaryItem isDark={isDark}>
                   <SummaryItemText isDark={isDark}>
                     {" "}
-                    Shipping Discount{" "}
+                    {t("shipping_discount_key")}{" "}
                   </SummaryItemText>
                   <SummaryItemPrice isDark={isDark}> $ -5.90 </SummaryItemPrice>
                 </SummaryItem>
 
                 <SummaryItem type="total" isDark={isDark}>
-                  <SummaryItemText isDark={isDark}> Total </SummaryItemText>
+                  <SummaryItemText isDark={isDark}> {t("total_key")} </SummaryItemText>
                   <SummaryItemPrice isDark={isDark}>
                     {" "}
                     $ {Number(cart.total).toFixed(2)}{" "}
@@ -202,7 +187,7 @@ const CartContainer = () => {
                     type="all"
                     isDark={isDark}
                     onClick={handleRemoveAllItems}>
-                    Clear
+                    {t("clear_key")}
                   </RemoveBtn>
                 </Clear>
                 {!user ? (
@@ -210,7 +195,7 @@ const CartContainer = () => {
                     pos="cnt"
                     isDark={isDark}
                     onClick={() => history.push("/login")}>
-                    CHECKOUT NOW
+                    {t("checkout_now_key")}
                   </SummaryButton>
                 ) : (
                   <StripeCheckout
@@ -223,7 +208,7 @@ const CartContainer = () => {
                     token={onToken}
                     stripeKey={StripeKEY}>
                     <SummaryButton pos="cnt" isDark={isDark}>
-                      CHECKOUT NOW
+                      {t("checkout_now_key")}
                     </SummaryButton>
                   </StripeCheckout>
                 )}
