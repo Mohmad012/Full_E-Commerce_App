@@ -1,5 +1,5 @@
 import axios from "axios";
-import { loginFailure, loginStart, loginSuccess } from "store/userReducer";
+// import { loginFailure, loginStart, loginSuccess } from "store/userReducer";
 
 const BASE_URL = `${process.env.REACT_APP_BACKEND_URL}/api`;
 //   user?.accessToken;
@@ -66,18 +66,15 @@ export const findAllProductsByCategories = async (categ) => {
     return res
 }
 
-export const login = async (dispatch, user) => {
-    dispatch(loginStart());
-  
+export const login = async (user) => {  
+    let res;
     try {
-      const res = await publicRequest.post("/auth/login", user);
-      if (res.status === 200) {
-        dispatch(loginSuccess(res.data));
-      }
+      res = await publicRequest.post("/auth/login", user);
     } catch (err) {
-      console.log("Error: ", err);
-      dispatch(loginFailure());
+      console.log(err);
     }
+
+    return res
 };
 
 export const checkoutPayment = async (data) => {

@@ -42,7 +42,7 @@ const Login = async (req, res) => {
     }
 
     const { password, ...others } = user._doc;
-    console.log("user._doc" , user._doc)
+    // console.log("user._doc" , user._doc)
     const accessToken = jwt.sign(
       {
         id: user._id,

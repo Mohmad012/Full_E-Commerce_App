@@ -13,6 +13,7 @@ import {
   Button,
 } from "./style";
 import { useTranslation } from "react-i18next";
+import { loginFailure, loginStart, loginSuccess } from "store/userReducer";
 
 const LoginContainer = () => {
   const [username, setUsername] = useState("");
@@ -22,14 +23,26 @@ const LoginContainer = () => {
   const history = useHistory();
   const { t } = useTranslation();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    login(dispatch, {
+
+    dispatch(loginStart());
+    const user = {
       username,
       password,
-    });
-    !isFetching && !error && history.goBack();
+    }
+    try {
+      const res = await login(user);
+      if (res.status === 200) {
+        dispatch(loginSuccess(res.data));
+        history.goBack();
+      }
+    } catch (err) {
+      console.log("Error: ", err);
+      dispatch(loginFailure());
+    }
   };
+
 
   return (
     <Container>
@@ -49,7 +62,7 @@ const LoginContainer = () => {
           <Button onClick={handleLogin} disabled={isFetching}>
             {isFetching ? t("loading_key") : t("login_key")}
           </Button>
-          {t("error_key") ? <Error> {t("a_username_or_password_is_wrong_key")}</Error> : ""}
+          {error ? <Error> {t("a_username_or_password_is_wrong_key")}</Error> : ""}
           <LinkItem>{t("do_not_you_remember_the_password_key")}</LinkItem>
 
           <LinkItem onClick={() => history.push("/register")}>
