@@ -1,1 +1,13 @@
-{}
+{
+    "create_an_account_key":"أنشاء حساب",
+	"loading_key":"تحميل",
+	"error_key":"خطأ",
+	"name_key":"الاسم",
+	"last_name_key":"الاسم الاخير",
+	"username_key":"اسم المستخدم",
+	"password_key":"كلمة ألمرور",
+	"email_key":"البريد الاكتروني",
+	"confirm_password_key":"تأكيد كلمة المرور",
+	"create_key":"أنشاء",
+    "sign_in_key":"تسجيل الدخول"
+}

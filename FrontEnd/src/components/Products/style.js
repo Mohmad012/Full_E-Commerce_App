@@ -13,20 +13,6 @@ export const NoItemFuond = styled.p`
   color: ${(props) => (props.isDark === true ? "gray" : "#000")};
 `;
 
-export const More = styled.button`
-
-  margin: 1rem auto;
-  display: block;
-  width: 5rem;
-  padding: 0.5rem 0.1rem;
-  cursor: pointer;
-  a{
-    text-decoration: none;
-    color: #f50057;
-  }
-
-`;
-
 export const Title = styled.div`
   background-color: ${(props) =>
     props.isDark === true ? props.colorInDark : props.color};

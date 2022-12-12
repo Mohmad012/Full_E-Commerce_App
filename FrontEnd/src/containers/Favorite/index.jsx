@@ -28,20 +28,14 @@ import {
 import { Add, Remove } from "@material-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { clearFavs, removeFav, updateFav } from "store/favReducer";
+import { removeFav, updateFav } from "store/favReducer";
 import { addProduct } from "store/cartReducer";
-import { useState } from "react";
-import { decrypt } from "utils/encryptions";
 import { useTranslation } from "react-i18next";
 
 const FavoriteContainer = () => {
-  const cart = useSelector((state) => state.cart);
   const fav = useSelector((state) => state.fav);
-  const [favs, setFavs] = useState(fav);
   const { t } = useTranslation();
 
-  let user = useSelector((state) => state.user.currentUser);
-  // user = JSON.parse(decrypt(user));
   const isDark = useSelector((state) => state.mode.isDark);
 
   const dispatch = useDispatch();
@@ -49,7 +43,6 @@ const FavoriteContainer = () => {
   const history = useHistory();
 
   const handleQuantity = (_id, type) => dispatch(updateFav({ _id, type }));
-  const handleRemoveAllItems = () => dispatch(clearFavs());
   const handleRemoveItems = (id) => dispatch(removeFav(id));
 
   const handleAddToCard = (product) => {

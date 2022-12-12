@@ -7,8 +7,6 @@ import {
   Wrapper,
   Title,
   Top,
-  TopTexts,
-  TopText,
   TopButton,
   Bottom,
   Info,
@@ -19,8 +17,6 @@ import {
   Details,
   ProductName,
   ProductId,
-  ProductColor,
-  ProductSize,
   PriceDetail,
   ProductAmountContainer,
   ProductAmount,
@@ -80,7 +76,7 @@ const CartContainer = () => {
     };
 
     StripeToken && cart.total >= 1 && makeCheckout();
-  }, [StripeToken, cart.total, history]);
+  }, [StripeToken, cart.total, history , dispatch]);
 
   const handleQuantity = (_id, type) => dispatch(updateProduct({ _id, type }));
   const handleRemoveAllItems = () => dispatch(clearProducts());

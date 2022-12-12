@@ -6,8 +6,9 @@ const color3 = "#554d73";
 
 export const Loader = styled.div`
     width: 150px;
-    height: 150px;
-    margin: 10% auto;
+    height: 100vh;
+    margin: 0 auto;
+    padding-top: 50%;
 
     svg {
         width: 90%;

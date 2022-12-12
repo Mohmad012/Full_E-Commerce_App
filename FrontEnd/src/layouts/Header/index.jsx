@@ -25,7 +25,7 @@ import Light from "./Light";
 import CustomDropdown from "./CustomDropdown";
 import { useTranslation } from "react-i18next";
 
-const Header = () => {
+const Header = ({addLogoOnly= false}) => {
   const quantity = useSelector((state) => state.cart.quantity);
   let user = useSelector((state) => state.user.currentUser);
   const isDark = useSelector((state) => state.mode.isDark);
@@ -80,133 +80,135 @@ const Header = () => {
             <Logo isDark={isDark}>Buy&amp;Sale</Logo>
           </Link>
         </Left>
-        <Right>
-          {!isDark ?
-            <Dark
-              dispatch={dispatch}
-              changeMode={changeMode}
-            />
-            :
-            <Light
-              dispatch={dispatch}
-              changeMode={changeMode}
-            />
-          }
+        {!addLogoOnly &&
+          <Right>
+            {!isDark ?
+              <Dark
+                dispatch={dispatch}
+                changeMode={changeMode}
+              />
+              :
+              <Light
+                dispatch={dispatch}
+                changeMode={changeMode}
+              />
+            }
 
-          <CustomDropdown
-            showMenu={showLang}
-            handleToggle={() => handleToggle(setShowLang)}
-            isDark={isDark}
-            Icon={Langs}
-            styleCs={isDark ? "#000" : "#fff"}
-          >
-            <ul>
-              <li
-                value={i18n.language}
-                onClick={(e) => changeLanguage(e, setShowLang, "ar")}>
-                {t("ar_key")}
-              </li>
-              <li
-                value={i18n.language}
-                onClick={(e) => changeLanguage(e, setShowLang , "en")}>
-                {t("en_key")}
-              </li>
-
-            </ul>
-
-          </CustomDropdown>
-
-          <Link to="/favorite">
-            <Icon isDark={isDark} type="icon">
-              <Favorite style={isDark ? "#000" : "#fff"} />
-            </Icon>
-          </Link>
-
-          <CustomDropdown
-            showMenu={showAccountState}
-            handleToggle={() => handleToggle(setShowAccountState)}
-            isDark={isDark}
-            Icon={Account}
-            styleCs={isDark ? "#000" : "#fff"}
-          >
-            <ul>
-              {user ? (
+            <CustomDropdown
+              showMenu={showLang}
+              handleToggle={() => handleToggle(setShowLang)}
+              isDark={isDark}
+              Icon={Langs}
+              styleCs={isDark ? "#000" : "#fff"}
+            >
+              <ul>
                 <li
-                  onClick={handleLogOut}>
-                  {t("logout_key")}
+                  value={i18n.language}
+                  onClick={(e) => changeLanguage(e, setShowLang, "ar")}>
+                  {t("ar_key")}
                 </li>
-              ) : (
-                <>
+                <li
+                  value={i18n.language}
+                  onClick={(e) => changeLanguage(e, setShowLang , "en")}>
+                  {t("en_key")}
+                </li>
+
+              </ul>
+
+            </CustomDropdown>
+
+            <Link to="/favorite">
+              <Icon isDark={isDark} type="icon">
+                <Favorite style={isDark ? "#000" : "#fff"} />
+              </Icon>
+            </Link>
+
+            <CustomDropdown
+              showMenu={showAccountState}
+              handleToggle={() => handleToggle(setShowAccountState)}
+              isDark={isDark}
+              Icon={Account}
+              styleCs={isDark ? "#000" : "#fff"}
+            >
+              <ul>
+                {user ? (
                   <li
-                    onClick={handleSignIn}>
-                    {t("register_key")}
+                    onClick={handleLogOut}>
+                    {t("logout_key")}
                   </li>
-                  <li
-                    onClick={handleLogin}>
-                    {t("sign_in_key")}
-                  </li>
-                </>
-              )}
+                ) : (
+                  <>
+                    <li
+                      onClick={handleSignIn}>
+                      {t("register_key")}
+                    </li>
+                    <li
+                      onClick={handleLogin}>
+                      {t("sign_in_key")}
+                    </li>
+                  </>
+                )}
 
-            </ul>
+              </ul>
 
-          </CustomDropdown>
+            </CustomDropdown>
 
-          <CustomDropdown
-            showMenu={showMenu}
-            handleToggle={() => handleToggle(setShowMenu)}
-            isDark={isDark}
-            Icon={List}
-            styleCs={isDark ? "#000" : "#fff"}
-            Class="iconMenuBtn"
-          >
-            <ul>
-              <li onClick={(e) => handleSubMenu(e, setSubAccount)}>
-                {t("account_key")}
-                <div style={{ opacity: subAccount ? "1" : "0", zIndex: subAccount ? "13" : "-1" }}>
-                  {user ? (
-                    <span
-                      onClick={handleLogOut}>
-                      {t("logout_key")}
-                    </span>
-                  ) : (
-                    <>
+            <CustomDropdown
+              showMenu={showMenu}
+              handleToggle={() => handleToggle(setShowMenu)}
+              isDark={isDark}
+              Icon={List}
+              styleCs={isDark ? "#000" : "#fff"}
+              Class="iconMenuBtn"
+            >
+              <ul>
+                <li onClick={(e) => handleSubMenu(e, setSubAccount)}>
+                  {t("account_key")}
+                  <div style={{ opacity: subAccount ? "1" : "0", zIndex: subAccount ? "13" : "-1" }}>
+                    {user ? (
                       <span
-                        onClick={handleSignIn}>
-                        {t("register_key")}
+                        onClick={handleLogOut}>
+                        {t("logout_key")}
                       </span>
-                      <span
-                        onClick={handleLogin}>
-                        {t("sign_in_key")}
-                      </span>
-                    </>
-                  )}
-                </div>
-              </li>
-              <li onClick={(e) => handleSubMenu(e, setSubLang)}>
-                {t("language_key")}
-                <div style={{ opacity: subLang ? "1" : "0", zIndex: subLang ? "13" : "-1" }}>
-                  <span>{t("ar_key")}</span>
-                  <span>{t("en_key")}</span>
-                </div>
-              </li>
-              <li onClick={() => history.push("/favorite")}>{t("favorite_key")}</li>
-              <li onClick={() => history.push("/cart")}>{t("cart_key")}</li>
-            </ul>
+                    ) : (
+                      <>
+                        <span
+                          onClick={handleSignIn}>
+                          {t("register_key")}
+                        </span>
+                        <span
+                          onClick={handleLogin}>
+                          {t("sign_in_key")}
+                        </span>
+                      </>
+                    )}
+                  </div>
+                </li>
+                <li onClick={(e) => handleSubMenu(e, setSubLang)}>
+                  {t("language_key")}
+                  <div style={{ opacity: subLang ? "1" : "0", zIndex: subLang ? "13" : "-1" }}>
+                    <span>{t("ar_key")}</span>
+                    <span>{t("en_key")}</span>
+                  </div>
+                </li>
+                <li onClick={() => history.push("/favorite")}>{t("favorite_key")}</li>
+                <li onClick={() => history.push("/cart")}>{t("cart_key")}</li>
+              </ul>
 
-          </CustomDropdown>
-          <Link to="/cart" type="icon">
-            <Icon isDark={isDark}>
-              <Badge badgeContent={quantity} color="primary">
-                <Cart
-                   style={isDark ? "#000" : "#fff"}
-                />
-              </Badge>
-            </Icon>
-          </Link>
-        </Right>
+            </CustomDropdown>
+            <Link to="/cart" type="icon">
+              <Icon isDark={isDark}>
+                <Badge badgeContent={quantity} color="primary">
+                  <Cart
+                     style={isDark ? "#000" : "#fff"}
+                  />
+                </Badge>
+              </Icon>
+            </Link>
+          </Right>
+        }
       </Wrapper>
-    </Container >
+    </Container>
   );
 };
 

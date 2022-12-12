@@ -1,5 +1,12 @@
-import CartContainer from "containers/Cart";
+import {lazy , Suspense} from "react"
 
-const Cart = () => <CartContainer />;
+import Spinner from "components/Spinner";
+const CartContainer = lazy(() => import('containers/Cart'));
+
+const Cart = () => (
+	<Suspense fallback={<Spinner />}>
+		<CartContainer />
+	</Suspense>
+)
 
 export default Cart;

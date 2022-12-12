@@ -4,17 +4,17 @@ import { loginFailure, loginStart, loginSuccess } from "store/userReducer";
 const BASE_URL = `${process.env.REACT_APP_BACKEND_URL}/api`;
 //   user?.accessToken;
 
-const TOKEN =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMjhiMjcyNGMwZGQ0YTFkZWFhNTlmYyIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NjM2MTE1NTcsImV4cCI6MTY2Mzg3MDc1N30.9uQnmMt7Sae-qtmdA18PxuaUCQKh25CKniQjaiqjV5k";
+// const TOKEN =
+//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMjhiMjcyNGMwZGQ0YTFkZWFhNTlmYyIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NjM2MTE1NTcsImV4cCI6MTY2Mzg3MDc1N30.9uQnmMt7Sae-qtmdA18PxuaUCQKh25CKniQjaiqjV5k";
 
 const publicRequest = axios.create({
   baseURL: BASE_URL,
 });
 
-const userRequest = axios.create({
-  baseURL: BASE_URL,
-  header: { token: `Bearer ${TOKEN}` },
-});
+// const userRequest = axios.create({
+//   baseURL: BASE_URL,
+//   header: { token: `Bearer ${TOKEN}` },
+// });
 
 export const findSliders = async () => {
     let res;

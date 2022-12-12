@@ -4,29 +4,34 @@ import {
   Title,
   Form,
   Input,
-  Agreement,
-  Button
+  Create,
+  SignIn,
+  ActionBox
 } from "./style";
 
+import { useTranslation } from "react-i18next";
+import {  useHistory } from "react-router-dom";
+
 const RegisterContainer = () => {
+
+  const { t } = useTranslation();
+  const history = useHistory();
 
   return (
     <Container>
       <Wrapper>
-          <Title>CREATE AN ACCOUNT</Title>
+          <Title>{t("create_an_account_key")}</Title>
           <Form>
-              <Input placeholder="name"/>
-              <Input placeholder="last name"/>
-              <Input placeholder="username"/>
-              <Input placeholder="email"/>
-              <Input placeholder="password"/>
-              <Input placeholder="confirm password" />
-              <Agreement>
-                By creating an account,Iconsent to the processing of my personal
-                data in accordance with the <br/> <b> PRIVACY POLICY </b>
-              </Agreement>
-              <Button>CREATER</Button>
-              {/* <Button>SIGN IN</Button> */}
+              <Input placeholder={t("name_key")}/>
+              <Input placeholder={t("last_name_key")}/>
+              <Input placeholder={t("username_key")}/>
+              <Input placeholder={t("email_key")}/>
+              <Input placeholder={t("password_key")}/>
+              <Input placeholder={t("confirm_password_key")} />
+              <ActionBox>
+                <Create>{t("create_key")}</Create>
+                <SignIn onClick={() => history.push("/login")}>{t("sign_in_key")}</SignIn>
+              </ActionBox>
           </Form>
       </Wrapper>
     </Container>

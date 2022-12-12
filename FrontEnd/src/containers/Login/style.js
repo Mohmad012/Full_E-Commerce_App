@@ -4,6 +4,7 @@ import { mobile, tablet } from "../../utils/responsive";
 export const Container = styled.div`
   width: 100vw;
   height: 100vh;
+  position: fixed;
   background: linear-gradient(
       rgba(255, 255, 255, 0.5),
       rgba(255, 255, 255, 0.5)

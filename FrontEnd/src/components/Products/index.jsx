@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Product from "./Product";
-import { Container, NoItemFuond, Title, More } from "./style";
+import { Container, NoItemFuond, Title } from "./style";
 // import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addFav, removeFav } from "store/favReducer";
@@ -59,7 +59,7 @@ const Products = ({ categ, args, fetchProducts, sortProds, index, addAll = false
       }
     };
     getProducts();
-  }, []);
+  }, [args , fetchProducts]);
 
   useEffect(() => {
     if (
@@ -141,19 +141,6 @@ const Products = ({ categ, args, fetchProducts, sortProds, index, addAll = false
         )}
 
       </Container>
-
-      {/* {!products?.length ? (
-        !loading ? (
-          ""
-        ) : (
-          ""
-        )
-      ) : (
-
-        <>
-          {!addAll && <More onClick={() => history.push(`/productsForCategory/${categ}`)}>More</More>}
-        </>
-      )} */}
     </>
   );
 };

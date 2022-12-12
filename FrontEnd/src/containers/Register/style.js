@@ -4,6 +4,7 @@ import { mobile , tablet } from '../../utils/responsive';
 export const Container = styled.div`
   width:100vw;
   height:100vh;
+  position: fixed;
   background: linear-gradient(
       rgba(255,255,255,0.5),
       rgba(255,255,255,0.5)
@@ -27,14 +28,10 @@ export const Form = styled.form`
   display:flex;
   flex-wrap:wrap;
 `
-
-
 export const Title = styled.h1`
   font-size:24px;
   font-weight:300;
 `
-
-
 export const Input = styled.input`
   flex:1;
   min-width:40%;
@@ -42,20 +39,28 @@ export const Input = styled.input`
   padding:10px;
   border: 1px solid black;
 `
-
-
-export const Agreement = styled.span`
-  font-size:12px;
-  margin:20px 0px;
-`
-
-
-export const Button = styled.button`
+export const Create = styled.button`
   width:40%;
   border:none;
   padding:15px 20px;
   background-color:#a88990;
   color:white;
   cursor:pointer;
+  margin-top: 1rem;
+  margin-right: 1rem;
 `
 
+export const SignIn = styled.button`
+  width:40%;
+  border:none;
+  padding:15px 20px;
+  background-color:#a88990;
+  color:white;
+  cursor:pointer;
+  margin-top: 1rem;
+`
+export const ActionBox = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`

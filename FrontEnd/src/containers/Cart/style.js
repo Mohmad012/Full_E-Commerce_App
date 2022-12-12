@@ -33,16 +33,7 @@ const Top = styled.div`
   ${mobile({ flexDirection: "column", gap: "0.5rem" })};
   ${tablet({ flexDirection: "column", gap: "1.5rem" })};
 `;
-const TopTexts = styled.div`
-  ${mobile({ display: "none" })};
-`;
-const TopText = styled.span`
-  text-decoration: none;
-  cursor: pointer;
-  margin: 0px 10px;
-  ${commonTransition()}
-  ${commonColor((props) => props)}
-`;
+
 const TopButton = styled.button`
   padding: 10px;
   font-weight: 600;
@@ -135,17 +126,7 @@ const ProductId = styled.span`
   ${mobile({ marginBottom: "1rem" })};
   ${smMobile({ marginBottom: "1rem"})};
 `;
-const ProductColor = styled.div`
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: ${(props) => props.color};
-`;
-const ProductSize = styled.span`
-  ${commonTransition()}
-  ${commonColor((props) => props)}
-  ${smMobile({ fontSize: "12px" })};
-`;
+
 const PriceDetail = styled.div`
   flex: 1;
   ${commonDisplay()}
@@ -216,8 +197,6 @@ export {
   Wrapper,
   Title,
   Top,
-  TopTexts,
-  TopText,
   TopButton,
   Bottom,
   Info,
@@ -230,8 +209,6 @@ export {
   Clear,
   ProductName,
   ProductId,
-  ProductColor,
-  ProductSize,
   PriceDetail,
   ProductAmountContainer,
   ProductAmount,

@@ -1,5 +1,12 @@
-import ProductListContainer from "containers/ProductList";
+import {lazy , Suspense} from "react"
 
-const ProductList = () => <ProductListContainer />;
+import Spinner from "components/Spinner";
+const ProductListContainer = lazy(() => import('containers/ProductList'));
+
+const ProductList = () => (
+	<Suspense fallback={<Spinner />}>
+		<ProductListContainer />
+	</Suspense>
+)
 
 export default ProductList;
