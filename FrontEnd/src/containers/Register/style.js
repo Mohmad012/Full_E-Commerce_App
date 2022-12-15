@@ -22,7 +22,10 @@ export const Wrapper = styled.div`
   ${mobile({ width: "75%" })};
   ${tablet({ width: "75%" })};
 `
-
+export const Error = styled.div`
+  color: red;
+  width:100%;
+`;
 
 export const Form = styled.form`
   display:flex;

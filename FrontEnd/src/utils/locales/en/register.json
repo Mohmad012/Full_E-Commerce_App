@@ -15,5 +15,7 @@
 	"email_key":"email",
 	"password_key":"password",
 	"confirm_password_key":"confirm password",
-	"create_key":"CREATE"
+	"create_key":"CREATE",
+	"password_is_not_equal_confirm_Password_key":"password is not equal confirm Password",
+	"Opss_You_Can_Not_Register_With_This_Username_Or_Email_It_Is_Taken_key":"Opss, You Can Not Register With This Username Or Email It Is Taken !!"
 }

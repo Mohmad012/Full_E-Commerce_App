@@ -49,9 +49,9 @@ router.post("/checkout/payment", StripePayment);
 
 // Users
 router.put("/users/:id" , verifyTokenAndAuthorization , UpdateUser)
-router.delete("/users/:id" , verifyTokenAndAuthorization , DeleteUser)
+router.delete("/users/:id"  , DeleteUser) //verifyTokenAndAuthorization
 router.get("/users/find/:id" , verifyTokenAndAdmin , GetUser)
-router.get("/users/" , verifyTokenAndAdmin , GetAllUsers)
+router.get("/users/" , GetAllUsers) // verifyTokenAndAdmin
 router.get("/users/stats" , verifyTokenAndAdmin , GetStatsOfUser)
 
 

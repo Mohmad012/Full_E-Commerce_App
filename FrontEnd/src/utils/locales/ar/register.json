@@ -9,5 +9,7 @@
 	"email_key":"البريد الاكتروني",
 	"confirm_password_key":"تأكيد كلمة المرور",
 	"create_key":"أنشاء",
-    "sign_in_key":"تسجيل الدخول"
+    "sign_in_key":"تسجيل الدخول",
+	"password_is_not_equal_confirm_Password_key":"كلمة المرور لا تساوي تأكيد كلمة المرور",
+	"Opss_You_Can_Not_Register_With_This_Username_Or_Email_It_Is_Taken_key":"للأ سف ﻻ يمكنك التسجيل بهذا البريد الالكتروني أو أسم المستخدم لانه مأخوذ بالفعل"
 }

@@ -25,7 +25,7 @@ const LoginContainer = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
+    e.persist()
     dispatch(loginStart());
     const user = {
       username,
@@ -35,7 +35,7 @@ const LoginContainer = () => {
       const res = await login(user);
       if (res.status === 200) {
         dispatch(loginSuccess(res.data));
-        history.goBack();
+        history.location.state === undefined ? history.goBack() : history.push("/");
       }
     } catch (err) {
       console.log("Error: ", err);

@@ -71,7 +71,18 @@ export const login = async (user) => {
     try {
       res = await publicRequest.post("/auth/login", user);
     } catch (err) {
-      console.log(err);
+        res = err
+    }
+
+    return res
+};
+
+export const register = async (user) => {  
+    let res;
+    try {
+      res = await publicRequest.post("/auth/register", user)
+    } catch (err) {
+        res = err
     }
 
     return res
