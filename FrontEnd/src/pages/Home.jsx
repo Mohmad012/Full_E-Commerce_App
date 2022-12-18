@@ -1,19 +1,16 @@
-import {lazy , Suspense} from "react"
-import Spinner from "components/Spinner";
-
-const Layout = lazy(() => import('layouts'));
-const HomeContainer = lazy(() => import('containers/Home'));
-const Announcement = lazy(() => import('components/Announcement'));
+import Layout from "layouts" 
+import HomeContainer from "containers/Home" 
+import Announcement from "components/Announcement"
 
 const Home = () => {
 
   return (
-    <Suspense fallback={<Spinner />}>
+    <>
       <Announcement />
       <Layout>
         <HomeContainer />
       </Layout>
-    </Suspense>
+    </>
   );
 };
 
