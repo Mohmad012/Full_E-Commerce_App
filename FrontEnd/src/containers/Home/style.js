@@ -30,6 +30,12 @@ export const Main = styled.main`
 `;
 
 export const Title = styled.div`
+  box-shadow: ${(props) =>
+    props.type === "best" ? " 0 -3rem 3.25rem white" : "none"};
+  position: ${(props) =>
+    props.type === "best" ? "relative" : "static"};
+  z-index: 1;
+  
   background-color: ${(props) =>
     props.isDark === true ? props.colorInDark : props.color};
   padding: 10px 20px 0;

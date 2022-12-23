@@ -4,7 +4,7 @@ const StripePayment = async (req, res) => {
     const charge = await stripe.charges.create({
       source: req.body.tokenId,
       amount: req.body.amount,
-      currency: "usd",
+      currency: req.body.currency,
     });
     res.status(200).json(charge);
   } catch (err) {

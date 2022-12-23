@@ -3,6 +3,7 @@ import cartReducer from "./cartReducer";
 import favReducer from "./favReducer";
 import userReducer from "./userReducer";
 import modeReducer from "./modeReducer";
+import productsInfoSlice from "./productsInfoSlice";
 
 import {
   persistStore,
@@ -39,6 +40,7 @@ const rootReducer = combineReducers({
   cart: cartPersistedReducer,
   fav: favPersistedReducer,
   mode: modePersistedReducer,
+  allProductsInfo: productsInfoSlice,
 });
 
 export const store = configureStore({

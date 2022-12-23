@@ -3,7 +3,7 @@ import Slider from "./Slider";
 import Products from "components/Products";
 import { Main, Title, NoItemFuond } from "./style";
 import Spinner from "components/Spinner";
-
+import { addProducts } from "store/productsInfoSlice";
 
 import SwiperCore, { EffectCoverflow, Autoplay } from 'swiper';
 
@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addFav, removeFav } from "store/favReducer";
 import { addProduct, removeProduct } from "store/cartReducer";
 import { useTranslation } from "react-i18next";
+import { addCategories, addBestProducts } from "store/productsInfoSlice";
 
 // install Swiper modules
 SwiperCore.use([EffectCoverflow, Autoplay]);
@@ -30,6 +31,7 @@ const HomeContainer = () => {
   const isDark = useSelector((state) => state.mode.isDark);
   const FavProd = useSelector((state) => state.fav.inFavProds);
   const cart = useSelector((state) => state.cart.products);
+  const {Categories , BestProducts} = useSelector((state) => state.allProductsInfo);
   const dispatch = useDispatch();
 
   const [loadingAfterGetProducts, setLoadingAfterGetProducts] = useState(false);
@@ -41,31 +43,41 @@ const HomeContainer = () => {
 
   useEffect(() => {
     const getProducts = async () => {
-      setLoadingAfterGetProducts(true);
-      try {
-        const res = await findCategories()
-        if (res.status === 200) {
-          setCategNames(res.data);
+      if(!Categories.length){      
+        setLoadingAfterGetProducts(true);
+        try {
+          const res = await findCategories()
+          if (res.status === 200) {
+            setCategNames(res.data);
+            dispatch(addCategories(res.data))
+            setLoadingAfterGetProducts(false);
+          }
+        } catch (err) {
           setLoadingAfterGetProducts(false);
+          console.log(err);
         }
-      } catch (err) {
-        setLoadingAfterGetProducts(false);
-        console.log(err);
+      }else{
+        setCategNames(Categories)
       }
     };
 
     const getBestProducts = async () => {
-      setLoadingAfterGetBestProducts(true);
-      try {
-        const res = await findBestProducts()
-        console.log("res", res)
-        if (res.status === 200) {
-          setBestProducts(res.data);
+      if(!BestProducts.length){
+        setLoadingAfterGetBestProducts(true);
+        try {
+          const res = await findBestProducts()
+          console.log("res", res)
+          if (res.status === 200) {
+            setBestProducts(res.data);
+            dispatch(addBestProducts(res.data))
+            setLoadingAfterGetBestProducts(false);
+          }
+        } catch (err) {
           setLoadingAfterGetBestProducts(false);
+          console.log(err);
         }
-      } catch (err) {
-        setLoadingAfterGetBestProducts(false);
-        console.log(err);
+      }else{
+        setBestProducts(BestProducts)
       }
     };
 
@@ -93,10 +105,14 @@ const HomeContainer = () => {
     }
   };
 
+  const allProductsBycateg = () => {
+    return !loadingAfterGetProducts ? categNames?.map((item, key) => <Products key={key} index={key} categ={item} args={[item]} fetchProducts={findAllProductsByCategories} />) : <Spinner />
+  }
+
   return (
     <>
       <Slider />
-      <Title isDark={isDark} color="" colorText="" colorInDark="transparent">
+      <Title isDark={isDark} color="" colorText="" type="best" colorInDark="transparent">
         <h2>{t("best_products_key")}</h2>
         <span></span>
       </Title>
@@ -146,7 +162,7 @@ const HomeContainer = () => {
         )}
       </Main>
 
-      {!loadingAfterGetProducts ? categNames?.map((item, key) => <Products key={key} index={key} categ={item} args={[item]} fetchProducts={findAllProductsByCategories} />) : <Spinner />}
+      {allProductsBycateg()}
     </>
   );
 };

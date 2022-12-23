@@ -15,8 +15,9 @@ import 'swiper/swiper.scss';
 import 'swiper/components/navigation/navigation.scss';
 import { useEffect, useState } from "react";
 import { findSliders } from "utils/apis";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Spinner from "components/Spinner";
+import { addSliders } from "store/productsInfoSlice";
 
 // install Swiper modules
 SwiperCore.use([Navigation]);
@@ -25,20 +26,29 @@ const Slider = () => {
 
   const [sliders, setSliders] = useState([]);
   const [loadingAfterGetSliders, setLoadingAfterGetSliders] = useState(false);
+  
   const isDark = useSelector((state) => state.mode.isDark);
+  const allSliders = useSelector((state) => state.allProductsInfo.sliders);
+  const dispatch = useDispatch();
+  
 
   useEffect(() => {
     const getSliders = async () => {
-      setLoadingAfterGetSliders(true);
-      try {
-        const res = await findSliders()
-        if (res.status === 200) {
-          setSliders(res.data);
+      if(allSliders?.length){
+        setSliders(allSliders)
+      }else{
+        setLoadingAfterGetSliders(true);
+        try {
+          const res = await findSliders()
+          if (res.status === 200) {
+            setSliders(res.data);
+            dispatch(addSliders(res.data))
+            setLoadingAfterGetSliders(false);
+          }
+        } catch (err) {
           setLoadingAfterGetSliders(false);
+          console.log(err);
         }
-      } catch (err) {
-        setLoadingAfterGetSliders(false);
-        console.log(err);
       }
     };
 

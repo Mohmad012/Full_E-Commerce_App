@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Layout from "layouts";
 import Announcement from "components/Announcement";
 
@@ -35,7 +34,6 @@ import {
 import { Add, Remove } from "@material-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { updateProduct, clearProducts, removeProduct } from "store/cartReducer";
-import { useEffect } from "react";
 import StripeCheckout from "react-stripe-checkout";
 import { useHistory } from "react-router-dom";
 import { checkoutPayment } from "utils/apis";
@@ -50,33 +48,35 @@ const CartContainer = () => {
 
   const dispatch = useDispatch();
 
-  const [StripeToken, setStripeToken] = useState(null);
-
   const history = useHistory();
   const { t } = useTranslation();
 
-  const onToken = (token) => setStripeToken(token);
-
-  useEffect(() => {
-    const makeCheckout = async () => {
-      try {
-        const res = await checkoutPayment(
-          {
-            tokenId: StripeToken.id,
-            amount: cart.total * 100,
-          }
-        )
-        if (res.status === 200) {
-          dispatch(clearProducts());
-          history.push("/success", { data: res.data });
+  const makeCheckout = async (token) => {
+    try {
+      const res = await checkoutPayment(
+        {
+          tokenId: token?.id,
+          amount: cart.total * 100,
+          currency: "usd"
         }
-      } catch (e) {
-        console.log("Error: ", e);
+      )
+      if (res.status === 200) {
+        dispatch(clearProducts());
+        history.push("/success", { data: res.data });
       }
-    };
+    } catch (e) {
+      console.log("Error: ", e);
+    }
+  };
 
-    StripeToken && cart.total >= 1 && makeCheckout();
-  }, [StripeToken, cart.total, history , dispatch]);
+
+  const onToken = (token) => {
+    if(Object.keys(token)?.length){
+      Object.keys(token)?.length && makeCheckout(token);
+      return token
+    }
+  }
+
 
   const handleQuantity = (_id, type) => dispatch(updateProduct({ _id, type }));
   const handleRemoveAllItems = () => dispatch(clearProducts());

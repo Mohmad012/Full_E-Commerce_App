@@ -59,27 +59,7 @@ const Products = ({ categ, args, fetchProducts, sortProds, index, addAll = false
       }
     };
     getProducts();
-  }, [args , fetchProducts]);
-
-  useEffect(() => {
-    if (
-      sortProds
-    ) {
-      if (sortProds === "newest ") {
-        setProducts((prev) =>
-          [...prev].sort((a, b) => a.createdAt - b.createdAt)
-        );
-      } else if (sortProds === "asc") {
-        setProducts((prev) =>
-          [...prev].sort((a, b) => a.price - b.price)
-        );
-      } else {
-        setProducts((prev) =>
-          [...prev].sort((a, b) => b.price - a.price)
-        );
-      }
-    }
-  }, [sortProds]);
+  }, []);
 
   return (
     <>
