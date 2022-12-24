@@ -12,12 +12,11 @@ const productsInfoSlice = createSlice({
 
   reducers: {
     addProducts: (state, action) => {
-      action.payload.forEach(product => {
-        state.products = {
-          ...state.products,
-          [product._id]: action.payload,
-        };
-      })
+      let { _id } = action.payload;
+      state.products = {
+        ...state.products,
+        [_id]: action.payload,
+      };
     },
     addProductsForEachCategory: (state, action) => {
       action.payload.forEach(product => {

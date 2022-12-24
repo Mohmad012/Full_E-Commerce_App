@@ -4,7 +4,7 @@ import { Container, NoItemFuond, Title } from "./style";
 import { useDispatch, useSelector } from "react-redux";
 import { addFav, removeFav } from "store/favReducer";
 import { addProduct, removeProduct } from "store/cartReducer";
-import { addProductsForEachCategory } from "store/productsInfoSlice";
+import { addProducts ,addProductsForEachCategory } from "store/productsInfoSlice";
 
 import Spinner from "components/Spinner";
 
@@ -54,6 +54,8 @@ const Products = ({ categ, args, fetchProducts, sortProds, index, addAll = false
           if (res.status === 200) {
             setProducts(res.data);
             dispatch(addProductsForEachCategory(res.data))
+            res.data?.forEach(product => dispatch(addProducts(product)))
+            // dispatch(addProducts(res.data))
             setLoading(false);
           }
         } catch (err) {

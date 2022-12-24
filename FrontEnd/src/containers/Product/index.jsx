@@ -38,6 +38,7 @@ const ProductContainer = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
   const isDark = useSelector((state) => state.mode.isDark);
+  const products = useSelector((state) => state.allProductsInfo.products);
 
   const [product, setProduct] = useState({});
 
@@ -48,26 +49,32 @@ const ProductContainer = () => {
 
   const dispatch = useDispatch();
 
+  console.log("id" , products , products[id])
+
   useEffect(() => {
     const getProduct = async () => {
-      setLoading(true);
-      try {
-        const res = await findProducts(id)
-        if (res.status === 200) {
-          setProduct(res.data);
-          setLoading(false);
-        } else {
+      if(products[id]){
+        setProduct(products[id])
+      }else{
+        setLoading(true);
+        try {
+          const res = await findProducts(id)
+          if (res.status === 200) {
+            setProduct(res.data);
+            setLoading(false);
+          } else {
+            setProduct(
+              data[0].popularProducts.filter((item) => item._id === +id)[0]
+            );
+            setLoading(false);
+          }
+        } catch (err) {
           setProduct(
             data[0].popularProducts.filter((item) => item._id === +id)[0]
           );
           setLoading(false);
+          console.log(err);
         }
-      } catch (err) {
-        setProduct(
-          data[0].popularProducts.filter((item) => item._id === +id)[0]
-        );
-        setLoading(false);
-        console.log(err);
       }
     };
     getProduct();
