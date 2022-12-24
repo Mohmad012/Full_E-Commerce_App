@@ -4,6 +4,7 @@ const productsInfoSlice = createSlice({
   name: "allProducts",
   initialState: {
     products: {},
+    productsForEachCategory: {},
     sliders: [],
     Categories:[],
     BestProducts:[]
@@ -11,11 +12,20 @@ const productsInfoSlice = createSlice({
 
   reducers: {
     addProducts: (state, action) => {
-      let { _id } = action.payload;
-      state.products = {
-        ...state.products,
-        [_id]: action.payload,
-      };
+      action.payload.forEach(product => {
+        state.products = {
+          ...state.products,
+          [product._id]: action.payload,
+        };
+      })
+    },
+    addProductsForEachCategory: (state, action) => {
+      action.payload.forEach(product => {
+        state.productsForEachCategory = {
+          ...state.productsForEachCategory,
+          [product.category]: action.payload,
+        };
+      })
     },
     addSliders: (state, action) => {
       state.sliders = action.payload
@@ -29,6 +39,6 @@ const productsInfoSlice = createSlice({
   },
 });
 
-export const { addProducts , addSliders , addCategories, addBestProducts } = productsInfoSlice.actions;
+export const { addProducts , addProductsForEachCategory, addSliders , addCategories, addBestProducts } = productsInfoSlice.actions;
 
 export default productsInfoSlice.reducer;

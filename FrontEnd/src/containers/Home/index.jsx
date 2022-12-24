@@ -3,7 +3,6 @@ import Slider from "./Slider";
 import Products from "components/Products";
 import { Main, Title, NoItemFuond } from "./style";
 import Spinner from "components/Spinner";
-import { addProducts } from "store/productsInfoSlice";
 
 import SwiperCore, { EffectCoverflow, Autoplay } from 'swiper';
 

@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import Product from "./Product";
 import { Container, NoItemFuond, Title } from "./style";
-// import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addFav, removeFav } from "store/favReducer";
 import { addProduct, removeProduct } from "store/cartReducer";
+import { addProductsForEachCategory } from "store/productsInfoSlice";
+
 import Spinner from "components/Spinner";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -20,8 +21,8 @@ const Products = ({ categ, args, fetchProducts, sortProds, index, addAll = false
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  // const history = useHistory();
 
+  const productsForEachCategory = useSelector((state) => state.allProductsInfo.productsForEachCategory);
   const FavProd = useSelector((state) => state.fav.inFavProds);
   const cart = useSelector((state) => state.cart.products);
 
@@ -46,16 +47,21 @@ const Products = ({ categ, args, fetchProducts, sortProds, index, addAll = false
 
   useEffect(() => {
     const getProducts = async () => {
-      setLoading(true);
-      try {
-        const res = await fetchProducts(...args)
-        if (res.status === 200) {
-          setProducts(res.data);
+      if(!productsForEachCategory[categ]){
+        setLoading(true);
+        try {
+          const res = await fetchProducts(...args)
+          if (res.status === 200) {
+            setProducts(res.data);
+            dispatch(addProductsForEachCategory(res.data))
+            setLoading(false);
+          }
+        } catch (err) {
           setLoading(false);
+          console.log(err);
         }
-      } catch (err) {
-        setLoading(false);
-        console.log(err);
+      }else{
+        setProducts(productsForEachCategory[categ]);
       }
     };
     getProducts();
